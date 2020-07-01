@@ -1,8 +1,10 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using net_core_api_boiler_plate.Database.DB;
 using net_core_api_boiler_plate.Extensions.Services;
 
 namespace net_core_api_boiler_plate
@@ -21,10 +23,12 @@ namespace net_core_api_boiler_plate
         {
             services.AddControllers().AddNewtonsoftJson();
             services.AddSwashbuckleService();
+            services.AddTestControllerService();
+            services.AddDatabaseService(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, DatabaseContext db)
         {
             if (env.IsDevelopment())
             {
@@ -41,6 +45,9 @@ namespace net_core_api_boiler_plate
             {
                 endpoints.MapControllers();
             });
+
+            db.Database.EnsureCreated();
+            db.Database.Migrate();
         }
     }
 }

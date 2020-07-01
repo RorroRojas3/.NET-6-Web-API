@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using net_core_api_boiler_plate.Models;
+using net_core_api_boiler_plate.Database.Tables;
 using net_core_api_boiler_plate.Services.Interface;
 
 namespace net_core_api_boiler_plate.Services.Implementation

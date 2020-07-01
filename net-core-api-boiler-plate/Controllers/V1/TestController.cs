@@ -3,7 +3,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using net_core_api_boiler_plate.Models;
+using net_core_api_boiler_plate.Database.Tables;
+using net_core_api_boiler_plate.Services.Interface;
 
 namespace net_core_api_boiler_plate.Controllers.V1
 {
@@ -11,11 +12,14 @@ namespace net_core_api_boiler_plate.Controllers.V1
     [Route("[controller]")]
     public class TestController : Controller
     {
+        // Private variables
         private readonly ILogger _logger;
+        private readonly ITestService _testService;
 
-        public TestController(ILogger<TestController> logger)
+        public TestController(ILogger<TestController> logger, ITestService testService)
         {
             _logger = logger;
+            _testService = testService;
         }
 
         [HttpGet]

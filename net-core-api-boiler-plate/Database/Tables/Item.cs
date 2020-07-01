@@ -2,7 +2,7 @@ using System;
 using System.ComponentModel.DataAnnotations;
 using Newtonsoft.Json;
 
-namespace net_core_api_boiler_plate.Models
+namespace net_core_api_boiler_plate.Database.Tables
 {
     public class Item
     {
