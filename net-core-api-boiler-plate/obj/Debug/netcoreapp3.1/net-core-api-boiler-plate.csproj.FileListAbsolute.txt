@@ -56,3 +56,14 @@
 /home/rorro/Documents/GitHub/net-core-api-boiler-plate/net-core-api-boiler-plate/bin/Debug/netcoreapp3.1/runtimes/unix/lib/netcoreapp2.0/System.Runtime.Caching.dll
 /home/rorro/Documents/GitHub/net-core-api-boiler-plate/net-core-api-boiler-plate/bin/Debug/netcoreapp3.1/runtimes/win/lib/netcoreapp2.0/System.Runtime.Caching.dll
 /home/rorro/Documents/GitHub/net-core-api-boiler-plate/net-core-api-boiler-plate/bin/Debug/netcoreapp3.1/runtimes/win/lib/netstandard2.0/System.Security.Cryptography.ProtectedData.dll
+/home/rorro/Documents/GitHub/net-core-api-boiler-plate/net-core-api-boiler-plate/bin/Debug/netcoreapp3.1/Microsoft.DotNet.PlatformAbstractions.dll
+/home/rorro/Documents/GitHub/net-core-api-boiler-plate/net-core-api-boiler-plate/bin/Debug/netcoreapp3.1/Microsoft.Extensions.DependencyModel.dll
+/home/rorro/Documents/GitHub/net-core-api-boiler-plate/net-core-api-boiler-plate/bin/Debug/netcoreapp3.1/Serilog.dll
+/home/rorro/Documents/GitHub/net-core-api-boiler-plate/net-core-api-boiler-plate/bin/Debug/netcoreapp3.1/Serilog.AspNetCore.dll
+/home/rorro/Documents/GitHub/net-core-api-boiler-plate/net-core-api-boiler-plate/bin/Debug/netcoreapp3.1/Serilog.Extensions.Hosting.dll
+/home/rorro/Documents/GitHub/net-core-api-boiler-plate/net-core-api-boiler-plate/bin/Debug/netcoreapp3.1/Serilog.Extensions.Logging.dll
+/home/rorro/Documents/GitHub/net-core-api-boiler-plate/net-core-api-boiler-plate/bin/Debug/netcoreapp3.1/Serilog.Formatting.Compact.dll
+/home/rorro/Documents/GitHub/net-core-api-boiler-plate/net-core-api-boiler-plate/bin/Debug/netcoreapp3.1/Serilog.Settings.Configuration.dll
+/home/rorro/Documents/GitHub/net-core-api-boiler-plate/net-core-api-boiler-plate/bin/Debug/netcoreapp3.1/Serilog.Sinks.Console.dll
+/home/rorro/Documents/GitHub/net-core-api-boiler-plate/net-core-api-boiler-plate/bin/Debug/netcoreapp3.1/Serilog.Sinks.Debug.dll
+/home/rorro/Documents/GitHub/net-core-api-boiler-plate/net-core-api-boiler-plate/bin/Debug/netcoreapp3.1/Serilog.Sinks.File.dll
