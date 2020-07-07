@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using net_core_api_boiler_plate.Database.Tables;
 
 namespace net_core_api_boiler_plate.Services.Interface
@@ -16,5 +17,7 @@ namespace net_core_api_boiler_plate.Services.Interface
         Task<Item> PutItem(Item item1);
 
         Task<Item> DeleteItem(Guid id);
+
+        Task<bool> PostFile(IFormFile formFile);
     }
 }

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using net_core_api_boiler_plate.Database.Tables;
 using net_core_api_boiler_plate.Services.Interface;
 
@@ -19,6 +20,11 @@ namespace net_core_api_boiler_plate.Services.Implementation
         }
 
         public async Task<List<Item>> GetItems()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<bool> PostFile(IFormFile formFile)
         {
             throw new NotImplementedException();
         }

@@ -40,8 +40,8 @@ namespace net_core_api_boiler_plate.Controllers.V1
         }
 
         [HttpGet]
-        [Route("Item")]
-        public async Task<IActionResult> GetItem(string id)
+        [Route("Item/{id}")]
+        public async Task<IActionResult> GetItem([FromRoute] string id)
         {
             try
             {
@@ -65,7 +65,7 @@ namespace net_core_api_boiler_plate.Controllers.V1
 
         [HttpPost]
         [Route("Item")]
-        public async Task<IActionResult> PostItem(Item item)
+        public async Task<IActionResult> PostItem([FromBody] Item item)
         {
             try
             {
@@ -82,7 +82,7 @@ namespace net_core_api_boiler_plate.Controllers.V1
 
         [HttpPut]
         [Route("Item")]
-        public async Task<IActionResult> PutItem(Item item)
+        public async Task<IActionResult> PutItem([FromBody] Item item)
         {
             try
             {
@@ -98,8 +98,8 @@ namespace net_core_api_boiler_plate.Controllers.V1
         }
 
         [HttpDelete]
-        [Route("Item")]
-        public async Task<IActionResult> DeleteItem(string id)
+        [Route("Item/{id}")]
+        public async Task<IActionResult> DeleteItem([FromRoute] string id)
         {
             try
             {
@@ -117,6 +117,101 @@ namespace net_core_api_boiler_plate.Controllers.V1
             catch (Exception ex)
             {
                 _logger.LogInformation($"DeleteItem - Failed - {ex.Message}");
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
+        }
+
+        [HttpGet]
+        [Route("File/{id}")]
+        public async Task<IActionResult> GetFile(string id)
+        {
+            try
+            {
+                Guid guid;
+                var validGuid = Guid.TryParse(id, out guid);
+                if (string.IsNullOrEmpty(id) || !validGuid)
+                {
+                    return StatusCode(StatusCodes.Status406NotAcceptable, "Id empty or not acceptable");
+                }
+
+                _logger.LogInformation($"GetFile - Started");
+                return StatusCode(StatusCodes.Status200OK);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogInformation($"GetFile - Failed - {ex.Message}");
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
+        }
+
+        [HttpPost]
+        [Route("File")]
+        public async Task<IActionResult> PostFile(IFormFile formFile)
+        {
+            try
+            {
+                if (formFile == null)
+                {
+                    return StatusCode(StatusCodes.Status406NotAcceptable, "File not provided");
+                }
+
+                _logger.LogInformation($"PostFile - Started");
+                return StatusCode(StatusCodes.Status200OK);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogInformation($"PostFile - Failed - {ex.Message}");
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
+        }
+
+        [HttpPut]
+        [Route("File/{id}")]
+        public async Task<IActionResult> PutFile(string id, IFormFile formFile)
+        {
+            try
+            {
+                Guid guid;
+                var validGuid = Guid.TryParse(id, out guid);
+                if (string.IsNullOrEmpty(id) || !validGuid)
+                {
+                    return StatusCode(StatusCodes.Status406NotAcceptable, "Id empty or not acceptable");
+                }
+
+                if (formFile == null)
+                {
+                    return StatusCode(StatusCodes.Status406NotAcceptable, "File not provided");
+                }
+
+                _logger.LogInformation($"PutFile - Started");
+                return StatusCode(StatusCodes.Status200OK);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogInformation($"PutFile - Failed - {ex.Message}");
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
+        }
+
+        [HttpDelete]
+        [Route("File/{id}")]
+        public async Task<IActionResult> DeleteFile(string id)
+        {
+            try
+            {
+                Guid guid;
+                var validGuid = Guid.TryParse(id, out guid);
+                if (string.IsNullOrEmpty(id) || !validGuid)
+                {
+                    return StatusCode(StatusCodes.Status406NotAcceptable, "Id empty or not acceptable");
+                }
+
+                _logger.LogInformation($"PutFile - Started");
+                return StatusCode(StatusCodes.Status200OK);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogInformation($"PutFile - Failed - {ex.Message}");
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
         }
