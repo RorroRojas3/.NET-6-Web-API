@@ -1,11 +1,13 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using net_core_api_boiler_plate.Database.DB;
+using net_core_api_boiler_plate.Extensions.Applications;
 using net_core_api_boiler_plate.Extensions.Services;
 using Serilog;
 
@@ -35,7 +37,7 @@ namespace net_core_api_boiler_plate
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, DatabaseContext db)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IApiVersionDescriptionProvider provider, DatabaseContext db)
         {
             if (env.IsDevelopment())
             {
@@ -52,6 +54,8 @@ namespace net_core_api_boiler_plate
             {
                 endpoints.MapControllers();
             });
+
+            app.AddSwashbuckleApp(provider);
 
             db.Database.EnsureCreated();
             db.Database.Migrate();

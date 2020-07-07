@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>net-core-api-boiler-plate</name>
+    </assembly>
+    <members>
+        <member name="T:net_core_api_boiler_plate.Extensions.Services.ConfigureSwaggerOptions">
+            <summary>
+                ConfigureSwaggerOptions class
+            </summary>
+        </member>
+    </members>
+</doc>

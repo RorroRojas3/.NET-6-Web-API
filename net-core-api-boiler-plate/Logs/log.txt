@@ -2,3 +2,23 @@
 2020-07-06 19:17:27.332 -04:00 [INF] Adding Swashbuckle Service
 2020-07-06 19:17:27.332 -04:00 [INF] Adding TestController Service
 2020-07-06 19:17:27.332 -04:00 [INF] Adding Database Service
+2020-07-06 20:01:37.963 -04:00 [INF] Adding Controller and NewtonSoftJson Service
+2020-07-06 20:01:38.332 -04:00 [INF] Adding Swashbuckle Service
+2020-07-06 20:01:38.701 -04:00 [INF] Adding TestController Service
+2020-07-06 20:01:38.701 -04:00 [INF] Adding Database Service
+2020-07-06 20:02:32.359 -04:00 [INF] Adding Controller and NewtonSoftJson Service
+2020-07-06 20:02:32.575 -04:00 [INF] Adding Swashbuckle Service
+2020-07-06 20:02:32.747 -04:00 [INF] Adding TestController Service
+2020-07-06 20:02:32.747 -04:00 [INF] Adding Database Service
+2020-07-06 20:04:42.425 -04:00 [INF] Adding Controller and NewtonSoftJson Service
+2020-07-06 20:04:42.584 -04:00 [INF] Adding Swashbuckle Service
+2020-07-06 20:04:42.842 -04:00 [INF] Adding TestController Service
+2020-07-06 20:04:42.843 -04:00 [INF] Adding Database Service
+2020-07-06 20:07:07.250 -04:00 [INF] Adding Controller and NewtonSoftJson Service
+2020-07-06 20:07:07.448 -04:00 [INF] Adding Swashbuckle Service
+2020-07-06 20:07:07.712 -04:00 [INF] Adding TestController Service
+2020-07-06 20:07:07.712 -04:00 [INF] Adding Database Service
+2020-07-06 20:08:18.040 -04:00 [INF] Adding Controller and NewtonSoftJson Service
+2020-07-06 20:08:18.217 -04:00 [INF] Adding Swashbuckle Service
+2020-07-06 20:08:18.473 -04:00 [INF] Adding TestController Service
+2020-07-06 20:08:18.474 -04:00 [INF] Adding Database Service

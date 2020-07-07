@@ -9,7 +9,8 @@ using net_core_api_boiler_plate.Services.Interface;
 namespace net_core_api_boiler_plate.Controllers.V1
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/v{version:apiVersion}")]
+    [ApiVersion("1")]
     public class TestController : Controller
     {
         // Private variables

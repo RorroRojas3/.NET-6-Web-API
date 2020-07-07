@@ -67,3 +67,12 @@
 /home/rorro/Documents/GitHub/net-core-api-boiler-plate/net-core-api-boiler-plate/bin/Debug/netcoreapp3.1/Serilog.Sinks.Console.dll
 /home/rorro/Documents/GitHub/net-core-api-boiler-plate/net-core-api-boiler-plate/bin/Debug/netcoreapp3.1/Serilog.Sinks.Debug.dll
 /home/rorro/Documents/GitHub/net-core-api-boiler-plate/net-core-api-boiler-plate/bin/Debug/netcoreapp3.1/Serilog.Sinks.File.dll
+/home/rorro/Documents/GitHub/net-core-api-boiler-plate/net-core-api-boiler-plate/bin/Debug/netcoreapp3.1/Microsoft.AspNetCore.Mvc.Versioning.dll
+/home/rorro/Documents/GitHub/net-core-api-boiler-plate/net-core-api-boiler-plate/bin/Debug/netcoreapp3.1/Microsoft.AspNetCore.Mvc.Versioning.ApiExplorer.dll
+/home/rorro/Documents/GitHub/net-core-api-boiler-plate/net-core-api-boiler-plate/bin/Debug/netcoreapp3.1/Microsoft.OpenApi.dll
+/home/rorro/Documents/GitHub/net-core-api-boiler-plate/net-core-api-boiler-plate/bin/Debug/netcoreapp3.1/Swashbuckle.AspNetCore.Swagger.dll
+/home/rorro/Documents/GitHub/net-core-api-boiler-plate/net-core-api-boiler-plate/bin/Debug/netcoreapp3.1/Swashbuckle.AspNetCore.SwaggerGen.dll
+/home/rorro/Documents/GitHub/net-core-api-boiler-plate/net-core-api-boiler-plate/bin/Debug/netcoreapp3.1/Swashbuckle.AspNetCore.SwaggerUI.dll
+/home/rorro/Documents/GitHub/net-core-api-boiler-plate/net-core-api-boiler-plate/obj/Debug/netcoreapp3.1/net-core-api-boiler-plate.MvcApplicationPartsAssemblyInfo.cs
+/home/rorro/Documents/GitHub/net-core-api-boiler-plate/net-core-api-boiler-plate/bin/Debug/netcoreapp3.1/net-core-api-boiler-plate.xml
+/home/rorro/Documents/GitHub/net-core-api-boiler-plate/net-core-api-boiler-plate/obj/Debug/netcoreapp3.1/net-core-api-boiler-plate.xml
