@@ -10,6 +10,6 @@ namespace net_core_api_boiler_plate.Database.Repository.Interface
         Task<T> Get(Guid id);
         Task<T> Add(T entity);
         Task<T> Update(T entity);
-        Task<T> Delete(Guid id);
+        Task<bool> Delete(Guid id);
     }
 }

@@ -30,7 +30,9 @@ namespace net_core_api_boiler_plate.Controllers.V1
             try
             {
                 _logger.LogInformation($"GetItems - Started");
-                return StatusCode(StatusCodes.Status200OK);
+
+                var result = await _testService.GetItems();
+                return StatusCode(StatusCodes.Status200OK, result);
             }
             catch (Exception ex)
             {
@@ -53,7 +55,10 @@ namespace net_core_api_boiler_plate.Controllers.V1
                 }
 
                 _logger.LogInformation($"GetItem - Started");
-                return StatusCode(StatusCodes.Status200OK);
+
+                var result = await _testService.GetItem(guid);
+
+                return StatusCode(StatusCodes.Status200OK, result);
 
             }
             catch (Exception ex)
@@ -69,9 +74,16 @@ namespace net_core_api_boiler_plate.Controllers.V1
         {
             try
             {
-                _logger.LogInformation($"PostItem - Started");
-                return StatusCode(StatusCodes.Status200OK);
+                if (item == null)
+                {
+                    return StatusCode(StatusCodes.Status406NotAcceptable, "Item not provided");
+                }
 
+                _logger.LogInformation($"PostItem - Started");
+
+                var result = await _testService.PostItem(item);
+
+                return StatusCode(StatusCodes.Status200OK, result);
             }
             catch (Exception ex)
             {
@@ -86,9 +98,16 @@ namespace net_core_api_boiler_plate.Controllers.V1
         {
             try
             {
-                _logger.LogInformation($"PutItem - Started");
-                return StatusCode(StatusCodes.Status200OK);
+                if (item == null)
+                {
+                    return StatusCode(StatusCodes.Status406NotAcceptable, "Item not provided");
+                }
 
+                _logger.LogInformation($"PutItem - Started");
+
+                var result = await _testService.PutItem(item);
+
+                return StatusCode(StatusCodes.Status200OK);
             }
             catch (Exception ex)
             {
@@ -111,6 +130,14 @@ namespace net_core_api_boiler_plate.Controllers.V1
                 }
 
                 _logger.LogInformation($"DeleteItem - Started");
+
+                var result = await _testService.DeleteItem(guid);
+
+                if (!result)
+                {
+                    return StatusCode(StatusCodes.Status404NotFound);
+                }
+
                 return StatusCode(StatusCodes.Status200OK);
 
             }

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "EYEY3pI4j2qC3Jsw8RonutQW9h1Z02Yv5z4icExvKFAaP1FjLLsWTrAnfel7fNsMuj9riFjW14O0mjPiwP0fMQ==",
+  "dgSpecHash": "uIXlH71hKGX8yjbU6pwLvBOKAagYM8e4yylIRESNfmepzZoYoFLCDX9YYHGXzpHyO+3q3DiAnM9u/kaWpRnxCQ==",
   "success": true,
   "projectFilePath": "/home/rorro/Documents/GitHub/net-core-api-boiler-plate/net-core-api-boiler-plate/net-core-api-boiler-plate.csproj",
   "expectedPackageFiles": [
@@ -20,6 +20,7 @@
     "/home/rorro/.nuget/packages/microsoft.entityframeworkcore/3.1.5/microsoft.entityframeworkcore.3.1.5.nupkg.sha512",
     "/home/rorro/.nuget/packages/microsoft.entityframeworkcore.abstractions/3.1.5/microsoft.entityframeworkcore.abstractions.3.1.5.nupkg.sha512",
     "/home/rorro/.nuget/packages/microsoft.entityframeworkcore.analyzers/3.1.5/microsoft.entityframeworkcore.analyzers.3.1.5.nupkg.sha512",
+    "/home/rorro/.nuget/packages/microsoft.entityframeworkcore.design/3.1.5/microsoft.entityframeworkcore.design.3.1.5.nupkg.sha512",
     "/home/rorro/.nuget/packages/microsoft.entityframeworkcore.relational/3.1.5/microsoft.entityframeworkcore.relational.3.1.5.nupkg.sha512",
     "/home/rorro/.nuget/packages/microsoft.entityframeworkcore.sqlserver/3.1.5/microsoft.entityframeworkcore.sqlserver.3.1.5.nupkg.sha512",
     "/home/rorro/.nuget/packages/microsoft.extensions.apidescription.server/3.0.0/microsoft.extensions.apidescription.server.3.0.0.nupkg.sha512",

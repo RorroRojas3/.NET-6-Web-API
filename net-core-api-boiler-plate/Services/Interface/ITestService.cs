@@ -16,7 +16,7 @@ namespace net_core_api_boiler_plate.Services.Interface
 
         Task<Item> PutItem(Item item1);
 
-        Task<Item> DeleteItem(Guid id);
+        Task<bool> DeleteItem(Guid id);
 
         Task<bool> PostFile(IFormFile formFile);
     }

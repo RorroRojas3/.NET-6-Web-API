@@ -2,55 +2,71 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using net_core_api_boiler_plate.Database.DB;
 using net_core_api_boiler_plate.Database.Repository.Interface;
 
 namespace net_core_api_boiler_plate.Database.Repository.Implementation
 {
-    public class Repository<TEntity, TContext> : IRepository<TEntity>
-        where TEntity : class, IEntity
-        where TContext : DbContext
+    public class Repository<T> : IRepository<T> where T : class, IEntity
     {
-        private readonly TContext _dbContext;
+        // Private and Protected variables
+        protected readonly DatabaseContext _dbContext;
+        private DbSet<T> _entities;
 
-        public Repository(TContext dbContext)
+        public Repository(DatabaseContext dbContext)
         {
             _dbContext = dbContext;
+            _entities = dbContext.Set<T>();
         }
 
-        public async Task<TEntity> Add(TEntity entity)
+        public async Task<T> Add(T entity)
         {
-            _dbContext.Set<TEntity>().Add(entity);
-            await _dbContext.SaveChangesAsync();
-            return entity;
-        }
+            T doesExit = await _entities.FirstOrDefaultAsync(x => x.Id == entity.Id);
 
-        public async Task<TEntity> Delete(Guid id)
-        {
-            var entity = await _dbContext.Set<TEntity>().FindAsync(id);
-            if (entity == null)
+            if (doesExit != null)
             {
-                return entity;
+                return default(T);
             }
 
-            _dbContext.Set<TEntity>().Remove(entity);
+            await _entities.AddAsync(entity);
             await _dbContext.SaveChangesAsync();
-
             return entity;
         }
 
-        public async Task<TEntity> Get(Guid id)
+        public async Task<bool> Delete(Guid id)
         {
-            return await _dbContext.Set<TEntity>().FindAsync(id);
+            T entity = await _entities.FirstOrDefaultAsync(x => x.Id == id);
+
+            if (entity == null)
+            {
+                return false;
+            }
+
+            _entities.Remove(entity);
+            await _dbContext.SaveChangesAsync();
+            return true;
         }
 
-        public async Task<List<TEntity>> GetAll()
+        public async Task<T> Get(Guid id)
         {
-            return await _dbContext.Set<TEntity>().ToListAsync();
+            return await _entities.FirstOrDefaultAsync(x => x.Id == id);
         }
 
-        public async Task<TEntity> Update(TEntity entity)
+        public async Task<List<T>> GetAll()
         {
-            _dbContext.Entry(entity).State = EntityState.Modified;
+            return await _entities.ToListAsync();
+        }
+
+        public async Task<T> Update(T entity)
+        {
+            T doesExit = await _entities.FirstOrDefaultAsync(x => x.Id == entity.Id);
+
+            if (doesExit == null)
+            {
+                return default(T);
+            }
+
+            _entities.Update(entity);
             await _dbContext.SaveChangesAsync();
             return entity;
         }

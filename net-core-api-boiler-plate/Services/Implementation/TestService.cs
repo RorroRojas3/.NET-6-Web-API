@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
+using net_core_api_boiler_plate.Database.Repository.Interface;
 using net_core_api_boiler_plate.Database.Tables;
 using net_core_api_boiler_plate.Services.Interface;
 
@@ -9,19 +10,26 @@ namespace net_core_api_boiler_plate.Services.Implementation
 {
     public class TestService : ITestService
     {
-        public async Task<Item> DeleteItem(Guid id)
+        private readonly IRepository<Item> _itemRepository;
+
+        public TestService(IRepository<Item> itemRepository)
         {
-            throw new NotImplementedException();
+            _itemRepository = itemRepository;
+        }
+
+        public async Task<bool> DeleteItem(Guid id)
+        {
+            return await _itemRepository.Delete(id);
         }
 
         public async Task<Item> GetItem(Guid id)
         {
-            throw new NotImplementedException();
+            return await _itemRepository.Get(id);
         }
 
         public async Task<List<Item>> GetItems()
         {
-            throw new NotImplementedException();
+            return await _itemRepository.GetAll();
         }
 
         public Task<bool> PostFile(IFormFile formFile)
@@ -31,12 +39,12 @@ namespace net_core_api_boiler_plate.Services.Implementation
 
         public async Task<Item> PostItem(Item item)
         {
-            throw new NotImplementedException();
+            return await _itemRepository.Add(item);
         }
 
-        public async Task<Item> PutItem(Item item1)
+        public async Task<Item> PutItem(Item item)
         {
-            throw new NotImplementedException();
+            return await _itemRepository.Update(item);
         }
     }
 }
