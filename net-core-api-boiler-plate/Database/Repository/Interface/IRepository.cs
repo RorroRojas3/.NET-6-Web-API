@@ -8,6 +8,8 @@ namespace net_core_api_boiler_plate.Database.Repository.Interface
     {
         Task<List<T>> GetAll();
         Task<T> Get(Guid id);
+        Task<T> GetWithExpression(Func<T, bool> predicate);
+        Task<List<T>> GetAllWithExpression(Func<T, bool> predicate);
         Task<T> Add(T entity);
         Task<T> Update(T entity);
         Task<bool> Delete(Guid id);

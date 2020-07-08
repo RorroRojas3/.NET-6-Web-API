@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using net_core_api_boiler_plate.Database.DB;
 using net_core_api_boiler_plate.Database.Repository.Interface;
+using System.Linq;
 
 namespace net_core_api_boiler_plate.Database.Repository.Implementation
 {
@@ -55,6 +56,16 @@ namespace net_core_api_boiler_plate.Database.Repository.Implementation
         public async Task<List<T>> GetAll()
         {
             return await _entities.ToListAsync();
+        }
+
+        public async Task<T> GetWithExpression(Func<T, bool> predicate)
+        {
+            return _entities.Where(predicate).FirstOrDefault();
+        }
+
+        public async Task<List<T>> GetAllWithExpression(Func<T, bool> predicate)
+        {
+            return _entities.Where(predicate).ToList();
         }
 
         public async Task<T> Update(T entity)
