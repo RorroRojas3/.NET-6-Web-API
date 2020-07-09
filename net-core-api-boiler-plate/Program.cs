@@ -9,6 +9,9 @@ using Microsoft.Extensions.Logging;
 
 namespace net_core_api_boiler_plate
 {
+    /// <summary>
+    ///     Program class
+    /// </summary>
     public class Program
     {
         public static void Main(string[] args)
@@ -16,6 +19,11 @@ namespace net_core_api_boiler_plate
             CreateHostBuilder(args).Build().Run();
         }
 
+        /// <summary>
+        ///     CreateHostBuilder
+        /// </summary>
+        /// <param name="args"></param>
+        /// <returns></returns>
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>

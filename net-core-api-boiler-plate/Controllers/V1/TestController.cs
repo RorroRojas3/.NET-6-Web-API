@@ -8,21 +8,35 @@ using net_core_api_boiler_plate.Services.Interface;
 
 namespace net_core_api_boiler_plate.Controllers.V1
 {
+    /// <summary>
+    ///     TestController
+    /// </summary>
     [ApiController]
     [Route("api/v{version:apiVersion}")]
     [ApiVersion("1")]
     public class TestController : Controller
     {
-        // Private variables
+        /// <summary>
+        ///     Private variables
+        /// </summary>
         private readonly ILogger _logger;
         private readonly ITestService _testService;
 
+        /// <summary>
+        ///     TestController constructor with DI
+        /// </summary>
+        /// <param name="logger"></param>
+        /// <param name="testService"></param>
         public TestController(ILogger<TestController> logger, ITestService testService)
         {
             _logger = logger;
             _testService = testService;
         }
 
+        /// <summary>
+        ///     Gets all items
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         [Route("Items")]
         public async Task<IActionResult> GetItems()
@@ -41,6 +55,11 @@ namespace net_core_api_boiler_plate.Controllers.V1
             }
         }
 
+        /// <summary>
+        ///     Gets item based on Id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet]
         [Route("Item/{id}")]
         public async Task<IActionResult> GetItem([FromRoute] string id)
@@ -68,6 +87,11 @@ namespace net_core_api_boiler_plate.Controllers.V1
             }
         }
 
+        /// <summary>
+        ///     Creates item 
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns></returns>
         [HttpPost]
         [Route("Item")]
         public async Task<IActionResult> PostItem([FromBody] Item item)
@@ -92,6 +116,11 @@ namespace net_core_api_boiler_plate.Controllers.V1
             }
         }
 
+        /// <summary>
+        ///     Updates item
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns></returns>
         [HttpPut]
         [Route("Item")]
         public async Task<IActionResult> PutItem([FromBody] Item item)
@@ -116,6 +145,11 @@ namespace net_core_api_boiler_plate.Controllers.V1
             }
         }
 
+        /// <summary>
+        ///     Deletes item based on Id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpDelete]
         [Route("Item/{id}")]
         public async Task<IActionResult> DeleteItem([FromRoute] string id)
@@ -148,6 +182,11 @@ namespace net_core_api_boiler_plate.Controllers.V1
             }
         }
 
+        /// <summary>
+        ///     Gets file based on Id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet]
         [Route("File/{id}")]
         public async Task<IActionResult> GetFile(string id)
@@ -171,6 +210,11 @@ namespace net_core_api_boiler_plate.Controllers.V1
             }
         }
 
+        /// <summary>
+        ///     Creates file
+        /// </summary>
+        /// <param name="formFile"></param>
+        /// <returns></returns>
         [HttpPost]
         [Route("File")]
         public async Task<IActionResult> PostFile(IFormFile formFile)
@@ -192,6 +236,12 @@ namespace net_core_api_boiler_plate.Controllers.V1
             }
         }
 
+        /// <summary>
+        ///     Updates file
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="formFile"></param>
+        /// <returns></returns>
         [HttpPut]
         [Route("File/{id}")]
         public async Task<IActionResult> PutFile(string id, IFormFile formFile)
@@ -220,6 +270,11 @@ namespace net_core_api_boiler_plate.Controllers.V1
             }
         }
 
+        /// <summary>
+        ///     Deletes file based on Id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpDelete]
         [Route("File/{id}")]
         public async Task<IActionResult> DeleteFile(string id)

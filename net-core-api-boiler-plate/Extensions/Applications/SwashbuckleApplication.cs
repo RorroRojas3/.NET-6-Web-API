@@ -3,8 +3,16 @@ using Microsoft.AspNetCore.Mvc.ApiExplorer;
 
 namespace net_core_api_boiler_plate.Extensions.Applications
 {
+    /// <summary>
+    ///     Static SwashbuckleApplication class
+    /// </summary>
     public static class SwashbuckleApplication
     {
+        /// <summary>
+        ///     Adds Swashbuckle application 
+        /// </summary>
+        /// <param name="application"></param>
+        /// <param name="provider"></param>
         public static void AddSwashbuckleApp(this IApplicationBuilder application, IApiVersionDescriptionProvider provider)
         {
             application.UseSwagger();

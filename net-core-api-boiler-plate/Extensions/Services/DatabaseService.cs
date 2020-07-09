@@ -7,8 +7,16 @@ using net_core_api_boiler_plate.Database.Repository.Interface;
 
 namespace net_core_api_boiler_plate.Extensions.Services
 {
+    /// <summary>
+    ///     Static DatabaseService class
+    /// </summary>
     public static class DatabaseService
     {
+        /// <summary>
+        ///     Adds database service
+        /// </summary>
+        /// <param name="services"></param>
+        /// <param name="configuration"></param>
         public static void AddDatabaseService(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddDbContext<DatabaseContext>(options => options.UseSqlServer(configuration.GetConnectionString("AzureDB")));

@@ -7,8 +7,16 @@ using Serilog.Events;
 
 namespace net_core_api_boiler_plate.Extensions.Services
 {
+    /// <summary>
+    ///     Static LoggingService class
+    /// </summary>
     public static class LoggingService
     {
+        /// <summary>
+        ///     Adds Logging service
+        /// </summary>
+        /// <param name="services"></param>
+        /// <param name="configuration"></param>
         public static void AddLoggingService(this IServiceCollection services, IConfiguration configuration)
         {
             var currentDirectory = Directory.GetCurrentDirectory();

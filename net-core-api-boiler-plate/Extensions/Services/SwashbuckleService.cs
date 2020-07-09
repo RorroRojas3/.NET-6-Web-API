@@ -9,8 +9,15 @@ using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace net_core_api_boiler_plate.Extensions.Services
 {
+    /// <summary>
+    ///     Static SwashbuckleService class
+    /// </summary>
     public static class SwashbuckleService
     {
+        /// <summary>
+        ///     Service to add Swashbuckle (Swagger)
+        /// </summary>
+        /// <param name="services"></param>
         public static void AddSwashbuckleService(this IServiceCollection services)
         {
             services.AddMvc();
@@ -31,11 +38,22 @@ namespace net_core_api_boiler_plate.Extensions.Services
     /// </summary>
     public class ConfigureSwaggerOptions : IConfigureOptions<SwaggerGenOptions>
     {
+        /// <summary>
+        ///     Private variables
+        /// </summary>
         readonly IApiVersionDescriptionProvider provider;
 
+        /// <summary>
+        ///     ConfigureSwaggerOptions constructor with DI
+        /// </summary>
+        /// <param name="provider"></param>
         public ConfigureSwaggerOptions(IApiVersionDescriptionProvider provider) =>
           this.provider = provider;
 
+        /// <summary>
+        ///     Adds swagger documentation
+        /// </summary>
+        /// <param name="options"></param>
         public void Configure(SwaggerGenOptions options)
         {
             foreach (var description in provider.ApiVersionDescriptions)
