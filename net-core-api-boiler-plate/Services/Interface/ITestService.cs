@@ -18,6 +18,12 @@ namespace net_core_api_boiler_plate.Services.Interface
 
         Task<bool> DeleteItem(Guid id);
 
+        Task<byte[]> GetFile(Guid id);
+
         Task<bool> PostFile(IFormFile formFile);
+
+        Task<bool> DeleteFile(Guid id);
+
+        Task<bool> UpdateFile(Guid id);
     }
 }

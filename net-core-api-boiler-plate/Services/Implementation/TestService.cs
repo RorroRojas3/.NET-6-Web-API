@@ -17,9 +17,19 @@ namespace net_core_api_boiler_plate.Services.Implementation
             _itemRepository = itemRepository;
         }
 
+        public Task<bool> DeleteFile(Guid id)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<bool> DeleteItem(Guid id)
         {
             return await _itemRepository.Delete(id);
+        }
+
+        public Task<byte[]> GetFile(Guid id)
+        {
+            throw new NotImplementedException();
         }
 
         public async Task<Item> GetItem(Guid id)
@@ -45,6 +55,11 @@ namespace net_core_api_boiler_plate.Services.Implementation
         public async Task<Item> PutItem(Item item)
         {
             return await _itemRepository.Update(item);
+        }
+
+        public Task<bool> UpdateFile(Guid id)
+        {
+            throw new NotImplementedException();
         }
     }
 }
