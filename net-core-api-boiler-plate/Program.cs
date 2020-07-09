@@ -14,6 +14,10 @@ namespace net_core_api_boiler_plate
     /// </summary>
     public class Program
     {
+        /// <summary>
+        ///     Main function
+        /// </summary>
+        /// <param name="args"></param>
         public static void Main(string[] args)
         {
             CreateHostBuilder(args).Build().Run();

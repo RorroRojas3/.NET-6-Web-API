@@ -70,7 +70,8 @@ namespace net_core_api_boiler_plate.Services.Interface
         ///     Updates file from DB based on Id
         /// </summary>
         /// <param name="id"></param>
+        /// <param name="formFile"></param>
         /// <returns></returns>
-        Task<bool> UpdateFile(Guid id);
+        Task<bool> UpdateFile(Guid id, IFormFile formFile);
     }
 }

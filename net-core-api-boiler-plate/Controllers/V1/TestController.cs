@@ -201,6 +201,9 @@ namespace net_core_api_boiler_plate.Controllers.V1
                 }
 
                 _logger.LogInformation($"GetFile - Started");
+
+                var result = await _testService.GetFile(guid);
+
                 return StatusCode(StatusCodes.Status200OK);
             }
             catch (Exception ex)
@@ -227,6 +230,9 @@ namespace net_core_api_boiler_plate.Controllers.V1
                 }
 
                 _logger.LogInformation($"PostFile - Started");
+
+                var result = await _testService.PostFile(formFile);
+
                 return StatusCode(StatusCodes.Status200OK);
             }
             catch (Exception ex)
@@ -261,6 +267,9 @@ namespace net_core_api_boiler_plate.Controllers.V1
                 }
 
                 _logger.LogInformation($"PutFile - Started");
+
+                var result = await _testService.UpdateFile(guid, formFile);
+
                 return StatusCode(StatusCodes.Status200OK);
             }
             catch (Exception ex)
@@ -287,6 +296,8 @@ namespace net_core_api_boiler_plate.Controllers.V1
                 {
                     return StatusCode(StatusCodes.Status406NotAcceptable, "Id empty or not acceptable");
                 }
+
+                var result = await _testService.DeleteFile(guid);
 
                 _logger.LogInformation($"PutFile - Started");
                 return StatusCode(StatusCodes.Status200OK);
