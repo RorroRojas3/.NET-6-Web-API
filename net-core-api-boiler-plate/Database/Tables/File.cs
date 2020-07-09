@@ -23,18 +23,21 @@ namespace net_core_api_boiler_plate.Database.Tables
         ///     Name
         /// </summary>
         /// <value></value>
+        [Required]
         public string Name { get; set; }
 
         /// <summary>
         ///  ContentType
         /// </summary>
         /// <value></value>
+        [Required]
         public string ContentType { get; set; }
 
         /// <summary>
         ///     Data
         /// </summary>
         /// <value></value>
+        [Required]
         public byte[] Data { get; set; }
     }
 }
