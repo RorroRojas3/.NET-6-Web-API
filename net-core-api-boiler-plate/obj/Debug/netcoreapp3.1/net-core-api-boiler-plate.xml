@@ -4,72 +4,38 @@
         <name>net-core-api-boiler-plate</name>
     </assembly>
     <members>
-        <member name="T:net_core_api_boiler_plate.Controllers.V1.TestController">
+        <member name="T:net_core_api_boiler_plate.Controllers.V1.FileController">
             <summary>
-                TestController
+                FileController
             </summary>
         </member>
-        <member name="F:net_core_api_boiler_plate.Controllers.V1.TestController._logger">
+        <member name="F:net_core_api_boiler_plate.Controllers.V1.FileController._logger">
             <summary>
                 Private variables
             </summary>
         </member>
-        <member name="M:net_core_api_boiler_plate.Controllers.V1.TestController.#ctor(Microsoft.Extensions.Logging.ILogger{net_core_api_boiler_plate.Controllers.V1.TestController},net_core_api_boiler_plate.Services.Interface.ITestService)">
+        <member name="M:net_core_api_boiler_plate.Controllers.V1.FileController.#ctor(Microsoft.Extensions.Logging.ILogger{net_core_api_boiler_plate.Controllers.V1.FileController},net_core_api_boiler_plate.Services.Interface.IFileService)">
             <summary>
                 TestController constructor with DI
             </summary>
             <param name="logger"></param>
-            <param name="testService"></param>
+            <param name="fileService"></param>
         </member>
-        <member name="M:net_core_api_boiler_plate.Controllers.V1.TestController.GetItems">
-            <summary>
-                Gets all items
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:net_core_api_boiler_plate.Controllers.V1.TestController.GetItem(System.String)">
-            <summary>
-                Gets item based on Id
-            </summary>
-            <param name="id"></param>
-            <returns></returns>
-        </member>
-        <member name="M:net_core_api_boiler_plate.Controllers.V1.TestController.PostItem(net_core_api_boiler_plate.Database.Tables.Item)">
-            <summary>
-                Creates item 
-            </summary>
-            <param name="item"></param>
-            <returns></returns>
-        </member>
-        <member name="M:net_core_api_boiler_plate.Controllers.V1.TestController.PutItem(net_core_api_boiler_plate.Database.Tables.Item)">
-            <summary>
-                Updates item
-            </summary>
-            <param name="item"></param>
-            <returns></returns>
-        </member>
-        <member name="M:net_core_api_boiler_plate.Controllers.V1.TestController.DeleteItem(System.String)">
-            <summary>
-                Deletes item based on Id
-            </summary>
-            <param name="id"></param>
-            <returns></returns>
-        </member>
-        <member name="M:net_core_api_boiler_plate.Controllers.V1.TestController.GetFile(System.String)">
+        <member name="M:net_core_api_boiler_plate.Controllers.V1.FileController.GetFile(System.String)">
             <summary>
                 Gets file based on Id
             </summary>
             <param name="id"></param>
             <returns></returns>
         </member>
-        <member name="M:net_core_api_boiler_plate.Controllers.V1.TestController.PostFile(Microsoft.AspNetCore.Http.IFormFile)">
+        <member name="M:net_core_api_boiler_plate.Controllers.V1.FileController.PostFile(Microsoft.AspNetCore.Http.IFormFile)">
             <summary>
                 Creates file
             </summary>
             <param name="formFile"></param>
             <returns></returns>
         </member>
-        <member name="M:net_core_api_boiler_plate.Controllers.V1.TestController.PutFile(System.String,Microsoft.AspNetCore.Http.IFormFile)">
+        <member name="M:net_core_api_boiler_plate.Controllers.V1.FileController.PutFile(System.String,Microsoft.AspNetCore.Http.IFormFile)">
             <summary>
                 Updates file
             </summary>
@@ -77,9 +43,60 @@
             <param name="formFile"></param>
             <returns></returns>
         </member>
-        <member name="M:net_core_api_boiler_plate.Controllers.V1.TestController.DeleteFile(System.String)">
+        <member name="M:net_core_api_boiler_plate.Controllers.V1.FileController.DeleteFile(System.String)">
             <summary>
                 Deletes file based on Id
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="T:net_core_api_boiler_plate.Controllers.V1.ItemController">
+            <summary>
+                TestController
+            </summary>
+        </member>
+        <member name="F:net_core_api_boiler_plate.Controllers.V1.ItemController._logger">
+            <summary>
+                Private variables
+            </summary>
+        </member>
+        <member name="M:net_core_api_boiler_plate.Controllers.V1.ItemController.#ctor(Microsoft.Extensions.Logging.ILogger{net_core_api_boiler_plate.Controllers.V1.ItemController},net_core_api_boiler_plate.Services.Interface.IItemService)">
+            <summary>
+                TestController constructor with DI
+            </summary>
+            <param name="logger"></param>
+            <param name="itemService"></param>
+        </member>
+        <member name="M:net_core_api_boiler_plate.Controllers.V1.ItemController.GetItems">
+            <summary>
+                Gets all items
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:net_core_api_boiler_plate.Controllers.V1.ItemController.GetItem(System.String)">
+            <summary>
+                Gets item based on Id
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:net_core_api_boiler_plate.Controllers.V1.ItemController.PostItem(net_core_api_boiler_plate.Database.Tables.Item)">
+            <summary>
+                Creates item 
+            </summary>
+            <param name="item"></param>
+            <returns></returns>
+        </member>
+        <member name="M:net_core_api_boiler_plate.Controllers.V1.ItemController.PutItem(net_core_api_boiler_plate.Database.Tables.Item)">
+            <summary>
+                Updates item
+            </summary>
+            <param name="item"></param>
+            <returns></returns>
+        </member>
+        <member name="M:net_core_api_boiler_plate.Controllers.V1.ItemController.DeleteItem(System.String)">
+            <summary>
+                Deletes item based on Id
             </summary>
             <param name="id"></param>
             <returns></returns>
@@ -425,79 +442,44 @@
             <param name="args"></param>
             <returns></returns>
         </member>
-        <member name="T:net_core_api_boiler_plate.Services.Implementation.TestService">
+        <member name="T:net_core_api_boiler_plate.Services.Implementation.FileService">
             <summary>
-                TestService class with implementation of interface ITestService
+                FileService class with IFileService interface implementation
             </summary>
         </member>
-        <member name="F:net_core_api_boiler_plate.Services.Implementation.TestService._itemRepository">
+        <member name="F:net_core_api_boiler_plate.Services.Implementation.FileService._fileRepository">
             <summary>
                 Private variables
             </summary>
         </member>
-        <member name="M:net_core_api_boiler_plate.Services.Implementation.TestService.#ctor(net_core_api_boiler_plate.Database.Repository.Interface.IRepository{net_core_api_boiler_plate.Database.Tables.Item},net_core_api_boiler_plate.Database.Repository.Interface.IRepository{net_core_api_boiler_plate.Database.Tables.File})">
+        <member name="M:net_core_api_boiler_plate.Services.Implementation.FileService.#ctor(net_core_api_boiler_plate.Database.Repository.Interface.IRepository{net_core_api_boiler_plate.Database.Tables.File})">
             <summary>
-                TestService constructor with DI
+                FileService constructor with DI
             </summary>
-            <param name="itemRepository"></param>
             <param name="fileRepository"></param>
         </member>
-        <member name="M:net_core_api_boiler_plate.Services.Implementation.TestService.DeleteFile(System.Guid)">
+        <member name="M:net_core_api_boiler_plate.Services.Implementation.FileService.DeleteFile(System.Guid)">
             <summary>
                 Deletes file from DB based on Id
             </summary>
             <param name="id"></param>
             <returns></returns>
         </member>
-        <member name="M:net_core_api_boiler_plate.Services.Implementation.TestService.DeleteItem(System.Guid)">
-            <summary>
-                Deletes item from DB based on Id
-            </summary>
-            <param name="id"></param>
-            <returns></returns>
-        </member>
-        <member name="M:net_core_api_boiler_plate.Services.Implementation.TestService.GetFile(System.Guid)">
+        <member name="M:net_core_api_boiler_plate.Services.Implementation.FileService.GetFile(System.Guid)">
             <summary>
                 Gets file from DB based on Id
             </summary>
             <param name="id"></param>
             <returns></returns>
         </member>
-        <member name="M:net_core_api_boiler_plate.Services.Implementation.TestService.GetItem(System.Guid)">
-            <summary>
-                Gets item from DB based on Id
-            </summary>
-            <param name="id"></param>
-            <returns></returns>
-        </member>
-        <member name="M:net_core_api_boiler_plate.Services.Implementation.TestService.GetItems">
-            <summary>
-                Gets all items from DB
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:net_core_api_boiler_plate.Services.Implementation.TestService.PostFile(Microsoft.AspNetCore.Http.IFormFile)">
+        <member name="M:net_core_api_boiler_plate.Services.Implementation.FileService.PostFile(Microsoft.AspNetCore.Http.IFormFile)">
             <summary>
                 Creates file on DB
             </summary>
             <param name="formFile"></param>
             <returns></returns>
         </member>
-        <member name="M:net_core_api_boiler_plate.Services.Implementation.TestService.PostItem(net_core_api_boiler_plate.Database.Tables.Item)">
-            <summary>
-                Creates item on DB
-            </summary>
-            <param name="item"></param>
-            <returns></returns>
-        </member>
-        <member name="M:net_core_api_boiler_plate.Services.Implementation.TestService.PutItem(net_core_api_boiler_plate.Database.Tables.Item)">
-            <summary>
-                Updates item on DB
-            </summary>
-            <param name="item"></param>
-            <returns></returns>
-        </member>
-        <member name="M:net_core_api_boiler_plate.Services.Implementation.TestService.UpdateFile(System.Guid,Microsoft.AspNetCore.Http.IFormFile)">
+        <member name="M:net_core_api_boiler_plate.Services.Implementation.FileService.UpdateFile(System.Guid,Microsoft.AspNetCore.Http.IFormFile)">
             <summary>
                 Updates file on DB based on Id
             </summary>
@@ -505,72 +487,127 @@
             <param name="formfile"></param>
             <returns></returns>
         </member>
-        <member name="T:net_core_api_boiler_plate.Services.Interface.ITestService">
+        <member name="T:net_core_api_boiler_plate.Services.Implementation.ItemService">
             <summary>
-                ITestSerice interface
+                TestService class with implementation of interface ITestService
             </summary>
         </member>
-        <member name="M:net_core_api_boiler_plate.Services.Interface.ITestService.GetItems">
+        <member name="F:net_core_api_boiler_plate.Services.Implementation.ItemService._itemRepository">
             <summary>
-                Gets all items from DB
+                Private variables
             </summary>
-            <returns></returns>
         </member>
-        <member name="M:net_core_api_boiler_plate.Services.Interface.ITestService.GetItem(System.Guid)">
+        <member name="M:net_core_api_boiler_plate.Services.Implementation.ItemService.#ctor(net_core_api_boiler_plate.Database.Repository.Interface.IRepository{net_core_api_boiler_plate.Database.Tables.Item})">
             <summary>
-                Gets item from DB based on Id
+                ItemService constructor with DI
             </summary>
-            <param name="id"></param>
-            <returns></returns>
+            <param name="itemRepository"></param>
         </member>
-        <member name="M:net_core_api_boiler_plate.Services.Interface.ITestService.PostItem(net_core_api_boiler_plate.Database.Tables.Item)">
-            <summary>
-                Creates item on DB
-            </summary>
-            <param name="item"></param>
-            <returns></returns>
-        </member>
-        <member name="M:net_core_api_boiler_plate.Services.Interface.ITestService.PutItem(net_core_api_boiler_plate.Database.Tables.Item)">
-            <summary>
-                Updates item on DB
-            </summary>
-            <param name="item1"></param>
-            <returns></returns>
-        </member>
-        <member name="M:net_core_api_boiler_plate.Services.Interface.ITestService.DeleteItem(System.Guid)">
+        <member name="M:net_core_api_boiler_plate.Services.Implementation.ItemService.DeleteItem(System.Guid)">
             <summary>
                 Deletes item from DB based on Id
             </summary>
             <param name="id"></param>
             <returns></returns>
         </member>
-        <member name="M:net_core_api_boiler_plate.Services.Interface.ITestService.GetFile(System.Guid)">
+        <member name="M:net_core_api_boiler_plate.Services.Implementation.ItemService.GetItem(System.Guid)">
+            <summary>
+                Gets item from DB based on Id
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:net_core_api_boiler_plate.Services.Implementation.ItemService.GetItems">
+            <summary>
+                Gets all items from DB
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:net_core_api_boiler_plate.Services.Implementation.ItemService.PostItem(net_core_api_boiler_plate.Database.Tables.Item)">
+            <summary>
+                Creates item on DB
+            </summary>
+            <param name="item"></param>
+            <returns></returns>
+        </member>
+        <member name="M:net_core_api_boiler_plate.Services.Implementation.ItemService.PutItem(net_core_api_boiler_plate.Database.Tables.Item)">
+            <summary>
+                Updates item on DB
+            </summary>
+            <param name="item"></param>
+            <returns></returns>
+        </member>
+        <member name="T:net_core_api_boiler_plate.Services.Interface.IFileService">
+            <summary>
+                IFileService interface
+            </summary>
+        </member>
+        <member name="M:net_core_api_boiler_plate.Services.Interface.IFileService.GetFile(System.Guid)">
             <summary>
                 Gets file from DB based on Id
             </summary>
             <param name="id"></param>
             <returns></returns>
         </member>
-        <member name="M:net_core_api_boiler_plate.Services.Interface.ITestService.PostFile(Microsoft.AspNetCore.Http.IFormFile)">
+        <member name="M:net_core_api_boiler_plate.Services.Interface.IFileService.PostFile(Microsoft.AspNetCore.Http.IFormFile)">
             <summary>
                 Creates file on DB 
             </summary>
             <param name="formFile"></param>
             <returns></returns>
         </member>
-        <member name="M:net_core_api_boiler_plate.Services.Interface.ITestService.DeleteFile(System.Guid)">
+        <member name="M:net_core_api_boiler_plate.Services.Interface.IFileService.DeleteFile(System.Guid)">
             <summary>
                 Delets file from DB based on Id
             </summary>
             <param name="id"></param>
             <returns></returns>
         </member>
-        <member name="M:net_core_api_boiler_plate.Services.Interface.ITestService.UpdateFile(System.Guid,Microsoft.AspNetCore.Http.IFormFile)">
+        <member name="M:net_core_api_boiler_plate.Services.Interface.IFileService.UpdateFile(System.Guid,Microsoft.AspNetCore.Http.IFormFile)">
             <summary>
                 Updates file from DB based on Id
             </summary>
             <param name="id"></param>
             <param name="formFile"></param>
+            <returns></returns>
+        </member>
+        <member name="T:net_core_api_boiler_plate.Services.Interface.IItemService">
+            <summary>
+                ITestSerice interface
+            </summary>
+        </member>
+        <member name="M:net_core_api_boiler_plate.Services.Interface.IItemService.GetItems">
+            <summary>
+                Gets all items from DB
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:net_core_api_boiler_plate.Services.Interface.IItemService.GetItem(System.Guid)">
+            <summary>
+                Gets item from DB based on Id
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:net_core_api_boiler_plate.Services.Interface.IItemService.PostItem(net_core_api_boiler_plate.Database.Tables.Item)">
+            <summary>
+                Creates item on DB
+            </summary>
+            <param name="item"></param>
+            <returns></returns>
+        </member>
+        <member name="M:net_core_api_boiler_plate.Services.Interface.IItemService.PutItem(net_core_api_boiler_plate.Database.Tables.Item)">
+            <summary>
+                Updates item on DB
+            </summary>
+            <param name="item1"></param>
+            <returns></returns>
+        </member>
+        <member name="M:net_core_api_boiler_plate.Services.Interface.IItemService.DeleteItem(System.Guid)">
+            <summary>
+                Deletes item from DB based on Id
+            </summary>
+            <param name="id"></param>
             <returns></returns>
         </member>
         <member name="T:net_core_api_boiler_plate.Startup">

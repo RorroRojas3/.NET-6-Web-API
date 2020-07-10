@@ -14,23 +14,23 @@ namespace net_core_api_boiler_plate.Controllers.V1
     [ApiController]
     [Route("api/v{version:apiVersion}")]
     [ApiVersion("1")]
-    public class TestController : Controller
+    public class ItemController : Controller
     {
         /// <summary>
         ///     Private variables
         /// </summary>
         private readonly ILogger _logger;
-        private readonly ITestService _testService;
+        private readonly IItemService _itemService;
 
         /// <summary>
         ///     TestController constructor with DI
         /// </summary>
         /// <param name="logger"></param>
-        /// <param name="testService"></param>
-        public TestController(ILogger<TestController> logger, ITestService testService)
+        /// <param name="itemService"></param>
+        public ItemController(ILogger<ItemController> logger, IItemService itemService)
         {
             _logger = logger;
-            _testService = testService;
+            _itemService = itemService;
         }
 
         /// <summary>
@@ -45,7 +45,7 @@ namespace net_core_api_boiler_plate.Controllers.V1
             {
                 _logger.LogInformation($"GetItems - Started");
 
-                var result = await _testService.GetItems();
+                var result = await _itemService.GetItems();
                 return StatusCode(StatusCodes.Status200OK, result);
             }
             catch (Exception ex)
@@ -75,7 +75,7 @@ namespace net_core_api_boiler_plate.Controllers.V1
 
                 _logger.LogInformation($"GetItem - Started");
 
-                var result = await _testService.GetItem(guid);
+                var result = await _itemService.GetItem(guid);
 
                 return StatusCode(StatusCodes.Status200OK, result);
 
@@ -105,7 +105,7 @@ namespace net_core_api_boiler_plate.Controllers.V1
 
                 _logger.LogInformation($"PostItem - Started");
 
-                var result = await _testService.PostItem(item);
+                var result = await _itemService.PostItem(item);
 
                 return StatusCode(StatusCodes.Status200OK, result);
             }
@@ -134,7 +134,7 @@ namespace net_core_api_boiler_plate.Controllers.V1
 
                 _logger.LogInformation($"PutItem - Started");
 
-                var result = await _testService.PutItem(item);
+                var result = await _itemService.PutItem(item);
 
                 return StatusCode(StatusCodes.Status200OK);
             }
@@ -165,7 +165,7 @@ namespace net_core_api_boiler_plate.Controllers.V1
 
                 _logger.LogInformation($"DeleteItem - Started");
 
-                var result = await _testService.DeleteItem(guid);
+                var result = await _itemService.DeleteItem(guid);
 
                 if (!result)
                 {
@@ -178,133 +178,6 @@ namespace net_core_api_boiler_plate.Controllers.V1
             catch (Exception ex)
             {
                 _logger.LogInformation($"DeleteItem - Failed - {ex.Message}");
-                return StatusCode(StatusCodes.Status500InternalServerError);
-            }
-        }
-
-        /// <summary>
-        ///     Gets file based on Id
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        [HttpGet]
-        [Route("File/{id}")]
-        public async Task<IActionResult> GetFile(string id)
-        {
-            try
-            {
-                Guid guid;
-                var validGuid = Guid.TryParse(id, out guid);
-                if (string.IsNullOrEmpty(id) || !validGuid)
-                {
-                    return StatusCode(StatusCodes.Status406NotAcceptable, "Id empty or not acceptable");
-                }
-
-                _logger.LogInformation($"GetFile - Started");
-
-                var result = await _testService.GetFile(guid);
-
-                return StatusCode(StatusCodes.Status200OK);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogInformation($"GetFile - Failed - {ex.Message}");
-                return StatusCode(StatusCodes.Status500InternalServerError);
-            }
-        }
-
-        /// <summary>
-        ///     Creates file
-        /// </summary>
-        /// <param name="formFile"></param>
-        /// <returns></returns>
-        [HttpPost]
-        [Route("File")]
-        public async Task<IActionResult> PostFile(IFormFile formFile)
-        {
-            try
-            {
-                if (formFile == null)
-                {
-                    return StatusCode(StatusCodes.Status406NotAcceptable, "File not provided");
-                }
-
-                _logger.LogInformation($"PostFile - Started");
-
-                var result = await _testService.PostFile(formFile);
-
-                return StatusCode(StatusCodes.Status200OK);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogInformation($"PostFile - Failed - {ex.Message}");
-                return StatusCode(StatusCodes.Status500InternalServerError);
-            }
-        }
-
-        /// <summary>
-        ///     Updates file
-        /// </summary>
-        /// <param name="id"></param>
-        /// <param name="formFile"></param>
-        /// <returns></returns>
-        [HttpPut]
-        [Route("File/{id}")]
-        public async Task<IActionResult> PutFile(string id, IFormFile formFile)
-        {
-            try
-            {
-                Guid guid;
-                var validGuid = Guid.TryParse(id, out guid);
-                if (string.IsNullOrEmpty(id) || !validGuid)
-                {
-                    return StatusCode(StatusCodes.Status406NotAcceptable, "Id empty or not acceptable");
-                }
-
-                if (formFile == null)
-                {
-                    return StatusCode(StatusCodes.Status406NotAcceptable, "File not provided");
-                }
-
-                _logger.LogInformation($"PutFile - Started");
-
-                var result = await _testService.UpdateFile(guid, formFile);
-
-                return StatusCode(StatusCodes.Status200OK);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogInformation($"PutFile - Failed - {ex.Message}");
-                return StatusCode(StatusCodes.Status500InternalServerError);
-            }
-        }
-
-        /// <summary>
-        ///     Deletes file based on Id
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        [HttpDelete]
-        [Route("File/{id}")]
-        public async Task<IActionResult> DeleteFile(string id)
-        {
-            try
-            {
-                Guid guid;
-                var validGuid = Guid.TryParse(id, out guid);
-                if (string.IsNullOrEmpty(id) || !validGuid)
-                {
-                    return StatusCode(StatusCodes.Status406NotAcceptable, "Id empty or not acceptable");
-                }
-
-                var result = await _testService.DeleteFile(guid);
-
-                _logger.LogInformation($"PutFile - Started");
-                return StatusCode(StatusCodes.Status200OK);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogInformation($"PutFile - Failed - {ex.Message}");
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
         }

@@ -15,7 +15,8 @@ namespace net_core_api_boiler_plate.Extensions.Services
         /// <param name="services"></param>
         public static void AddTestControllerService(this IServiceCollection services)
         {
-            services.AddTransient<ITestService, TestService>();
+            services.AddTransient<IItemService, ItemService>();
+            services.AddTransient<IFileService, FileService>();
         }
 
     }

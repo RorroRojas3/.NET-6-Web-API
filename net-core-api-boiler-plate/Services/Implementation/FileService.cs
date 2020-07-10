@@ -1,35 +1,30 @@
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
-using File = net_core_api_boiler_plate.Database.Tables.File;
 using net_core_api_boiler_plate.Database.Repository.Interface;
-using net_core_api_boiler_plate.Database.Tables;
 using net_core_api_boiler_plate.Services.Interface;
+using File = net_core_api_boiler_plate.Database.Tables.File;
+using static System.Net.WebRequestMethods;
 
 namespace net_core_api_boiler_plate.Services.Implementation
 {
     /// <summary>
-    ///     TestService class with implementation of interface ITestService
+    ///     FileService class with IFileService interface implementation
     /// </summary>
-    public class TestService : ITestService
+    public class FileService : IFileService
     {
         /// <summary>
         ///     Private variables
         /// </summary>
-        private readonly IRepository<Item> _itemRepository;
         private readonly IRepository<File> _fileRepository;
 
         /// <summary>
-        ///     TestService constructor with DI
+        ///     FileService constructor with DI
         /// </summary>
-        /// <param name="itemRepository"></param>
         /// <param name="fileRepository"></param>
-        public TestService(IRepository<Item> itemRepository,
-                            IRepository<File> fileRepository)
+        public FileService(IRepository<File> fileRepository)
         {
-            _itemRepository = itemRepository;
             _fileRepository = fileRepository;
         }
 
@@ -44,16 +39,6 @@ namespace net_core_api_boiler_plate.Services.Implementation
         }
 
         /// <summary>
-        ///     Deletes item from DB based on Id
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        public async Task<bool> DeleteItem(Guid id)
-        {
-            return await _itemRepository.Delete(id);
-        }
-
-        /// <summary>
         ///     Gets file from DB based on Id
         /// </summary>
         /// <param name="id"></param>
@@ -62,25 +47,6 @@ namespace net_core_api_boiler_plate.Services.Implementation
         {
             var file = await _fileRepository.Get(id);
             return file.Data;
-        }
-
-        /// <summary>
-        ///     Gets item from DB based on Id
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        public async Task<Item> GetItem(Guid id)
-        {
-            return await _itemRepository.Get(id);
-        }
-
-        /// <summary>
-        ///     Gets all items from DB
-        /// </summary>
-        /// <returns></returns>
-        public async Task<List<Item>> GetItems()
-        {
-            return await _itemRepository.GetAll();
         }
 
         /// <summary>
@@ -108,26 +74,6 @@ namespace net_core_api_boiler_plate.Services.Implementation
             var result = await _fileRepository.Add(file);
 
             return result == null ? false : true;
-        }
-
-        /// <summary>
-        ///     Creates item on DB
-        /// </summary>
-        /// <param name="item"></param>
-        /// <returns></returns>
-        public async Task<Item> PostItem(Item item)
-        {
-            return await _itemRepository.Add(item);
-        }
-
-        /// <summary>
-        ///     Updates item on DB
-        /// </summary>
-        /// <param name="item"></param>
-        /// <returns></returns>
-        public async Task<Item> PutItem(Item item)
-        {
-            return await _itemRepository.Update(item);
         }
 
         /// <summary>
