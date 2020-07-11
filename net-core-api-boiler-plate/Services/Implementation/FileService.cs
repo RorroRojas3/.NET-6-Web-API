@@ -1,8 +1,11 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using net_core_api_boiler_plate.Database.Repository.Interface;
+using net_core_api_boiler_plate.Models.Responses;
 using net_core_api_boiler_plate.Services.Interface;
 using File = net_core_api_boiler_plate.Database.Tables.File;
 
@@ -17,14 +20,18 @@ namespace net_core_api_boiler_plate.Services.Implementation
         ///     Private variables
         /// </summary>
         private readonly IRepository<File> _fileRepository;
+        private readonly IMapper _mapper;
 
         /// <summary>
         ///     FileService constructor with DI
         /// </summary>
         /// <param name="fileRepository"></param>
-        public FileService(IRepository<File> fileRepository)
+        /// <param name="mapper"></param>
+        public FileService(IRepository<File> fileRepository,
+                            IMapper mapper)
         {
             _fileRepository = fileRepository;
+            _mapper = mapper;
         }
 
         /// <summary>
@@ -35,6 +42,17 @@ namespace net_core_api_boiler_plate.Services.Implementation
         public async Task<bool> DeleteFile(Guid id)
         {
             return await _fileRepository.Delete(id);
+        }
+
+        /// <summary>
+        ///     Gets all files from DB
+        /// </summary>
+        /// <returns></returns>
+        public async Task<List<FileResponse>> GetAllFiles()
+        {
+            var files = await _fileRepository.GetAll();
+            var response = _mapper.Map<List<FileResponse>>(files);
+            return response;
         }
 
         /// <summary>

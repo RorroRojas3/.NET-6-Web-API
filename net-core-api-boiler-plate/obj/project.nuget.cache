@@ -1,9 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "uIXlH71hKGX8yjbU6pwLvBOKAagYM8e4yylIRESNfmepzZoYoFLCDX9YYHGXzpHyO+3q3DiAnM9u/kaWpRnxCQ==",
+  "dgSpecHash": "gsK6GTUIb67YKStUpczcIpfuitxXNKbVsMUPOrvGLrUfUjOucauB4BwgYtx6uW5EC9KOOIu5nWK6yl2vBQqX3A==",
   "success": true,
   "projectFilePath": "/home/rorro/Documents/GitHub/net-core-api-boiler-plate/net-core-api-boiler-plate/net-core-api-boiler-plate.csproj",
   "expectedPackageFiles": [
+    "/home/rorro/.nuget/packages/automapper/10.0.0/automapper.10.0.0.nupkg.sha512",
+    "/home/rorro/.nuget/packages/automapper.extensions.microsoft.dependencyinjection/8.0.0/automapper.extensions.microsoft.dependencyinjection.8.0.0.nupkg.sha512",
     "/home/rorro/.nuget/packages/microsoft.aspnetcore.hosting.abstractions/2.0.0/microsoft.aspnetcore.hosting.abstractions.2.0.0.nupkg.sha512",
     "/home/rorro/.nuget/packages/microsoft.aspnetcore.hosting.server.abstractions/2.0.0/microsoft.aspnetcore.hosting.server.abstractions.2.0.0.nupkg.sha512",
     "/home/rorro/.nuget/packages/microsoft.aspnetcore.http.abstractions/2.0.0/microsoft.aspnetcore.http.abstractions.2.0.0.nupkg.sha512",
@@ -93,7 +95,7 @@
     "/home/rorro/.nuget/packages/system.objectmodel/4.0.12/system.objectmodel.4.0.12.nupkg.sha512",
     "/home/rorro/.nuget/packages/system.private.datacontractserialization/4.3.0/system.private.datacontractserialization.4.3.0.nupkg.sha512",
     "/home/rorro/.nuget/packages/system.reflection/4.3.0/system.reflection.4.3.0.nupkg.sha512",
-    "/home/rorro/.nuget/packages/system.reflection.emit/4.3.0/system.reflection.emit.4.3.0.nupkg.sha512",
+    "/home/rorro/.nuget/packages/system.reflection.emit/4.7.0/system.reflection.emit.4.7.0.nupkg.sha512",
     "/home/rorro/.nuget/packages/system.reflection.emit.ilgeneration/4.3.0/system.reflection.emit.ilgeneration.4.3.0.nupkg.sha512",
     "/home/rorro/.nuget/packages/system.reflection.emit.lightweight/4.3.0/system.reflection.emit.lightweight.4.3.0.nupkg.sha512",
     "/home/rorro/.nuget/packages/system.reflection.extensions/4.3.0/system.reflection.extensions.4.3.0.nupkg.sha512",
