@@ -12,7 +12,7 @@ namespace net_core_api_boiler_plate.Controllers.V1
     ///     FileController
     /// </summary>
     [ApiController]
-    [Route("api/v{version:apiVersion}")]
+    [Route("api/v{version:apiVersion}/[controller]")]
     [ApiVersion("1")]
     public class FileController : Controller
     {
@@ -39,19 +39,19 @@ namespace net_core_api_boiler_plate.Controllers.V1
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet]
-        [Route("File/{id}")]
+        [Route("{id}")]
         public async Task<IActionResult> GetFile(string id)
         {
             try
             {
+                _logger.LogInformation($"GetFile - Started");
+
                 Guid guid;
                 var validGuid = Guid.TryParse(id, out guid);
                 if (string.IsNullOrEmpty(id) || !validGuid)
                 {
                     return StatusCode(StatusCodes.Status406NotAcceptable, "Id empty or not acceptable");
                 }
-
-                _logger.LogInformation($"GetFile - Started");
 
                 var result = await _fileService.GetFile(guid);
 
@@ -77,17 +77,16 @@ namespace net_core_api_boiler_plate.Controllers.V1
         /// <param name="formFile"></param>
         /// <returns></returns>
         [HttpPost]
-        [Route("File")]
         public async Task<IActionResult> PostFile(IFormFile formFile)
         {
             try
             {
+                _logger.LogInformation($"PostFile - Started");
+
                 if (formFile == null)
                 {
                     return StatusCode(StatusCodes.Status406NotAcceptable, "File not provided");
                 }
-
-                _logger.LogInformation($"PostFile - Started");
 
                 var result = await _fileService.PostFile(formFile);
 
@@ -112,11 +111,13 @@ namespace net_core_api_boiler_plate.Controllers.V1
         /// <param name="formFile"></param>
         /// <returns></returns>
         [HttpPut]
-        [Route("File/{id}")]
+        [Route("{id}")]
         public async Task<IActionResult> PutFile(string id, IFormFile formFile)
         {
             try
             {
+                _logger.LogInformation($"PutFile - Started");
+
                 Guid guid;
                 var validGuid = Guid.TryParse(id, out guid);
                 if (string.IsNullOrEmpty(id) || !validGuid)
@@ -148,11 +149,13 @@ namespace net_core_api_boiler_plate.Controllers.V1
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpDelete]
-        [Route("File/{id}")]
+        [Route("{id}")]
         public async Task<IActionResult> DeleteFile(string id)
         {
             try
             {
+                _logger.LogInformation($"DeleteFile - Started");
+
                 Guid guid;
                 var validGuid = Guid.TryParse(id, out guid);
                 if (string.IsNullOrEmpty(id) || !validGuid)
@@ -168,6 +171,24 @@ namespace net_core_api_boiler_plate.Controllers.V1
             catch (Exception ex)
             {
                 _logger.LogInformation($"PutFile - Failed - {ex.Message}");
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetAllFiles()
+        {
+            try
+            {
+                _logger.LogInformation($"GetAllFiles - Started");
+
+                var result = await _fileService.GetAllFiles();
+
+                return StatusCode(StatusCodes.Status200OK, result);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogInformation($"GetAllFiles - Failed - {ex.Message}");
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
         }

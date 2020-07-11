@@ -48,6 +48,8 @@ namespace net_core_api_boiler_plate
             services.AddTestControllerService();
             Log.Information("Adding Database Service");
             services.AddDatabaseService(Configuration);
+            Log.Information("Adding AutoMapper service");
+            services.AddAutoMapperService();
         }
 
         /// <summary>

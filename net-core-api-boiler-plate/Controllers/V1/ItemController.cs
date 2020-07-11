@@ -12,7 +12,7 @@ namespace net_core_api_boiler_plate.Controllers.V1
     ///     TestController
     /// </summary>
     [ApiController]
-    [Route("api/v{version:apiVersion}")]
+    [Route("api/v{version:apiVersion}/[controller]")]
     [ApiVersion("1")]
     public class ItemController : Controller
     {
@@ -38,7 +38,6 @@ namespace net_core_api_boiler_plate.Controllers.V1
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        [Route("Items")]
         public async Task<IActionResult> GetItems()
         {
             try
@@ -61,7 +60,7 @@ namespace net_core_api_boiler_plate.Controllers.V1
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet]
-        [Route("Item/{id}")]
+        [Route("{id}")]
         public async Task<IActionResult> GetItem([FromRoute] string id)
         {
             try
@@ -93,7 +92,6 @@ namespace net_core_api_boiler_plate.Controllers.V1
         /// <param name="item"></param>
         /// <returns></returns>
         [HttpPost]
-        [Route("Item")]
         public async Task<IActionResult> PostItem([FromBody] Item item)
         {
             try
@@ -122,7 +120,6 @@ namespace net_core_api_boiler_plate.Controllers.V1
         /// <param name="item"></param>
         /// <returns></returns>
         [HttpPut]
-        [Route("Item")]
         public async Task<IActionResult> PutItem([FromBody] Item item)
         {
             try
@@ -151,7 +148,7 @@ namespace net_core_api_boiler_plate.Controllers.V1
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpDelete]
-        [Route("Item/{id}")]
+        [Route("{id}")]
         public async Task<IActionResult> DeleteItem([FromRoute] string id)
         {
             try

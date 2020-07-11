@@ -1,5 +1,6 @@
 using AutoMapper;
 using Microsoft.Extensions.DependencyInjection;
+using net_core_api_boiler_plate.Services.Implementation;
 
 namespace net_core_api_boiler_plate.Extensions.Services
 {

@@ -4,6 +4,16 @@
         <name>net-core-api-boiler-plate</name>
     </assembly>
     <members>
+        <member name="T:net_core_api_boiler_plate.AutoMapper.AutoMapping">
+            <summary>
+                AutoMapping class
+            </summary>
+        </member>
+        <member name="M:net_core_api_boiler_plate.AutoMapper.AutoMapping.#ctor">
+            <summary>
+                AutomMapping constructor which creates mapping
+            </summary>
+        </member>
         <member name="T:net_core_api_boiler_plate.Controllers.V1.FileController">
             <summary>
                 FileController
@@ -340,6 +350,17 @@
             <param name="application"></param>
             <param name="provider"></param>
         </member>
+        <member name="T:net_core_api_boiler_plate.Extensions.Services.AutoMapperService">
+            <summary>
+                Static AutoMapperService class  
+            </summary>
+        </member>
+        <member name="M:net_core_api_boiler_plate.Extensions.Services.AutoMapperService.AddAutoMapperService(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+                Adds AutoMapper service
+            </summary>
+            <param name="services"></param>
+        </member>
         <member name="T:net_core_api_boiler_plate.Extensions.Services.CorsService">
             <summary>
                 Static CorsService class
@@ -424,6 +445,29 @@
             </summary>
             <param name="services"></param>
         </member>
+        <member name="T:net_core_api_boiler_plate.Models.Responses.FileResponse">
+            <summary>
+                FileResponse class
+            </summary>
+        </member>
+        <member name="P:net_core_api_boiler_plate.Models.Responses.FileResponse.Id">
+            <summary>
+                Id
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:net_core_api_boiler_plate.Models.Responses.FileResponse.Name">
+            <summary>
+                Name
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:net_core_api_boiler_plate.Models.Responses.FileResponse.ContentType">
+            <summary>
+             ContentType
+            </summary>
+            <value></value>
+        </member>
         <member name="T:net_core_api_boiler_plate.Program">
             <summary>
                 Program class
@@ -452,17 +496,24 @@
                 Private variables
             </summary>
         </member>
-        <member name="M:net_core_api_boiler_plate.Services.Implementation.FileService.#ctor(net_core_api_boiler_plate.Database.Repository.Interface.IRepository{net_core_api_boiler_plate.Database.Tables.File})">
+        <member name="M:net_core_api_boiler_plate.Services.Implementation.FileService.#ctor(net_core_api_boiler_plate.Database.Repository.Interface.IRepository{net_core_api_boiler_plate.Database.Tables.File},AutoMapper.IMapper)">
             <summary>
                 FileService constructor with DI
             </summary>
             <param name="fileRepository"></param>
+            <param name="mapper"></param>
         </member>
         <member name="M:net_core_api_boiler_plate.Services.Implementation.FileService.DeleteFile(System.Guid)">
             <summary>
                 Deletes file from DB based on Id
             </summary>
             <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:net_core_api_boiler_plate.Services.Implementation.FileService.GetAllFiles">
+            <summary>
+                Gets all files from DB
+            </summary>
             <returns></returns>
         </member>
         <member name="M:net_core_api_boiler_plate.Services.Implementation.FileService.GetFile(System.Guid)">
@@ -541,6 +592,12 @@
             <summary>
                 IFileService interface
             </summary>
+        </member>
+        <member name="M:net_core_api_boiler_plate.Services.Interface.IFileService.GetAllFiles">
+            <summary>
+                Gets all files from DB
+            </summary>
+            <returns></returns>
         </member>
         <member name="M:net_core_api_boiler_plate.Services.Interface.IFileService.GetFile(System.Guid)">
             <summary>
