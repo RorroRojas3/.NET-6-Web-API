@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Http;
 using net_core_api_boiler_plate.Database.Repository.Interface;
 using net_core_api_boiler_plate.Services.Interface;
 using File = net_core_api_boiler_plate.Database.Tables.File;
-using static System.Net.WebRequestMethods;
 
 namespace net_core_api_boiler_plate.Services.Implementation
 {
@@ -43,10 +42,10 @@ namespace net_core_api_boiler_plate.Services.Implementation
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public async Task<byte[]> GetFile(Guid id)
+        public async Task<File> GetFile(Guid id)
         {
             var file = await _fileRepository.Get(id);
-            return file.Data;
+            return file;
         }
 
         /// <summary>

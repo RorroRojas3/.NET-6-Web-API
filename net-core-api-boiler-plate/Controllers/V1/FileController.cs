@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -54,7 +55,14 @@ namespace net_core_api_boiler_plate.Controllers.V1
 
                 var result = await _fileService.GetFile(guid);
 
-                return StatusCode(StatusCodes.Status200OK);
+                if (result == null)
+                {
+                    return StatusCode(StatusCodes.Status404NotFound);
+                }
+
+                Stream stream = new MemoryStream(result.Data);
+
+                return new FileStreamResult(stream, result.ContentType);
             }
             catch (Exception ex)
             {
@@ -83,7 +91,12 @@ namespace net_core_api_boiler_plate.Controllers.V1
 
                 var result = await _fileService.PostFile(formFile);
 
-                return StatusCode(StatusCodes.Status200OK);
+                if (!result)
+                {
+                    return StatusCode(StatusCodes.Status400BadRequest, "File could not be created");
+                }
+
+                return StatusCode(StatusCodes.Status201Created);
             }
             catch (Exception ex)
             {

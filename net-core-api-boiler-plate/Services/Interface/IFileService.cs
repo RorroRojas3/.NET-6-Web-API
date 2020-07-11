@@ -1,6 +1,7 @@
 using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
+using net_core_api_boiler_plate.Database.Tables;
 
 namespace net_core_api_boiler_plate.Services.Interface
 {
@@ -14,7 +15,7 @@ namespace net_core_api_boiler_plate.Services.Interface
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        Task<byte[]> GetFile(Guid id);
+        Task<File> GetFile(Guid id);
 
         /// <summary>
         ///     Creates file on DB 

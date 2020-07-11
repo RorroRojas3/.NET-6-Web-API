@@ -107,7 +107,7 @@ namespace net_core_api_boiler_plate.Controllers.V1
 
                 var result = await _itemService.PostItem(item);
 
-                return StatusCode(StatusCodes.Status200OK, result);
+                return StatusCode(StatusCodes.Status201Created, result);
             }
             catch (Exception ex)
             {
