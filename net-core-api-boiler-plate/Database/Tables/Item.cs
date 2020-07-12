@@ -25,12 +25,14 @@ namespace net_core_api_boiler_plate.Database.Tables
         ///     Name
         /// </summary>
         /// <value></value>
+        [Required]
         public string Name { get; set; }
 
         /// <summary>
         ///     Value
         /// </summary>
         /// <value></value>
+        [Required]
         public string Value { get; set; }
     }
 }

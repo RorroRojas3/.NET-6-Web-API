@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using net_core_api_boiler_plate.Database.Tables;
+using net_core_api_boiler_plate.Models.Requests;
 using net_core_api_boiler_plate.Services.Interface;
 
 namespace net_core_api_boiler_plate.Controllers.V1
@@ -75,7 +76,7 @@ namespace net_core_api_boiler_plate.Controllers.V1
         /// <param name="item"></param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<IActionResult> PostItem([FromBody] Item item)
+        public async Task<IActionResult> PostItem([FromBody] ItemRequest item)
         {
             if (item == null)
             {

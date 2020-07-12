@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using net_core_api_boiler_plate.Database.Repository.Interface;
 using net_core_api_boiler_plate.Database.Tables;
+using net_core_api_boiler_plate.Models.Requests;
 using net_core_api_boiler_plate.Services.Interface;
 
 namespace net_core_api_boiler_plate.Services.Implementation
@@ -60,9 +61,16 @@ namespace net_core_api_boiler_plate.Services.Implementation
         /// </summary>
         /// <param name="item"></param>
         /// <returns></returns>
-        public async Task<Item> PostItem(Item item)
+        public async Task<Item> PostItem(ItemRequest item)
         {
-            return await _itemRepository.Add(item);
+            var newItem = new Item
+            {
+                Id = Guid.NewGuid(),
+                Name = item.Name,
+                Value = item.Value
+            };
+
+            return await _itemRepository.Add(newItem);
         }
 
         /// <summary>

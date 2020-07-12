@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using net_core_api_boiler_plate.Database.Tables;
+using net_core_api_boiler_plate.Models.Requests;
 
 namespace net_core_api_boiler_plate.Services.Interface
 {
@@ -29,7 +30,7 @@ namespace net_core_api_boiler_plate.Services.Interface
         /// </summary>
         /// <param name="item"></param>
         /// <returns></returns>
-        Task<Item> PostItem(Item item);
+        Task<Item> PostItem(ItemRequest item);
 
         /// <summary>
         ///     Updates item on DB

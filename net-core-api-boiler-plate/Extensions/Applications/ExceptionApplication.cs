@@ -58,6 +58,7 @@ namespace net_core_api_boiler_plate.Extensions.Applications
             }
             catch (Exception ex)
             {
+                _logger.LogInformation($"StackTrace: {ex.StackTrace}, Exception: {ex.Message}");
                 await HandleExceptionAsync(context, ex).ConfigureAwait(false);
             }
         }

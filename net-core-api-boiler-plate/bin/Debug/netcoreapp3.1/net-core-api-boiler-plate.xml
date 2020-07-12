@@ -96,7 +96,7 @@
             <param name="id"></param>
             <returns></returns>
         </member>
-        <member name="M:net_core_api_boiler_plate.Controllers.V1.ItemController.PostItem(net_core_api_boiler_plate.Database.Tables.Item)">
+        <member name="M:net_core_api_boiler_plate.Controllers.V1.ItemController.PostItem(net_core_api_boiler_plate.Models.Requests.ItemRequest)">
             <summary>
                 Creates item 
             </summary>
@@ -494,6 +494,23 @@
             </summary>
             <param name="services"></param>
         </member>
+        <member name="T:net_core_api_boiler_plate.Models.Requests.ItemRequest">
+            <summary>
+                ItemRequest class
+            </summary>
+        </member>
+        <member name="P:net_core_api_boiler_plate.Models.Requests.ItemRequest.Name">
+            <summary>
+                Name
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:net_core_api_boiler_plate.Models.Requests.ItemRequest.Value">
+            <summary>
+                Value
+            </summary>
+            <value></value>
+        </member>
         <member name="T:net_core_api_boiler_plate.Models.Responses.FileResponse">
             <summary>
                 FileResponse class
@@ -623,7 +640,7 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:net_core_api_boiler_plate.Services.Implementation.ItemService.PostItem(net_core_api_boiler_plate.Database.Tables.Item)">
+        <member name="M:net_core_api_boiler_plate.Services.Implementation.ItemService.PostItem(net_core_api_boiler_plate.Models.Requests.ItemRequest)">
             <summary>
                 Creates item on DB
             </summary>
@@ -695,7 +712,7 @@
             <param name="id"></param>
             <returns></returns>
         </member>
-        <member name="M:net_core_api_boiler_plate.Services.Interface.IItemService.PostItem(net_core_api_boiler_plate.Database.Tables.Item)">
+        <member name="M:net_core_api_boiler_plate.Services.Interface.IItemService.PostItem(net_core_api_boiler_plate.Models.Requests.ItemRequest)">
             <summary>
                 Creates item on DB
             </summary>
