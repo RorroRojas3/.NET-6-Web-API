@@ -13,7 +13,7 @@ namespace net_core_api_boiler_plate.Extensions.Applications
         /// </summary>
         /// <param name="application"></param>
         /// <param name="provider"></param>
-        public static void AddSwashbuckleApp(this IApplicationBuilder application, IApiVersionDescriptionProvider provider)
+        public static void UseSwashbuckle(this IApplicationBuilder application, IApiVersionDescriptionProvider provider)
         {
             application.UseSwagger();
             application.UseSwaggerUI(

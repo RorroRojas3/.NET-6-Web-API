@@ -63,25 +63,25 @@ namespace net_core_api_boiler_plate
                                 IApiVersionDescriptionProvider provider,
                                 DatabaseContext db)
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
-
+            Log.Information($"Using Exception middleware");
+            app.UseExceptionMiddleware();
+            Log.Information($"Using HttpsRedirection");
             app.UseHttpsRedirection();
-
+            Log.Information($"Using Routing");
             app.UseRouting();
-
+            Log.Information($"Using Auhtorization");
             app.UseAuthorization();
-
+            Log.Information($"Using Endpoint");
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
             });
+            Log.Information($"Using Swashbuckle");
+            app.UseSwashbuckle(provider);
 
-            app.AddSwashbuckleApp(provider);
-
+            Log.Information($"Using Ensure Creation of DB");
             db.Database.EnsureCreated();
+            Log.Information($"Using Migration of DB");
             db.Database.Migrate();
         }
     }

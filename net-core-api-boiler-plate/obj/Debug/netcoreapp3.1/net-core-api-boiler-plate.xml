@@ -60,6 +60,12 @@
             <param name="id"></param>
             <returns></returns>
         </member>
+        <member name="M:net_core_api_boiler_plate.Controllers.V1.FileController.GetAllFiles">
+            <summary>
+                Get all files
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:net_core_api_boiler_plate.Controllers.V1.ItemController">
             <summary>
                 TestController
@@ -338,12 +344,55 @@
             </summary>
             <value></value>
         </member>
+        <member name="T:net_core_api_boiler_plate.Extensions.Applications.ExceptionApplication">
+            <summary>
+                Static ExceptionApplicaton class
+            </summary>
+        </member>
+        <member name="M:net_core_api_boiler_plate.Extensions.Applications.ExceptionApplication.UseExceptionMiddleware(Microsoft.AspNetCore.Builder.IApplicationBuilder)">
+            <summary>
+                Adds Exception middleware
+            </summary>
+            <param name="application"></param>
+        </member>
+        <member name="T:net_core_api_boiler_plate.Extensions.Applications.ExceptionMiddleware">
+            <summary>
+                ExceptionMiddleware class
+            </summary>
+        </member>
+        <member name="F:net_core_api_boiler_plate.Extensions.Applications.ExceptionMiddleware._next">
+            <summary>
+                Private variables
+            </summary>
+        </member>
+        <member name="M:net_core_api_boiler_plate.Extensions.Applications.ExceptionMiddleware.#ctor(Microsoft.AspNetCore.Http.RequestDelegate,Microsoft.Extensions.Logging.ILogger{net_core_api_boiler_plate.Extensions.Applications.ExceptionMiddleware})">
+            <summary>
+                ExceptionMiddelware constructor with DI
+            </summary>
+            <param name="next"></param>
+            <param name="logger"></param>
+        </member>
+        <member name="M:net_core_api_boiler_plate.Extensions.Applications.ExceptionMiddleware.Invoke(Microsoft.AspNetCore.Http.HttpContext)">
+            <summary>
+                Invokes exception on API call
+            </summary>
+            <param name="context"></param>
+            <returns></returns>
+        </member>
+        <member name="M:net_core_api_boiler_plate.Extensions.Applications.ExceptionMiddleware.HandleExceptionAsync(Microsoft.AspNetCore.Http.HttpContext,System.Exception)">
+            <summary>
+                Handles exceptions
+            </summary>
+            <param name="context"></param>
+            <param name="exception"></param>
+            <returns></returns>
+        </member>
         <member name="T:net_core_api_boiler_plate.Extensions.Applications.SwashbuckleApplication">
             <summary>
                 Static SwashbuckleApplication class
             </summary>
         </member>
-        <member name="M:net_core_api_boiler_plate.Extensions.Applications.SwashbuckleApplication.AddSwashbuckleApp(Microsoft.AspNetCore.Builder.IApplicationBuilder,Microsoft.AspNetCore.Mvc.ApiExplorer.IApiVersionDescriptionProvider)">
+        <member name="M:net_core_api_boiler_plate.Extensions.Applications.SwashbuckleApplication.UseSwashbuckle(Microsoft.AspNetCore.Builder.IApplicationBuilder,Microsoft.AspNetCore.Mvc.ApiExplorer.IApiVersionDescriptionProvider)">
             <summary>
                 Adds Swashbuckle application 
             </summary>

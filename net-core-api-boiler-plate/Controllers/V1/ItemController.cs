@@ -40,18 +40,10 @@ namespace net_core_api_boiler_plate.Controllers.V1
         [HttpGet]
         public async Task<IActionResult> GetItems()
         {
-            try
-            {
-                _logger.LogInformation($"GetItems - Started");
+            _logger.LogInformation($"GetItems - Started");
 
-                var result = await _itemService.GetItems();
-                return StatusCode(StatusCodes.Status200OK, result);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogInformation($"GetItems - Failed - {ex.Message}");
-                return StatusCode(StatusCodes.Status500InternalServerError);
-            }
+            var result = await _itemService.GetItems();
+            return StatusCode(StatusCodes.Status200OK, result);
         }
 
         /// <summary>
@@ -63,27 +55,18 @@ namespace net_core_api_boiler_plate.Controllers.V1
         [Route("{id}")]
         public async Task<IActionResult> GetItem([FromRoute] string id)
         {
-            try
+            Guid guid;
+            var validGuid = Guid.TryParse(id, out guid);
+            if (string.IsNullOrEmpty(id) || !validGuid)
             {
-                Guid guid;
-                var validGuid = Guid.TryParse(id, out guid);
-                if (string.IsNullOrEmpty(id) || !validGuid)
-                {
-                    return StatusCode(StatusCodes.Status406NotAcceptable, "Id empty or not acceptable");
-                }
-
-                _logger.LogInformation($"GetItem - Started");
-
-                var result = await _itemService.GetItem(guid);
-
-                return StatusCode(StatusCodes.Status200OK, result);
-
+                return StatusCode(StatusCodes.Status406NotAcceptable, "Id empty or not acceptable");
             }
-            catch (Exception ex)
-            {
-                _logger.LogInformation($"GetItem - Failed - {ex.Message}");
-                return StatusCode(StatusCodes.Status500InternalServerError);
-            }
+
+            _logger.LogInformation($"GetItem - Started");
+
+            var result = await _itemService.GetItem(guid);
+
+            return StatusCode(StatusCodes.Status200OK, result);
         }
 
         /// <summary>
@@ -94,24 +77,16 @@ namespace net_core_api_boiler_plate.Controllers.V1
         [HttpPost]
         public async Task<IActionResult> PostItem([FromBody] Item item)
         {
-            try
+            if (item == null)
             {
-                if (item == null)
-                {
-                    return StatusCode(StatusCodes.Status406NotAcceptable, "Item not provided");
-                }
-
-                _logger.LogInformation($"PostItem - Started");
-
-                var result = await _itemService.PostItem(item);
-
-                return StatusCode(StatusCodes.Status201Created, result);
+                return StatusCode(StatusCodes.Status406NotAcceptable, "Item not provided");
             }
-            catch (Exception ex)
-            {
-                _logger.LogInformation($"PostItem - Failed - {ex.Message}");
-                return StatusCode(StatusCodes.Status500InternalServerError);
-            }
+
+            _logger.LogInformation($"PostItem - Started");
+
+            var result = await _itemService.PostItem(item);
+
+            return StatusCode(StatusCodes.Status201Created, result);
         }
 
         /// <summary>
@@ -122,24 +97,16 @@ namespace net_core_api_boiler_plate.Controllers.V1
         [HttpPut]
         public async Task<IActionResult> PutItem([FromBody] Item item)
         {
-            try
+            if (item == null)
             {
-                if (item == null)
-                {
-                    return StatusCode(StatusCodes.Status406NotAcceptable, "Item not provided");
-                }
-
-                _logger.LogInformation($"PutItem - Started");
-
-                var result = await _itemService.PutItem(item);
-
-                return StatusCode(StatusCodes.Status200OK);
+                return StatusCode(StatusCodes.Status406NotAcceptable, "Item not provided");
             }
-            catch (Exception ex)
-            {
-                _logger.LogInformation($"PutItem - Failed - {ex.Message}");
-                return StatusCode(StatusCodes.Status500InternalServerError);
-            }
+
+            _logger.LogInformation($"PutItem - Started");
+
+            var result = await _itemService.PutItem(item);
+
+            return StatusCode(StatusCodes.Status200OK);
         }
 
         /// <summary>
@@ -151,32 +118,23 @@ namespace net_core_api_boiler_plate.Controllers.V1
         [Route("{id}")]
         public async Task<IActionResult> DeleteItem([FromRoute] string id)
         {
-            try
+            Guid guid;
+            var validGuid = Guid.TryParse(id, out guid);
+            if (string.IsNullOrEmpty(id) || !validGuid)
             {
-                Guid guid;
-                var validGuid = Guid.TryParse(id, out guid);
-                if (string.IsNullOrEmpty(id) || !validGuid)
-                {
-                    return StatusCode(StatusCodes.Status406NotAcceptable, "Id empty or not acceptable");
-                }
-
-                _logger.LogInformation($"DeleteItem - Started");
-
-                var result = await _itemService.DeleteItem(guid);
-
-                if (!result)
-                {
-                    return StatusCode(StatusCodes.Status404NotFound);
-                }
-
-                return StatusCode(StatusCodes.Status200OK);
-
+                return StatusCode(StatusCodes.Status406NotAcceptable, "Id empty or not acceptable");
             }
-            catch (Exception ex)
+
+            _logger.LogInformation($"DeleteItem - Started");
+
+            var result = await _itemService.DeleteItem(guid);
+
+            if (!result)
             {
-                _logger.LogInformation($"DeleteItem - Failed - {ex.Message}");
-                return StatusCode(StatusCodes.Status500InternalServerError);
+                return StatusCode(StatusCodes.Status404NotFound);
             }
+
+            return StatusCode(StatusCodes.Status200OK);
         }
     }
 }
