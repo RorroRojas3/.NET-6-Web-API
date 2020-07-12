@@ -76,7 +76,8 @@ namespace net_core_api_boiler_plate.Services.Implementation
         /// <summary>
         ///     Updates item on DB
         /// </summary>
-        /// <param name="item"></param>
+        /// <param name="id"></param>
+        /// <param name="itemRequest"></param>
         /// <returns></returns>
         public async Task<Item> PutItem(Guid id, ItemRequest itemRequest)
         {
