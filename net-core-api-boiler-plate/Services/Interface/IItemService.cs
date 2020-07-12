@@ -35,9 +35,10 @@ namespace net_core_api_boiler_plate.Services.Interface
         /// <summary>
         ///     Updates item on DB
         /// </summary>
-        /// <param name="item1"></param>
+        /// <param name="id"></param>
+        /// <param name="item"></param>
         /// <returns></returns>
-        Task<Item> PutItem(Item item1);
+        Task<Item> PutItem(Guid id, ItemRequest item);
 
         /// <summary>
         ///     Deletes item from DB based on Id

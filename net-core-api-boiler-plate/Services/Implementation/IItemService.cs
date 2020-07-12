@@ -78,8 +78,18 @@ namespace net_core_api_boiler_plate.Services.Implementation
         /// </summary>
         /// <param name="item"></param>
         /// <returns></returns>
-        public async Task<Item> PutItem(Item item)
+        public async Task<Item> PutItem(Guid id, ItemRequest itemRequest)
         {
+            var item = await GetItem(id);
+
+            if (item == null)
+            {
+                return null;
+            }
+
+            item.Name = itemRequest.Name;
+            item.Value = itemRequest.Value;
+
             return await _itemRepository.Update(item);
         }
     }

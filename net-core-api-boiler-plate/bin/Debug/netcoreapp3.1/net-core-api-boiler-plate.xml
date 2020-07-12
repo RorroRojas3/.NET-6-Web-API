@@ -103,10 +103,11 @@
             <param name="item"></param>
             <returns></returns>
         </member>
-        <member name="M:net_core_api_boiler_plate.Controllers.V1.ItemController.PutItem(net_core_api_boiler_plate.Database.Tables.Item)">
+        <member name="M:net_core_api_boiler_plate.Controllers.V1.ItemController.PutItem(System.String,net_core_api_boiler_plate.Models.Requests.ItemRequest)">
             <summary>
                 Updates item
             </summary>
+            <param name="id"></param>
             <param name="item"></param>
             <returns></returns>
         </member>
@@ -647,7 +648,7 @@
             <param name="item"></param>
             <returns></returns>
         </member>
-        <member name="M:net_core_api_boiler_plate.Services.Implementation.ItemService.PutItem(net_core_api_boiler_plate.Database.Tables.Item)">
+        <member name="M:net_core_api_boiler_plate.Services.Implementation.ItemService.PutItem(System.Guid,net_core_api_boiler_plate.Models.Requests.ItemRequest)">
             <summary>
                 Updates item on DB
             </summary>
@@ -719,11 +720,12 @@
             <param name="item"></param>
             <returns></returns>
         </member>
-        <member name="M:net_core_api_boiler_plate.Services.Interface.IItemService.PutItem(net_core_api_boiler_plate.Database.Tables.Item)">
+        <member name="M:net_core_api_boiler_plate.Services.Interface.IItemService.PutItem(System.Guid,net_core_api_boiler_plate.Models.Requests.ItemRequest)">
             <summary>
                 Updates item on DB
             </summary>
-            <param name="item1"></param>
+            <param name="id"></param>
+            <param name="item"></param>
             <returns></returns>
         </member>
         <member name="M:net_core_api_boiler_plate.Services.Interface.IItemService.DeleteItem(System.Guid)">

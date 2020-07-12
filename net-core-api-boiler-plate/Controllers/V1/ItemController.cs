@@ -93,11 +93,20 @@ namespace net_core_api_boiler_plate.Controllers.V1
         /// <summary>
         ///     Updates item
         /// </summary>
+        /// <param name="id"></param>
         /// <param name="item"></param>
         /// <returns></returns>
         [HttpPut]
-        public async Task<IActionResult> PutItem([FromBody] Item item)
+        [Route("{id}")]
+        public async Task<IActionResult> PutItem([FromRoute] string id, [FromBody] ItemRequest item)
         {
+            Guid guid;
+            var validGuid = Guid.TryParse(id, out guid);
+            if (string.IsNullOrEmpty(id) || !validGuid)
+            {
+                return StatusCode(StatusCodes.Status406NotAcceptable, "Id empty or not acceptable");
+            }
+
             if (item == null)
             {
                 return StatusCode(StatusCodes.Status406NotAcceptable, "Item not provided");
@@ -105,7 +114,13 @@ namespace net_core_api_boiler_plate.Controllers.V1
 
             _logger.LogInformation($"PutItem - Started");
 
-            var result = await _itemService.PutItem(item);
+            var result = await _itemService.PutItem(guid, item);
+
+            if (result == null)
+            {
+                _logger.LogInformation($"PutItem - Item not found");
+                return StatusCode(StatusCodes.Status404NotFound);
+            }
 
             return StatusCode(StatusCodes.Status200OK);
         }
