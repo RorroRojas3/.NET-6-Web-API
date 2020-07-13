@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.Caching.Distributed;
 using net_core_api_boiler_plate.Database.Repository.Interface;
 using net_core_api_boiler_plate.Database.Tables;
+using net_core_api_boiler_plate.Helpers;
 using net_core_api_boiler_plate.Models.Requests;
 using net_core_api_boiler_plate.Services.Interface;
 
@@ -51,13 +52,11 @@ namespace net_core_api_boiler_plate.Services.Implementation
         /// <returns></returns>
         public async Task<Item> GetItem(Guid id)
         {
-            var cacheBytes = await _cache.GetAsync($"item-{id}");
+            var cacheBytes = await CacheHelper.GetAsync($"item-{id}", _cache);
 
             if (cacheBytes != null)
             {
-                BinaryFormatter bf1 = new BinaryFormatter();
-                MemoryStream ms2 = new MemoryStream(cacheBytes);
-                var cacheItem = (Item)bf1.Deserialize(ms2);
+                var cacheItem = SerializeHelper.DeserializeObject<Item>(cacheBytes);
                 return cacheItem;
             }
 
@@ -68,14 +67,9 @@ namespace net_core_api_boiler_plate.Services.Implementation
                 return null;
             }
 
-            BinaryFormatter bf = new BinaryFormatter();
-            MemoryStream ms = new MemoryStream();
-            bf.Serialize(ms, item);
+            var serializedItem = SerializeHelper.SerializeObject(item);
 
-            var options = new DistributedCacheEntryOptions()
-            .SetSlidingExpiration(TimeSpan.FromMinutes(1));
-
-            await _cache.SetAsync($"item-{id}", ms.ToArray(), options);
+            await CacheHelper.SetDatatMinAsync($"item-{id}", serializedItem, 5, _cache);
 
             return item;
         }
