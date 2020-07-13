@@ -79,8 +79,6 @@ namespace net_core_api_boiler_plate
             Log.Information($"Using Swashbuckle");
             app.UseSwashbuckle(provider);
 
-            Log.Information($"Using Ensure Creation of DB");
-            db.Database.EnsureCreated();
             Log.Information($"Using Migration of DB");
             db.Database.Migrate();
         }

@@ -10,7 +10,7 @@ using net_core_api_boiler_plate.Database.DB;
 namespace net_core_api_boiler_plate.Database.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20200708022855_InitialCreate")]
+    [Migration("20200713021558_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -21,6 +21,29 @@ namespace net_core_api_boiler_plate.Database.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("net_core_api_boiler_plate.Database.Tables.File", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("ContentType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<byte[]>("Data")
+                        .IsRequired()
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("File","Example");
+                });
+
             modelBuilder.Entity("net_core_api_boiler_plate.Database.Tables.Item", b =>
                 {
                     b.Property<Guid>("Id")
@@ -28,9 +51,11 @@ namespace net_core_api_boiler_plate.Database.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Value")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");

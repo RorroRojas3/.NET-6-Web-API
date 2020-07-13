@@ -11,13 +11,28 @@ namespace net_core_api_boiler_plate.Database.Migrations
                 name: "Example");
 
             migrationBuilder.CreateTable(
+                name: "File",
+                schema: "Example",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(nullable: false),
+                    Name = table.Column<string>(nullable: false),
+                    ContentType = table.Column<string>(nullable: false),
+                    Data = table.Column<byte[]>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_File", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Item",
                 schema: "Example",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
-                    Name = table.Column<string>(nullable: true),
-                    Value = table.Column<string>(nullable: true)
+                    Name = table.Column<string>(nullable: false),
+                    Value = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -27,6 +42,10 @@ namespace net_core_api_boiler_plate.Database.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "File",
+                schema: "Example");
+
             migrationBuilder.DropTable(
                 name: "Item",
                 schema: "Example");
