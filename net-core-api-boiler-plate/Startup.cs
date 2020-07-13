@@ -52,6 +52,8 @@ namespace net_core_api_boiler_plate
             services.AddAutoMapperService();
             Log.Information("Adding Cache Service");
             services.AddCacheService(Configuration);
+            Log.Information("Adding Helper Service");
+            services.AddHelpersService();
         }
 
         /// <summary>

@@ -284,3 +284,45 @@
 2020-07-12 23:40:08.522 -04:00 [INF] Using Endpoint
 2020-07-12 23:40:08.623 -04:00 [INF] Using Swashbuckle
 2020-07-12 23:40:08.643 -04:00 [INF] Using Migration of DB
+2020-07-12 23:52:28.300 -04:00 [INF] Adding Controller and NewtonSoftJson Service
+2020-07-12 23:52:28.480 -04:00 [INF] Adding Swashbuckle Service
+2020-07-12 23:52:28.616 -04:00 [INF] Adding TestController Service
+2020-07-12 23:52:28.617 -04:00 [INF] Adding Database Service
+2020-07-12 23:52:28.641 -04:00 [INF] Adding AutoMapper service
+2020-07-12 23:52:28.671 -04:00 [INF] Adding Cache Service
+2020-07-12 23:52:28.679 -04:00 [INF] Adding Helper Service
+2020-07-12 23:52:29.113 -04:00 [INF] Using Exception middleware
+2020-07-12 23:52:29.113 -04:00 [INF] Using HttpsRedirection
+2020-07-12 23:52:29.114 -04:00 [INF] Using Routing
+2020-07-12 23:52:29.115 -04:00 [INF] Using Auhtorization
+2020-07-12 23:52:29.116 -04:00 [INF] Using Endpoint
+2020-07-12 23:52:29.220 -04:00 [INF] Using Swashbuckle
+2020-07-12 23:52:29.241 -04:00 [INF] Using Migration of DB
+2020-07-12 23:54:24.286 -04:00 [INF] Adding Controller and NewtonSoftJson Service
+2020-07-12 23:54:24.470 -04:00 [INF] Adding Swashbuckle Service
+2020-07-12 23:54:24.603 -04:00 [INF] Adding TestController Service
+2020-07-12 23:54:24.604 -04:00 [INF] Adding Database Service
+2020-07-12 23:54:24.629 -04:00 [INF] Adding AutoMapper service
+2020-07-12 23:54:24.654 -04:00 [INF] Adding Cache Service
+2020-07-12 23:54:24.661 -04:00 [INF] Adding Helper Service
+2020-07-12 23:54:25.152 -04:00 [INF] Using Exception middleware
+2020-07-12 23:54:25.152 -04:00 [INF] Using HttpsRedirection
+2020-07-12 23:54:25.153 -04:00 [INF] Using Routing
+2020-07-12 23:54:25.153 -04:00 [INF] Using Auhtorization
+2020-07-12 23:54:25.154 -04:00 [INF] Using Endpoint
+2020-07-12 23:54:25.249 -04:00 [INF] Using Swashbuckle
+2020-07-12 23:54:25.268 -04:00 [INF] Using Migration of DB
+2020-07-12 23:56:08.314 -04:00 [INF] Adding Controller and NewtonSoftJson Service
+2020-07-12 23:56:08.498 -04:00 [INF] Adding Swashbuckle Service
+2020-07-12 23:56:08.638 -04:00 [INF] Adding TestController Service
+2020-07-12 23:56:08.639 -04:00 [INF] Adding Database Service
+2020-07-12 23:56:08.667 -04:00 [INF] Adding AutoMapper service
+2020-07-12 23:56:08.706 -04:00 [INF] Adding Cache Service
+2020-07-12 23:56:08.713 -04:00 [INF] Adding Helper Service
+2020-07-12 23:56:09.133 -04:00 [INF] Using Exception middleware
+2020-07-12 23:56:09.134 -04:00 [INF] Using HttpsRedirection
+2020-07-12 23:56:09.134 -04:00 [INF] Using Routing
+2020-07-12 23:56:09.134 -04:00 [INF] Using Auhtorization
+2020-07-12 23:56:09.135 -04:00 [INF] Using Endpoint
+2020-07-12 23:56:09.232 -04:00 [INF] Using Swashbuckle
+2020-07-12 23:56:09.255 -04:00 [INF] Using Migration of DB

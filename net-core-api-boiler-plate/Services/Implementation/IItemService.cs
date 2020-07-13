@@ -21,18 +21,18 @@ namespace net_core_api_boiler_plate.Services.Implementation
         ///     Private variables
         /// </summary>
         private readonly IRepository<Item> _itemRepository;
-        private readonly IDistributedCache _cache;
+        private readonly CacheHelper _cacheHelper;
 
         /// <summary>
         ///     ItemService constructor with DI
         /// </summary>
         /// <param name="itemRepository"></param>
-        /// <param name="distributedCache"></param>
+        /// <param name="cacheHelper"></param>
         public ItemService(IRepository<Item> itemRepository,
-                            IDistributedCache distributedCache)
+                            CacheHelper cacheHelper)
         {
             _itemRepository = itemRepository;
-            _cache = distributedCache;
+            _cacheHelper = cacheHelper;
         }
 
         /// <summary>
@@ -52,7 +52,7 @@ namespace net_core_api_boiler_plate.Services.Implementation
         /// <returns></returns>
         public async Task<Item> GetItem(Guid id)
         {
-            var cacheBytes = await CacheHelper.GetAsync($"item-{id}", _cache);
+            var cacheBytes = await _cacheHelper.GetAsync($"item-{id}");
 
             if (cacheBytes != null)
             {
@@ -69,7 +69,7 @@ namespace net_core_api_boiler_plate.Services.Implementation
 
             var serializedItem = SerializeHelper.SerializeObject(item);
 
-            await CacheHelper.SetDatatMinAsync($"item-{id}", serializedItem, 5, _cache);
+            await _cacheHelper.SetDatatMinAsync($"item-{id}", serializedItem, 5);
 
             return item;
         }
@@ -80,7 +80,7 @@ namespace net_core_api_boiler_plate.Services.Implementation
         /// <returns></returns>
         public async Task<List<Item>> GetItems()
         {
-            var cacheBytes = await CacheHelper.GetAsync($"items", _cache);
+            var cacheBytes = await _cacheHelper.GetAsync($"items");
 
             if (cacheBytes != null)
             {
@@ -97,7 +97,7 @@ namespace net_core_api_boiler_plate.Services.Implementation
 
             var serializedItem = SerializeHelper.SerializeObject(items);
 
-            await CacheHelper.SetDatatMinAsync($"items", serializedItem, 5, _cache);
+            await _cacheHelper.SetDatatMinAsync($"items", serializedItem, 5);
 
             return items;
         }
@@ -133,6 +133,8 @@ namespace net_core_api_boiler_plate.Services.Implementation
             {
                 return null;
             }
+
+            await _cacheHelper.RemoveCacheAsync($"item-{id}");
 
             item.Name = itemRequest.Name;
             item.Value = itemRequest.Value;

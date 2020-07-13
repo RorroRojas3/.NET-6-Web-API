@@ -7,97 +7,115 @@ namespace net_core_api_boiler_plate.Helpers
     /// <summary>
     ///     CacheHelper class
     /// </summary>
-    public static class CacheHelper
+    public class CacheHelper
     {
         /// <summary>
-        ///     Gets byte array from cache based on key
+        ///     Private variables
         /// </summary>
-        /// <param name="key"></param>
+        private readonly IDistributedCache _cache;
+
+        /// <summary>
+        ///     CacheHelper constructor with DI
+        /// </summary>
         /// <param name="cache"></param>
-        /// <returns></returns>
-        public static async Task<byte[]> GetAsync(string key, IDistributedCache cache)
+        public CacheHelper(IDistributedCache cache)
         {
-            return await cache.GetAsync(key);
+            _cache = cache;
         }
 
         /// <summary>
-        ///     Sets data in cache for miliseconds
+        ///     Gets byte array from _cache based on key
+        /// </summary>
+        /// <param name="key"></param>
+        /// <returns></returns>
+        public async Task<byte[]> GetAsync(string key)
+        {
+            return await _cache.GetAsync(key);
+        }
+
+        /// <summary>
+        ///     Sets data in _cache for miliseconds
         /// </summary>
         /// <param name="key"></param>
         /// <param name="data"></param>
         /// <param name="time"></param>
-        /// <param name="cache"></param>
         /// <returns></returns>
-        public static async Task SetDatatMillAsync(string key, byte[] data, int time, IDistributedCache cache)
+        public async Task SetDatatMillAsync(string key, byte[] data, int time)
         {
             var options = new DistributedCacheEntryOptions()
             .SetSlidingExpiration(TimeSpan.FromMilliseconds(time));
 
-            await cache.SetAsync(key, data, options);
+            await _cache.SetAsync(key, data, options);
         }
 
         /// <summary>
-        ///     Sets data in cache in seconds
+        ///     Sets data in _cache in seconds
         /// </summary>
         /// <param name="key"></param>
         /// <param name="data"></param>
         /// <param name="time"></param>
-        /// <param name="cache"></param>
         /// <returns></returns>
-        public static async Task SetDatatSecAsync(string key, byte[] data, int time, IDistributedCache cache)
+        public async Task SetDatatSecAsync(string key, byte[] data, int time)
         {
             var options = new DistributedCacheEntryOptions()
             .SetSlidingExpiration(TimeSpan.FromSeconds(time));
 
-            await cache.SetAsync(key, data, options);
+            await _cache.SetAsync(key, data, options);
         }
 
         /// <summary>
-        ///     Sets data in cache for minutes
+        ///     Sets data in _cache for minutes
         /// </summary>
         /// <param name="key"></param>
         /// <param name="data"></param>
         /// <param name="time"></param>
-        /// <param name="cache"></param>
         /// <returns></returns>
-        public static async Task SetDatatMinAsync(string key, byte[] data, int time, IDistributedCache cache)
+        public async Task SetDatatMinAsync(string key, byte[] data, int time)
         {
             var options = new DistributedCacheEntryOptions()
             .SetSlidingExpiration(TimeSpan.FromMinutes(time));
 
-            await cache.SetAsync(key, data, options);
+            await _cache.SetAsync(key, data, options);
         }
 
         /// <summary>
-        ///     Sets data cache for hours
+        ///     Sets data _cache for hours
         /// </summary>
         /// <param name="key"></param>
         /// <param name="data"></param>
         /// <param name="time"></param>
-        /// <param name="cache"></param>
         /// <returns></returns>
-        public static async Task SetDatatHourAsync(string key, byte[] data, int time, IDistributedCache cache)
+        public async Task SetDatatHourAsync(string key, byte[] data, int time)
         {
             var options = new DistributedCacheEntryOptions()
             .SetSlidingExpiration(TimeSpan.FromHours(time));
 
-            await cache.SetAsync(key, data, options);
+            await _cache.SetAsync(key, data, options);
         }
 
         /// <summary>
-        ///     Sets data in cache for days
+        ///     Sets data in _cache for days
         /// </summary>
         /// <param name="key"></param>
         /// <param name="data"></param>
         /// <param name="time"></param>
-        /// <param name="cache"></param>
         /// <returns></returns>
-        public static async Task SetDatatDaysAsync(string key, byte[] data, int time, IDistributedCache cache)
+        public async Task SetDatatDaysAsync(string key, byte[] data, int time)
         {
             var options = new DistributedCacheEntryOptions()
             .SetSlidingExpiration(TimeSpan.FromDays(time));
 
-            await cache.SetAsync(key, data, options);
+            await _cache.SetAsync(key, data, options);
+        }
+
+        /// <summary>
+        ///     Removes object from _cache
+        /// </summary>
+        /// <param name="key"></param>
+        /// <returns></returns>
+        public async Task RemoveCacheAsync(string key)
+        {
+            await _cache.RemoveAsync(key);
         }
     }
 }
