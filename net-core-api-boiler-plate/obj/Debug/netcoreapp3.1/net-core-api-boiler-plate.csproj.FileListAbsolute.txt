@@ -25,6 +25,7 @@
 /home/rorro/Documents/GitHub/net-core-api-boiler-plate/net-core-api-boiler-plate/bin/Debug/netcoreapp3.1/Microsoft.EntityFrameworkCore.SqlServer.dll
 /home/rorro/Documents/GitHub/net-core-api-boiler-plate/net-core-api-boiler-plate/bin/Debug/netcoreapp3.1/Microsoft.Extensions.Caching.Abstractions.dll
 /home/rorro/Documents/GitHub/net-core-api-boiler-plate/net-core-api-boiler-plate/bin/Debug/netcoreapp3.1/Microsoft.Extensions.Caching.Memory.dll
+/home/rorro/Documents/GitHub/net-core-api-boiler-plate/net-core-api-boiler-plate/bin/Debug/netcoreapp3.1/Microsoft.Extensions.Caching.SqlServer.dll
 /home/rorro/Documents/GitHub/net-core-api-boiler-plate/net-core-api-boiler-plate/bin/Debug/netcoreapp3.1/Microsoft.Extensions.Configuration.dll
 /home/rorro/Documents/GitHub/net-core-api-boiler-plate/net-core-api-boiler-plate/bin/Debug/netcoreapp3.1/Microsoft.Extensions.Configuration.Abstractions.dll
 /home/rorro/Documents/GitHub/net-core-api-boiler-plate/net-core-api-boiler-plate/bin/Debug/netcoreapp3.1/Microsoft.Extensions.Configuration.Binder.dll
@@ -79,4 +80,3 @@
 /home/rorro/Documents/GitHub/net-core-api-boiler-plate/net-core-api-boiler-plate/obj/Debug/netcoreapp3.1/net-core-api-boiler-plate.xml
 /home/rorro/Documents/GitHub/net-core-api-boiler-plate/net-core-api-boiler-plate/obj/Debug/netcoreapp3.1/net-core-api-boiler-plate.pdb
 /home/rorro/Documents/GitHub/net-core-api-boiler-plate/net-core-api-boiler-plate/obj/Debug/netcoreapp3.1/net-core-api-boiler-plate.genruntimeconfig.cache
-/home/rorro/Documents/GitHub/net-core-api-boiler-plate/net-core-api-boiler-plate/bin/Debug/netcoreapp3.1/Microsoft.Extensions.Caching.SqlServer.dll

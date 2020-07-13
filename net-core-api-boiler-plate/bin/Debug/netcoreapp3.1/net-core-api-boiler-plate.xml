@@ -507,6 +507,90 @@
             </summary>
             <param name="services"></param>
         </member>
+        <member name="T:net_core_api_boiler_plate.Helpers.CacheHelper">
+            <summary>
+                CacheHelper class
+            </summary>
+        </member>
+        <member name="M:net_core_api_boiler_plate.Helpers.CacheHelper.GetAsync(System.String,Microsoft.Extensions.Caching.Distributed.IDistributedCache)">
+            <summary>
+                Gets byte array from cache based on key
+            </summary>
+            <param name="key"></param>
+            <param name="cache"></param>
+            <returns></returns>
+        </member>
+        <member name="M:net_core_api_boiler_plate.Helpers.CacheHelper.SetDatatMillAsync(System.String,System.Byte[],System.Int32,Microsoft.Extensions.Caching.Distributed.IDistributedCache)">
+            <summary>
+                Sets data in cache for miliseconds
+            </summary>
+            <param name="key"></param>
+            <param name="data"></param>
+            <param name="time"></param>
+            <param name="cache"></param>
+            <returns></returns>
+        </member>
+        <member name="M:net_core_api_boiler_plate.Helpers.CacheHelper.SetDatatSecAsync(System.String,System.Byte[],System.Int32,Microsoft.Extensions.Caching.Distributed.IDistributedCache)">
+            <summary>
+                Sets data in cache in seconds
+            </summary>
+            <param name="key"></param>
+            <param name="data"></param>
+            <param name="time"></param>
+            <param name="cache"></param>
+            <returns></returns>
+        </member>
+        <member name="M:net_core_api_boiler_plate.Helpers.CacheHelper.SetDatatMinAsync(System.String,System.Byte[],System.Int32,Microsoft.Extensions.Caching.Distributed.IDistributedCache)">
+            <summary>
+                Sets data in cache for minutes
+            </summary>
+            <param name="key"></param>
+            <param name="data"></param>
+            <param name="time"></param>
+            <param name="cache"></param>
+            <returns></returns>
+        </member>
+        <member name="M:net_core_api_boiler_plate.Helpers.CacheHelper.SetDatatHourAsync(System.String,System.Byte[],System.Int32,Microsoft.Extensions.Caching.Distributed.IDistributedCache)">
+            <summary>
+                Sets data cache for hours
+            </summary>
+            <param name="key"></param>
+            <param name="data"></param>
+            <param name="time"></param>
+            <param name="cache"></param>
+            <returns></returns>
+        </member>
+        <member name="M:net_core_api_boiler_plate.Helpers.CacheHelper.SetDatatDaysAsync(System.String,System.Byte[],System.Int32,Microsoft.Extensions.Caching.Distributed.IDistributedCache)">
+            <summary>
+                Sets data in cache for days
+            </summary>
+            <param name="key"></param>
+            <param name="data"></param>
+            <param name="time"></param>
+            <param name="cache"></param>
+            <returns></returns>
+        </member>
+        <member name="T:net_core_api_boiler_plate.Helpers.SerializeHelper">
+            <summary>
+              Static  SerializeHelper class
+            </summary>
+        </member>
+        <member name="M:net_core_api_boiler_plate.Helpers.SerializeHelper.SerializeObject(System.Object)">
+            <summary>
+                Serializes any object to a byte array
+            </summary>
+            <param name="obj"></param>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:net_core_api_boiler_plate.Helpers.SerializeHelper.DeserializeObject``1(System.Byte[])">
+            <summary>
+                Deserialize byte array to T object
+            </summary>
+            <param name="data"></param>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
         <member name="T:net_core_api_boiler_plate.Models.Requests.ItemRequest">
             <summary>
                 ItemRequest class
