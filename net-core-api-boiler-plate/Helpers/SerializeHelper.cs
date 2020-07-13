@@ -12,7 +12,6 @@ namespace net_core_api_boiler_plate.Helpers
         ///     Serializes any object to a byte array
         /// </summary>
         /// <param name="obj"></param>
-        /// <typeparam name="T"></typeparam>
         /// <returns></returns>
         public static byte[] SerializeObject(object obj)
         {
@@ -33,7 +32,6 @@ namespace net_core_api_boiler_plate.Helpers
         ///     Deserialize byte array to T object
         /// </summary>
         /// <param name="data"></param>
-        /// <typeparam name="T"></typeparam>
         /// <returns></returns>
         public static T DeserializeObject<T>(byte[] data)
         {
