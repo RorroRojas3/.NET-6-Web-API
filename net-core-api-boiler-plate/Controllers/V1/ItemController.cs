@@ -3,7 +3,6 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using net_core_api_boiler_plate.Database.Tables;
 using net_core_api_boiler_plate.Models.Requests;
 using net_core_api_boiler_plate.Services.Interface;
 

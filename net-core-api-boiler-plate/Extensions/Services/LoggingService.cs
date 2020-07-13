@@ -31,6 +31,7 @@ namespace net_core_api_boiler_plate.Extensions.Services
                             .ReadFrom.Configuration(configuration)
                             .CreateLogger();
             services.AddSingleton(logger);
+            services.AddLogging(l => l.AddSerilog(logger));
 
             Log.Logger = new LoggerConfiguration()
                         .WriteTo.Console(LogEventLevel.Information)
