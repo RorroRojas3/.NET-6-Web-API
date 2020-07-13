@@ -1,6 +1,9 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Caching.Distributed;
 using net_core_api_boiler_plate.Database.Repository.Interface;
 using net_core_api_boiler_plate.Database.Tables;
 using net_core_api_boiler_plate.Models.Requests;
@@ -17,14 +20,18 @@ namespace net_core_api_boiler_plate.Services.Implementation
         ///     Private variables
         /// </summary>
         private readonly IRepository<Item> _itemRepository;
+        private readonly IDistributedCache _cache;
 
         /// <summary>
         ///     ItemService constructor with DI
         /// </summary>
         /// <param name="itemRepository"></param>
-        public ItemService(IRepository<Item> itemRepository)
+        /// <param name="distributedCache"></param>
+        public ItemService(IRepository<Item> itemRepository,
+                            IDistributedCache distributedCache)
         {
             _itemRepository = itemRepository;
+            _cache = distributedCache;
         }
 
         /// <summary>
@@ -44,7 +51,33 @@ namespace net_core_api_boiler_plate.Services.Implementation
         /// <returns></returns>
         public async Task<Item> GetItem(Guid id)
         {
-            return await _itemRepository.Get(id);
+            var cacheBytes = await _cache.GetAsync($"item-{id}");
+
+            if (cacheBytes != null)
+            {
+                BinaryFormatter bf1 = new BinaryFormatter();
+                MemoryStream ms2 = new MemoryStream(cacheBytes);
+                var cacheItem = (Item)bf1.Deserialize(ms2);
+                return cacheItem;
+            }
+
+            var item = await _itemRepository.Get(id);
+
+            if (item == null)
+            {
+                return null;
+            }
+
+            BinaryFormatter bf = new BinaryFormatter();
+            MemoryStream ms = new MemoryStream();
+            bf.Serialize(ms, item);
+
+            var options = new DistributedCacheEntryOptions()
+            .SetSlidingExpiration(TimeSpan.FromMinutes(1));
+
+            await _cache.SetAsync($"item-{id}", ms.ToArray(), options);
+
+            return item;
         }
 
         /// <summary>

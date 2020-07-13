@@ -9,6 +9,7 @@ namespace net_core_api_boiler_plate.Database.Tables
     /// <summary>
     ///     Item table
     /// </summary>
+    [Serializable]
     [Table(nameof(Item), Schema = nameof(Schemas.Example))]
     public class Item : IEntity
     {

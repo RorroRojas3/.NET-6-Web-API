@@ -50,6 +50,8 @@ namespace net_core_api_boiler_plate
             services.AddDatabaseService(Configuration);
             Log.Information("Adding AutoMapper service");
             services.AddAutoMapperService();
+            Log.Information("Adding Cache Service");
+            services.AddCacheService(Configuration);
         }
 
         /// <summary>

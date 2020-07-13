@@ -411,6 +411,18 @@
             </summary>
             <param name="services"></param>
         </member>
+        <member name="T:net_core_api_boiler_plate.Extensions.Services.CacheService">
+            <summary>
+                Static CacheService class
+            </summary>
+        </member>
+        <member name="M:net_core_api_boiler_plate.Extensions.Services.CacheService.AddCacheService(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+                Adds Distributed cache
+            </summary>
+            <param name="services"></param>
+            <param name="configuration"></param>
+        </member>
         <member name="T:net_core_api_boiler_plate.Extensions.Services.CorsService">
             <summary>
                 Static CorsService class
@@ -615,11 +627,12 @@
                 Private variables
             </summary>
         </member>
-        <member name="M:net_core_api_boiler_plate.Services.Implementation.ItemService.#ctor(net_core_api_boiler_plate.Database.Repository.Interface.IRepository{net_core_api_boiler_plate.Database.Tables.Item})">
+        <member name="M:net_core_api_boiler_plate.Services.Implementation.ItemService.#ctor(net_core_api_boiler_plate.Database.Repository.Interface.IRepository{net_core_api_boiler_plate.Database.Tables.Item},Microsoft.Extensions.Caching.Distributed.IDistributedCache)">
             <summary>
                 ItemService constructor with DI
             </summary>
             <param name="itemRepository"></param>
+            <param name="distributedCache"></param>
         </member>
         <member name="M:net_core_api_boiler_plate.Services.Implementation.ItemService.DeleteItem(System.Guid)">
             <summary>

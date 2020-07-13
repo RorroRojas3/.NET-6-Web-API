@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "gsK6GTUIb67YKStUpczcIpfuitxXNKbVsMUPOrvGLrUfUjOucauB4BwgYtx6uW5EC9KOOIu5nWK6yl2vBQqX3A==",
+  "dgSpecHash": "wbtagr3TDpyZK+jUoTj78rFS33vpLVA0MyPNZPP1ixoGFnmqoEngh2SZCZdnQyWloPiY7myUTT8l4MA8Of6+TA==",
   "success": true,
   "projectFilePath": "/home/rorro/Documents/GitHub/net-core-api-boiler-plate/net-core-api-boiler-plate/net-core-api-boiler-plate.csproj",
   "expectedPackageFiles": [
@@ -28,6 +28,7 @@
     "/home/rorro/.nuget/packages/microsoft.extensions.apidescription.server/3.0.0/microsoft.extensions.apidescription.server.3.0.0.nupkg.sha512",
     "/home/rorro/.nuget/packages/microsoft.extensions.caching.abstractions/3.1.5/microsoft.extensions.caching.abstractions.3.1.5.nupkg.sha512",
     "/home/rorro/.nuget/packages/microsoft.extensions.caching.memory/3.1.5/microsoft.extensions.caching.memory.3.1.5.nupkg.sha512",
+    "/home/rorro/.nuget/packages/microsoft.extensions.caching.sqlserver/3.1.5/microsoft.extensions.caching.sqlserver.3.1.5.nupkg.sha512",
     "/home/rorro/.nuget/packages/microsoft.extensions.configuration/3.1.5/microsoft.extensions.configuration.3.1.5.nupkg.sha512",
     "/home/rorro/.nuget/packages/microsoft.extensions.configuration.abstractions/3.1.5/microsoft.extensions.configuration.abstractions.3.1.5.nupkg.sha512",
     "/home/rorro/.nuget/packages/microsoft.extensions.configuration.binder/3.1.5/microsoft.extensions.configuration.binder.3.1.5.nupkg.sha512",

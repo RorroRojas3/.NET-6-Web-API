@@ -331,6 +331,20 @@
           "lib/netcoreapp3.1/Microsoft.Extensions.Caching.Memory.dll": {}
         }
       },
+      "Microsoft.Extensions.Caching.SqlServer/3.1.5": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Data.SqlClient": "1.0.19239.1",
+          "Microsoft.Extensions.Caching.Abstractions": "3.1.5",
+          "Microsoft.Extensions.Options": "3.1.5"
+        },
+        "compile": {
+          "lib/netstandard2.0/Microsoft.Extensions.Caching.SqlServer.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Microsoft.Extensions.Caching.SqlServer.dll": {}
+        }
+      },
       "Microsoft.Extensions.Configuration/3.1.5": {
         "type": "package",
         "dependencies": {
@@ -2313,6 +2327,20 @@
         "lib/netstandard2.0/Microsoft.Extensions.Caching.Memory.xml",
         "microsoft.extensions.caching.memory.3.1.5.nupkg.sha512",
         "microsoft.extensions.caching.memory.nuspec"
+      ]
+    },
+    "Microsoft.Extensions.Caching.SqlServer/3.1.5": {
+      "sha512": "yOGOnB4GAVg/81S5IALFZaycPME8wdqGvlKUgdVoShWO0QQVjxTpaentUbceaFi7XQFKbr7dTIj50xGWUVGfKw==",
+      "type": "package",
+      "path": "microsoft.extensions.caching.sqlserver/3.1.5",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "lib/netstandard2.0/Microsoft.Extensions.Caching.SqlServer.dll",
+        "lib/netstandard2.0/Microsoft.Extensions.Caching.SqlServer.xml",
+        "microsoft.extensions.caching.sqlserver.3.1.5.nupkg.sha512",
+        "microsoft.extensions.caching.sqlserver.nuspec"
       ]
     },
     "Microsoft.Extensions.Configuration/3.1.5": {
@@ -6511,6 +6539,7 @@
       "Microsoft.AspNetCore.Mvc.Versioning.ApiExplorer >= 4.1.1",
       "Microsoft.EntityFrameworkCore.Design >= 3.1.5",
       "Microsoft.EntityFrameworkCore.SqlServer >= 3.1.5",
+      "Microsoft.Extensions.Caching.SqlServer >= 3.1.5",
       "Newtonsoft.Json >= 12.0.3",
       "Serilog.AspNetCore >= 3.2.0",
       "Serilog.Sinks.Console >= 3.1.1",
@@ -6576,6 +6605,10 @@
             "version": "[3.1.5, )"
           },
           "Microsoft.EntityFrameworkCore.SqlServer": {
+            "target": "Package",
+            "version": "[3.1.5, )"
+          },
+          "Microsoft.Extensions.Caching.SqlServer": {
             "target": "Package",
             "version": "[3.1.5, )"
           },
