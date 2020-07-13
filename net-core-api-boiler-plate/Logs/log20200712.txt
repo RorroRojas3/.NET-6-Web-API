@@ -271,3 +271,16 @@
 2020-07-12 22:58:24.220 -04:00 [INF] Using Endpoint
 2020-07-12 22:58:24.311 -04:00 [INF] Using Swashbuckle
 2020-07-12 22:58:24.330 -04:00 [INF] Using Migration of DB
+2020-07-12 23:40:07.727 -04:00 [INF] Adding Controller and NewtonSoftJson Service
+2020-07-12 23:40:07.918 -04:00 [INF] Adding Swashbuckle Service
+2020-07-12 23:40:08.051 -04:00 [INF] Adding TestController Service
+2020-07-12 23:40:08.051 -04:00 [INF] Adding Database Service
+2020-07-12 23:40:08.073 -04:00 [INF] Adding AutoMapper service
+2020-07-12 23:40:08.101 -04:00 [INF] Adding Cache Service
+2020-07-12 23:40:08.520 -04:00 [INF] Using Exception middleware
+2020-07-12 23:40:08.520 -04:00 [INF] Using HttpsRedirection
+2020-07-12 23:40:08.521 -04:00 [INF] Using Routing
+2020-07-12 23:40:08.521 -04:00 [INF] Using Auhtorization
+2020-07-12 23:40:08.522 -04:00 [INF] Using Endpoint
+2020-07-12 23:40:08.623 -04:00 [INF] Using Swashbuckle
+2020-07-12 23:40:08.643 -04:00 [INF] Using Migration of DB

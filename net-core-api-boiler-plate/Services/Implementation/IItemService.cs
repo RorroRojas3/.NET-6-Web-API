@@ -80,7 +80,26 @@ namespace net_core_api_boiler_plate.Services.Implementation
         /// <returns></returns>
         public async Task<List<Item>> GetItems()
         {
-            return await _itemRepository.GetAll();
+            var cacheBytes = await CacheHelper.GetAsync($"items", _cache);
+
+            if (cacheBytes != null)
+            {
+                var cacheItem = SerializeHelper.DeserializeObject<List<Item>>(cacheBytes);
+                return cacheItem;
+            }
+
+            var items = await _itemRepository.GetAll();
+
+            if (items == null)
+            {
+                return null;
+            }
+
+            var serializedItem = SerializeHelper.SerializeObject(items);
+
+            await CacheHelper.SetDatatMinAsync($"items", serializedItem, 5, _cache);
+
+            return items;
         }
 
         /// <summary>
