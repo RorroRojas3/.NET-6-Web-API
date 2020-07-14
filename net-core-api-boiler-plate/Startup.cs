@@ -54,6 +54,10 @@ namespace net_core_api_boiler_plate
             services.AddCacheService(Configuration);
             Log.Information("Adding Helper Service");
             services.AddHelpersService();
+            Log.Information("Adding Data Protection Service");
+            services.AddDataProtectionService();
+            Log.Information("Adding HttpContextAccesor Service");
+            services.AddHttpContextAccessor();
         }
 
         /// <summary>
