@@ -44,8 +44,8 @@ namespace net_core_api_boiler_plate
             services.AddControllers().AddNewtonsoftJson();
             Log.Information("Adding Swashbuckle Service");
             services.AddSwashbuckleService();
-            Log.Information("Adding TestController Service");
-            services.AddTestControllerService();
+            Log.Information("Adding Custom Service");
+            services.AddCustomService();
             Log.Information("Adding Database Service");
             services.AddDatabaseService(Configuration);
             Log.Information("Adding AutoMapper service");

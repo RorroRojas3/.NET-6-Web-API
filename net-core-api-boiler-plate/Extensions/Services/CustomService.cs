@@ -5,18 +5,19 @@ using net_core_api_boiler_plate.Services.Interface;
 namespace net_core_api_boiler_plate.Extensions.Services
 {
     /// <summary>
-    ///     Static TestControllerService class
+    ///     Static AddCustomServices class
     /// </summary>
-    public static class TestControllerService
+    public static class CustomService
     {
         /// <summary>
         ///     Adds service for TestController
         /// </summary>
         /// <param name="services"></param>
-        public static void AddTestControllerService(this IServiceCollection services)
+        public static void AddCustomService(this IServiceCollection services)
         {
             services.AddTransient<IItemService, ItemService>();
             services.AddTransient<IFileService, FileService>();
+            services.AddTransient<IAzureBlobStorageService, AzureBloblStorageService>();
         }
 
     }
