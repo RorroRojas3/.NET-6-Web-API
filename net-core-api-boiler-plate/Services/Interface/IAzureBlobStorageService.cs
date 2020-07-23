@@ -34,10 +34,9 @@ namespace net_core_api_boiler_plate.Services.Interface
         ///     Uploads file to Azure Blob Storage
         /// </summary>
         /// <param name="containerName"></param>
-        /// <param name="fileName"></param>
         /// <param name="formFile"></param>
         /// <returns></returns>
-        Task<object> UploadFile(string containerName, string fileName, IFormFile formFile);
+        Task<object> UploadFile(string containerName, IFormFile formFile);
 
         /// <summary>
         ///     Deletes file from Azure Blob Storage

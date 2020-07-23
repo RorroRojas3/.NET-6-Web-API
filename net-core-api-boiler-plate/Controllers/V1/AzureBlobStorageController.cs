@@ -53,5 +53,27 @@ namespace net_core_api_boiler_plate.Controllers.V1
 
             return null;
         }
+
+        /// <summary>
+        ///     Uploads file to Azure Blob Storage
+        /// </summary>
+        /// <param name="containerName"></param>
+        /// <param name="formFile"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [Route("{containerName}")]
+        public async Task<IActionResult> PostFile(string containerName, IFormFile formFile)
+        {
+            _logger.LogInformation($"AzureBlobStorage - PostFile - Started");
+
+            if (string.IsNullOrEmpty(containerName) || formFile == null)
+            {
+                return StatusCode(StatusCodes.Status406NotAcceptable, "Container name or File not provided");
+            }
+
+            var result = await _azureBlobStorageService.UploadFile(containerName, formFile);
+
+            return null;
+        }
     }
 }

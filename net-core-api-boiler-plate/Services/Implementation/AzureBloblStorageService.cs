@@ -44,10 +44,9 @@ namespace net_core_api_boiler_plate.Services.Implementation
         ///     Uploads file to Azure Blob Storage
         /// </summary>
         /// <param name="containerName"></param>
-        /// <param name="fileName"></param>
         /// <param name="formFile"></param>
         /// <returns></returns>
-        public Task<object> UploadFile(string containerName, string fileName, IFormFile formFile)
+        public Task<object> UploadFile(string containerName, IFormFile formFile)
         {
             throw new System.NotImplementedException();
         }
