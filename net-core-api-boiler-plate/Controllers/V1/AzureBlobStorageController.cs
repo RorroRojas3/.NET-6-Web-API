@@ -33,13 +33,55 @@ namespace net_core_api_boiler_plate.Controllers.V1
         }
 
         /// <summary>
+        ///     Creates container in Azure Blob Storage
+        /// </summary>
+        /// <param name="containerName"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [Route("{containerName}")]
+        public async Task<IActionResult> PostContainer(string containerName)
+        {
+            _logger.LogInformation($"AzureBlobStorage - PostContainer - Started");
+
+            if (string.IsNullOrEmpty(containerName))
+            {
+                return StatusCode(StatusCodes.Status406NotAcceptable, "Container name not provided");
+            }
+
+            var result = await _azureBlobStorageService.CreateContainer(containerName);
+
+            return null;
+        }
+
+        /// <summary>
+        ///     Deletes Container from Azure Blob Storage
+        /// </summary>
+        /// <param name="containerName"></param>
+        /// <returns></returns>
+        [HttpDelete]
+        [Route("{containerName}")]
+        public async Task<IActionResult> DeleteContainer(string containerName)
+        {
+            _logger.LogInformation($"AzureBlobStorage - DeleteContainer - Started");
+
+            if (string.IsNullOrEmpty(containerName))
+            {
+                return StatusCode(StatusCodes.Status406NotAcceptable, "Container name not provided");
+            }
+
+            var result = await _azureBlobStorageService.DeleteContainer(containerName);
+
+            return null;
+        }
+
+        /// <summary>
         ///     Gets File from Azure Blob Storage
         /// </summary>
         /// <param name="containerName"></param>
         /// <param name="fileName"></param>
         /// <returns></returns>
         [HttpGet]
-        [Route("{containerName}/{fileName}")]
+        [Route("File/{containerName}/{fileName}")]
         public async Task<IActionResult> GetFile([FromRoute] string containerName, string fileName)
         {
             _logger.LogInformation($"AzureBlobStorage - GetFile - Started");
@@ -61,7 +103,7 @@ namespace net_core_api_boiler_plate.Controllers.V1
         /// <param name="formFile"></param>
         /// <returns></returns>
         [HttpPost]
-        [Route("{containerName}")]
+        [Route("File/{containerName}")]
         public async Task<IActionResult> PostFile(string containerName, IFormFile formFile)
         {
             _logger.LogInformation($"AzureBlobStorage - PostFile - Started");

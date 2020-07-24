@@ -1,13 +1,16 @@
+using System.Reflection.Metadata;
+using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using net_core_api_boiler_plate.Services.Interface;
+using Azure.Storage.Blobs;
 
 namespace net_core_api_boiler_plate.Services.Implementation
 {
     /// <summary>
     ///     AzureBlobStorageService class with Interface implementation
     /// </summary>
-    public class AzureBloblStorageService : IAzureBlobStorageService
+    public class AzureBlobStorageService : IAzureBlobStorageService
     {
         /// <summary>
         ///     Creates Azure Blob Storage Container
@@ -60,6 +63,17 @@ namespace net_core_api_boiler_plate.Services.Implementation
         public Task<object> DeleteFile(string containerName, string fileName)
         {
             throw new System.NotImplementedException();
+        }
+
+        /// <summary>
+        ///     Creates BlobServiceClient
+        /// </summary>
+        /// <returns></returns>
+        private BlobServiceClient CreateBlobServiceClient()
+        {
+            var connectionString = Environment.GetEnvironmentVariable("AZURE_BLOB_STORAGE");
+            BlobServiceClient blobServiceClient = new BlobServiceClient(connectionString);
+            return blobServiceClient;
         }
     }
 }

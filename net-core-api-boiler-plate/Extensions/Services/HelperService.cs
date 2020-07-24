@@ -14,7 +14,7 @@ namespace net_core_api_boiler_plate.Extensions.Services
         /// <param name="services"></param>
         public static void AddHelpersService(this IServiceCollection services)
         {
-            services.AddTransient<CacheHelper>();
+            services.AddScoped<CacheHelper>();
         }
     }
 }

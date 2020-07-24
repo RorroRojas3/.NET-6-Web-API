@@ -15,9 +15,9 @@ namespace net_core_api_boiler_plate.Extensions.Services
         /// <param name="services"></param>
         public static void AddCustomService(this IServiceCollection services)
         {
-            services.AddTransient<IItemService, ItemService>();
-            services.AddTransient<IFileService, FileService>();
-            services.AddTransient<IAzureBlobStorageService, AzureBloblStorageService>();
+            services.AddScoped<IItemService, ItemService>();
+            services.AddScoped<IFileService, FileService>();
+            services.AddScoped<IAzureBlobStorageService, AzureBlobStorageService>();
         }
 
     }
