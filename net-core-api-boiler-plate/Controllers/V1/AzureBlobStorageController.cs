@@ -93,7 +93,7 @@ namespace net_core_api_boiler_plate.Controllers.V1
 
             var result = await _azureBlobStorageService.GetFile(containerName, fileName);
 
-            return null;
+            return StatusCode(StatusCodes.Status201Created, result);
         }
 
         /// <summary>

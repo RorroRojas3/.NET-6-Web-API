@@ -17,9 +17,13 @@ namespace net_core_api_boiler_plate.Services.Implementation
         /// </summary>
         /// <param name="containerName"></param>
         /// <returns></returns>
-        public Task<object> CreateContainer(string containerName)
+        public async Task<BlobContainerClient> CreateContainer(string containerName)
         {
-            throw new System.NotImplementedException();
+            var blobServiceClient = CreateBlobServiceClient();
+
+            BlobContainerClient containerClient = await blobServiceClient.CreateBlobContainerAsync(containerName);
+
+            return containerClient;
         }
 
         /// <summary>

@@ -1,4 +1,5 @@
 using System.Threading.Tasks;
+using Azure.Storage.Blobs;
 using Microsoft.AspNetCore.Http;
 
 namespace net_core_api_boiler_plate.Services.Interface
@@ -13,7 +14,7 @@ namespace net_core_api_boiler_plate.Services.Interface
         /// </summary>
         /// <param name="containerName"></param>
         /// <returns></returns>
-        Task<object> CreateContainer(string containerName);
+        Task<BlobContainerClient> CreateContainer(string containerName);
 
         /// <summary>
         ///     Deletes Azure Blob Storage Container
