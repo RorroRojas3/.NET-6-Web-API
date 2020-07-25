@@ -19,7 +19,7 @@ namespace net_core_api_boiler_plate.Extensions.Services
         /// <param name="configuration"></param>
         public static void AddDatabaseService(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddDbContext<DatabaseContext>(options => options.UseSqlServer(configuration.GetConnectionString("AzureDB")));
+            services.AddDbContext<DatabaseContext>(options => options.UseSqlServer(configuration.GetConnectionString("AZURE_DB")));
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
         }
     }
