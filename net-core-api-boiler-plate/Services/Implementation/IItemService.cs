@@ -35,21 +35,13 @@ namespace net_core_api_boiler_plate.Services.Implementation
             _cacheHelper = cacheHelper;
         }
 
-        /// <summary>
-        ///     Deletes item from DB based on Id
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
+        /// <inheritdoc/>
         public async Task<bool> DeleteItem(Guid id)
         {
             return await _itemRepository.Delete(id);
         }
 
-        /// <summary>
-        ///     Gets item from DB based on Id
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
+        /// <inheritdoc/>
         public async Task<Item> GetItem(Guid id)
         {
             var cacheBytes = await _cacheHelper.GetAsync($"item-{id}");
@@ -74,10 +66,7 @@ namespace net_core_api_boiler_plate.Services.Implementation
             return item;
         }
 
-        /// <summary>
-        ///     Gets all items from DB
-        /// </summary>
-        /// <returns></returns>
+        /// <inheritdoc/>
         public async Task<List<Item>> GetItems()
         {
             var cacheBytes = await _cacheHelper.GetAsync($"items");
@@ -102,11 +91,7 @@ namespace net_core_api_boiler_plate.Services.Implementation
             return items;
         }
 
-        /// <summary>
-        ///     Creates item on DB
-        /// </summary>
-        /// <param name="item"></param>
-        /// <returns></returns>
+        /// <inheritdoc/>
         public async Task<Item> PostItem(ItemRequest item)
         {
             var newItem = new Item
@@ -119,12 +104,7 @@ namespace net_core_api_boiler_plate.Services.Implementation
             return await _itemRepository.Add(newItem);
         }
 
-        /// <summary>
-        ///     Updates item on DB
-        /// </summary>
-        /// <param name="id"></param>
-        /// <param name="itemRequest"></param>
-        /// <returns></returns>
+        /// <inheritdoc/>
         public async Task<Item> PutItem(Guid id, ItemRequest itemRequest)
         {
             var item = await GetItem(id);

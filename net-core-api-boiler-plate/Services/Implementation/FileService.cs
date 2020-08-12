@@ -34,20 +34,13 @@ namespace net_core_api_boiler_plate.Services.Implementation
             _mapper = mapper;
         }
 
-        /// <summary>
-        ///     Deletes file from DB based on Id
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
+        /// <inheritdoc/>
         public async Task<bool> DeleteFile(Guid id)
         {
             return await _fileRepository.Delete(id);
         }
 
-        /// <summary>
-        ///     Gets all files from DB
-        /// </summary>
-        /// <returns></returns>
+        /// <inheritdoc/>
         public async Task<List<FileResponse>> GetAllFiles()
         {
             var files = await _fileRepository.GetAll();
@@ -55,22 +48,14 @@ namespace net_core_api_boiler_plate.Services.Implementation
             return response;
         }
 
-        /// <summary>
-        ///     Gets file from DB based on Id
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
+        /// <inheritdoc/>
         public async Task<File> GetFile(Guid id)
         {
             var file = await _fileRepository.Get(id);
             return file;
         }
 
-        /// <summary>
-        ///     Creates file on DB
-        /// </summary>
-        /// <param name="formFile"></param>
-        /// <returns></returns>
+        /// <inheritdoc/>
         public async Task<bool> PostFile(IFormFile formFile)
         {
             byte[] data;
@@ -93,12 +78,7 @@ namespace net_core_api_boiler_plate.Services.Implementation
             return result == null ? false : true;
         }
 
-        /// <summary>
-        ///     Updates file on DB based on Id
-        /// </summary>
-        /// <param name="id"></param>
-        /// <param name="formfile"></param>
-        /// <returns></returns>
+        /// <inheritdoc/>
         public async Task<bool> UpdateFile(Guid id, IFormFile formfile)
         {
             var deleteFile = await _fileRepository.Delete(id);
