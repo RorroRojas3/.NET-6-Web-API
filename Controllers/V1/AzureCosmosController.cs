@@ -36,6 +36,7 @@ namespace net_core_api_boiler_plate.Controllers.V1
         /// </summary>
         /// <returns></returns>
         [HttpGet]
+        [Route("Item")]
         public async Task<IActionResult> GetAllItems()
         {
             var result = await _azureCosmosService.GetAllItems();
@@ -47,6 +48,7 @@ namespace net_core_api_boiler_plate.Controllers.V1
         /// </summary>
         /// <returns></returns>
         [HttpGet]
+        [Route("Items/{id}")]
         public async Task<IActionResult> GetItem()
         {
             var result = await _azureCosmosService.GetItem();
