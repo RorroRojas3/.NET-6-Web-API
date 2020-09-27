@@ -40,10 +40,10 @@ namespace net_core_api_boiler_plate.Services.Implementation
                         httpResponseMessage = await client.GetAsync(url);
                         break;
                     case "POST":
-                        httpResponseMessage = await client.PostAsJsonAsync<T>(url, body);
+                        httpResponseMessage = await client.PostAsJsonAsync(url, body);
                         break;
                     case "PUT":
-                        httpResponseMessage = await client.PutAsJsonAsync<T>(url, body);
+                        httpResponseMessage = await client.PutAsJsonAsync(url, body);
                         break;
                     case "DELETE":
                         httpResponseMessage = await client.DeleteAsync(url);

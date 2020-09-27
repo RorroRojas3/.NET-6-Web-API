@@ -10,6 +10,6 @@
 
         public bool IsLastChunk { get; set; }
 
-        public string Bytes { get; set; }
+        public byte[] Bytes { get; set; }
     }
 }
