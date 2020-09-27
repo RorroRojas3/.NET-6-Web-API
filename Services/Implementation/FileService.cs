@@ -94,7 +94,7 @@ namespace net_core_api_boiler_plate.Services.Implementation
         public async Task<bool> PostFileByChunks(FileByChunksRequest request)
         {
             var bytes = Encoding.ASCII.GetBytes(request.Bytes);
-            await SystemFile.WriteAllBytesAsync("Example.xlsx", bytes);
+            await SystemFile.WriteAllBytesAsync("Example-2.xlsx", bytes);
             return true;
         }
     }
