@@ -4,19 +4,10 @@ using Microsoft.Extensions.Caching.Distributed;
 
 namespace net_core_api_boiler_plate.Helpers
 {
-    /// <summary>
-    ///     CacheHelper class
-    /// </summary>
     public class CacheHelper
     {
-        /// <summary>
-        ///     Private variables
-        /// </summary>
         private readonly IDistributedCache _cache;
 
-        /// <summary>
-        ///     CacheHelper constructor with DI
-        /// </summary>
         /// <param name="cache"></param>
         public CacheHelper(IDistributedCache cache)
         {

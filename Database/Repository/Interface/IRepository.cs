@@ -4,10 +4,6 @@ using System.Threading.Tasks;
 
 namespace net_core_api_boiler_plate.Database.Repository.Interface
 {
-    /// <summary>
-    ///     IRepository interface
-    /// </summary>
-    /// <typeparam name="T"></typeparam>
     public interface IRepository<T> where T : class, IEntity
     {
         /// <summary>

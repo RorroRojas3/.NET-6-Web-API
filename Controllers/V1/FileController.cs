@@ -4,29 +4,19 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using net_core_api_boiler_plate.Models.Requests;
 using net_core_api_boiler_plate.Services.Interface;
 
 namespace net_core_api_boiler_plate.Controllers.V1
 {
-    /// <summary>
-    ///     FileController
-    /// </summary>
     [ApiController]
     [Route("api/v{version:apiVersion}/[controller]")]
     [ApiVersion("1")]
     public class FileController : Controller
     {
-        /// <summary>
-        ///     Private variables
-        /// </summary>
         private readonly ILogger _logger;
         private readonly IFileService _fileService;
 
-        /// <summary>
-        ///     TestController constructor with DI
-        /// </summary>
-        /// <param name="logger"></param>
-        /// <param name="fileService"></param>
         public FileController(ILogger<FileController> logger, IFileService fileService)
         {
             _logger = logger;
@@ -155,6 +145,21 @@ namespace net_core_api_boiler_plate.Controllers.V1
             var result = await _fileService.GetAllFiles();
 
             return StatusCode(StatusCodes.Status200OK, result);
+        }
+
+        /// <summary>
+        ///     Creates file by Chunks
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<IActionResult> PostFileByChuncks(FileByChunksRequest request)
+        {
+            _logger.LogInformation($"PostFileByChuncks - Started");
+
+            var result = await _fileService.PostFileByChunks(request);
+
+            return StatusCode(StatusCodes.Status200OK);
         }
     }
 }

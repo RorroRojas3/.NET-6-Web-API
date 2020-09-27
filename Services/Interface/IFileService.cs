@@ -3,13 +3,11 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using net_core_api_boiler_plate.Database.Tables;
+using net_core_api_boiler_plate.Models.Requests;
 using net_core_api_boiler_plate.Models.Responses;
 
 namespace net_core_api_boiler_plate.Services.Interface
 {
-    /// <summary>
-    ///     IFileService interface
-    /// </summary>
     public interface IFileService
     {
         /// <summary>
@@ -33,7 +31,7 @@ namespace net_core_api_boiler_plate.Services.Interface
         Task<bool> PostFile(IFormFile formFile);
 
         /// <summary>
-        ///     Delets file from DB based on Id
+        ///     Deletes file from DB based on Id
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
@@ -46,5 +44,11 @@ namespace net_core_api_boiler_plate.Services.Interface
         /// <param name="formFile"></param>
         /// <returns></returns>
         Task<bool> UpdateFile(Guid id, IFormFile formFile);
+
+        /// <summary>
+        ///     Creates file by chunks
+        /// </summary>
+        /// <returns></returns>
+        Task<bool> PostFileByChunks(FileByChunksRequest request);
     }
 }

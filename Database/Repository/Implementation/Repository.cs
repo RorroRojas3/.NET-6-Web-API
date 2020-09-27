@@ -8,22 +8,11 @@ using System.Linq;
 
 namespace net_core_api_boiler_plate.Database.Repository.Implementation
 {
-    /// <summary>
-    ///     Repository class which implements IRepository interface
-    /// </summary>
-    /// <typeparam name="T"></typeparam>
     public class Repository<T> : IRepository<T> where T : class, IEntity
     {
-        /// <summary>
-        ///     Private and protected variables
-        /// </summary>
         protected readonly DatabaseContext _dbContext;
         private DbSet<T> _entities;
 
-        /// <summary>
-        ///     Repository constructor with DI
-        /// </summary>
-        /// <param name="dbContext"></param>
         public Repository(DatabaseContext dbContext)
         {
             _dbContext = dbContext;

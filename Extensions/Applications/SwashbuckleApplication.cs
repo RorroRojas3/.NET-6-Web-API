@@ -3,9 +3,6 @@ using Microsoft.AspNetCore.Mvc.ApiExplorer;
 
 namespace net_core_api_boiler_plate.Extensions.Applications
 {
-    /// <summary>
-    ///     Static SwashbuckleApplication class
-    /// </summary>
     public static class SwashbuckleApplication
     {
         /// <summary>

@@ -5,25 +5,14 @@ using net_core_api_boiler_plate.Services.Interface;
 
 namespace net_core_api_boiler_plate.Controllers.V1
 {
-    /// <summary>
-    ///     AzureCosmosController
-    /// </summary>
     [ApiController]
     [Route("api/v{version:apiVersion}/[controller]")]
     [ApiVersion("1")]
     public class AzureCosmosController
     {
-        /// <summary>
-        ///     Private variables
-        /// </summary>
         private readonly ILogger _logger;
         private readonly IAzureCosmosService _azureCosmosService;
 
-        /// <summary>
-        ///     Constructor for AzureCosmosController
-        /// </summary>
-        /// <param name="logger"></param>
-        /// <param name="azureCosmosService"></param>
         public AzureCosmosController(ILogger<AzureCosmosController> logger,
                                         IAzureCosmosService azureCosmosService)
         {

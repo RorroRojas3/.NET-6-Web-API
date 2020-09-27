@@ -7,9 +7,6 @@ using net_core_api_boiler_plate.Models.Requests;
 
 namespace net_core_api_boiler_plate.Services.Interface
 {
-    /// <summary>
-    ///     ITestSerice interface
-    /// </summary>
     public interface IItemService
     {
         /// <summary>

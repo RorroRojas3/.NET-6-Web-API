@@ -4,9 +4,6 @@ using net_core_api_boiler_plate.Services.Interface;
 
 namespace net_core_api_boiler_plate.Extensions.Services
 {
-    /// <summary>
-    ///     Static AddCustomServices class
-    /// </summary>
     public static class CustomService
     {
         /// <summary>

@@ -13,24 +13,13 @@ using Serilog;
 
 namespace net_core_api_boiler_plate
 {
-    /// <summary>
-    ///     Startup class
-    /// </summary>
     public class Startup
     {
-        /// <summary>
-        ///     Startup constructor with DI
-        /// </summary>
-        /// <param name="configuration"></param>
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
         }
 
-        /// <summary>
-        ///     Configuration settings
-        /// </summary>
-        /// <value></value>
         public IConfiguration Configuration { get; }
 
         /// <summary>

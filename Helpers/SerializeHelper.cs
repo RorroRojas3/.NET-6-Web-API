@@ -3,9 +3,6 @@ using System.Runtime.Serialization.Formatters.Binary;
 
 namespace net_core_api_boiler_plate.Helpers
 {
-    /// <summary>
-    ///   Static  SerializeHelper class
-    /// </summary>
     public static class SerializeHelper
     {
         /// <summary>

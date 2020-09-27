@@ -8,25 +8,14 @@ using net_core_api_boiler_plate.Services.Interface;
 
 namespace net_core_api_boiler_plate.Controllers.V1
 {
-    /// <summary>
-    ///     TestController
-    /// </summary>
     [ApiController]
     [Route("api/v{version:apiVersion}/[controller]")]
     [ApiVersion("1")]
     public class ItemController : Controller
     {
-        /// <summary>
-        ///     Private variables
-        /// </summary>
         private readonly ILogger _logger;
         private readonly IItemService _itemService;
 
-        /// <summary>
-        ///     TestController constructor with DI
-        /// </summary>
-        /// <param name="logger"></param>
-        /// <param name="itemService"></param>
         public ItemController(ILogger<ItemController> logger, IItemService itemService)
         {
             _logger = logger;

@@ -9,9 +9,6 @@ using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace net_core_api_boiler_plate.Extensions.Services
 {
-    /// <summary>
-    ///     Static SwashbuckleService class
-    /// </summary>
     public static class SwashbuckleService
     {
         /// <summary>

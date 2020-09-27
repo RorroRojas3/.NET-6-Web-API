@@ -12,22 +12,11 @@ using net_core_api_boiler_plate.Services.Interface;
 
 namespace net_core_api_boiler_plate.Services.Implementation
 {
-    /// <summary>
-    ///     TestService class with implementation of interface ITestService
-    /// </summary>
     public class ItemService : IItemService
     {
-        /// <summary>
-        ///     Private variables
-        /// </summary>
         private readonly IRepository<Item> _itemRepository;
         private readonly CacheHelper _cacheHelper;
 
-        /// <summary>
-        ///     ItemService constructor with DI
-        /// </summary>
-        /// <param name="itemRepository"></param>
-        /// <param name="cacheHelper"></param>
         public ItemService(IRepository<Item> itemRepository,
                             CacheHelper cacheHelper)
         {

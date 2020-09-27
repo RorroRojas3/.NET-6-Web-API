@@ -4,9 +4,6 @@ using net_core_api_boiler_plate.Services.Implementation;
 
 namespace net_core_api_boiler_plate.Extensions.Services
 {
-    /// <summary>
-    ///     Static AutoMapperService class  
-    /// </summary>
     public static class AutoMapperService
     {
         /// <summary>

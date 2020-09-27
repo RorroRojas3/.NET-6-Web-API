@@ -7,9 +7,6 @@ using Serilog.Events;
 
 namespace net_core_api_boiler_plate.Extensions.Services
 {
-    /// <summary>
-    ///     Static LoggingService class
-    /// </summary>
     public static class LoggingService
     {
         /// <summary>

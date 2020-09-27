@@ -8,9 +8,6 @@ using Newtonsoft.Json;
 
 namespace net_core_api_boiler_plate.Extensions.Applications
 {
-    /// <summary>
-    ///     Static ExceptionApplicaton class
-    /// </summary>
     public static class ExceptionApplication
     {
         /// <summary>
@@ -23,22 +20,11 @@ namespace net_core_api_boiler_plate.Extensions.Applications
         }
     }
 
-    /// <summary>
-    ///     ExceptionMiddleware class
-    /// </summary>
     public class ExceptionMiddleware
     {
-        /// <summary>
-        ///     Private variables
-        /// </summary>
         private readonly RequestDelegate _next;
         private readonly ILogger _logger;
 
-        /// <summary>
-        ///     ExceptionMiddelware constructor with DI
-        /// </summary>
-        /// <param name="next"></param>
-        /// <param name="logger"></param>
         public ExceptionMiddleware(RequestDelegate next, ILogger<ExceptionMiddleware> logger)
         {
             _next = next;

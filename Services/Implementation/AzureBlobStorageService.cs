@@ -7,9 +7,6 @@ using Azure.Storage.Blobs;
 
 namespace net_core_api_boiler_plate.Services.Implementation
 {
-    /// <summary>
-    ///     AzureBlobStorageService class with Interface implementation
-    /// </summary>
     public class AzureBlobStorageService : IAzureBlobStorageService
     {
         /// <inheritdoc/>

@@ -5,28 +5,18 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using net_core_api_boiler_plate.Database.Repository.Interface;
+using net_core_api_boiler_plate.Models.Requests;
 using net_core_api_boiler_plate.Models.Responses;
 using net_core_api_boiler_plate.Services.Interface;
 using File = net_core_api_boiler_plate.Database.Tables.File;
 
 namespace net_core_api_boiler_plate.Services.Implementation
 {
-    /// <summary>
-    ///     FileService class with IFileService interface implementation
-    /// </summary>
     public class FileService : IFileService
     {
-        /// <summary>
-        ///     Private variables
-        /// </summary>
         private readonly IRepository<File> _fileRepository;
         private readonly IMapper _mapper;
 
-        /// <summary>
-        ///     FileService constructor with DI
-        /// </summary>
-        /// <param name="fileRepository"></param>
-        /// <param name="mapper"></param>
         public FileService(IRepository<File> fileRepository,
                             IMapper mapper)
         {
@@ -96,6 +86,12 @@ namespace net_core_api_boiler_plate.Services.Implementation
             }
 
             return true;
+        }
+
+        /// <inheritdoc/>
+        public async Task<bool> PostFileByChunks(FileByChunksRequest request)
+        {
+            throw new NotImplementedException();
         }
     }
 }

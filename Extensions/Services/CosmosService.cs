@@ -8,9 +8,6 @@ using net_core_api_boiler_plate.Services.Interface;
 
 namespace net_core_api_boiler_plate.Extensions.Services
 {
-    /// <summary>
-    ///     Static CosmosService class
-    /// </summary>
     public static class CosmosService
     {
         /// <summary>

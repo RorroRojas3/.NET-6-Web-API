@@ -6,25 +6,14 @@ using net_core_api_boiler_plate.Services.Interface;
 
 namespace net_core_api_boiler_plate.Controllers.V1
 {
-    /// <summary>
-    ///     AzureBlobStorageController
-    /// </summary>
     [ApiController]
     [Route("api/v{version:apiVersion}/[controller]")]
     [ApiVersion("1")]
     public class AzureBlobStorageController : Controller
     {
-        /// <summary>
-        ///     Private variables
-        /// </summary>
         private readonly ILogger _logger;
         private readonly IAzureBlobStorageService _azureBlobStorageService;
 
-        /// <summary>
-        ///     TestController constructor with DI
-        /// </summary>
-        /// <param name="logger"></param>
-        /// <param name="azureBlobStorageService"></param>
         public AzureBlobStorageController(ILogger<AzureBlobStorageController> logger,
                                          IAzureBlobStorageService azureBlobStorageService)
         {

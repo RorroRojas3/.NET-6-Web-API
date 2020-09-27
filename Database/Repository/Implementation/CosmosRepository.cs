@@ -8,17 +8,10 @@ using net_core_api_boiler_plate.Database.Repository.Interface;
 
 namespace net_core_api_boiler_plate.Database.Repository.Implementation
 {
-    /// <summary>
-    ///     CosmosRepository class with inheritance
-    /// </summary>
     public class CosmosRepository : ICosmosRepository
     {
         private readonly CosmosClient _cosmosClient;
 
-        /// <summary>
-        ///     CosmosRepository constructor with DI
-        /// </summary>
-        /// <param name="cosmosClient"></param>
         public CosmosRepository(CosmosClient cosmosClient)
         {
             _cosmosClient = cosmosClient;

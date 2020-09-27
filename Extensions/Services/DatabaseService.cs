@@ -7,9 +7,6 @@ using net_core_api_boiler_plate.Database.Repository.Interface;
 
 namespace net_core_api_boiler_plate.Extensions.Services
 {
-    /// <summary>
-    ///     Static DatabaseService class
-    /// </summary>
     public static class DatabaseService
     {
         /// <summary>

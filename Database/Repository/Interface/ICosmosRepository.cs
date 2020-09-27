@@ -5,9 +5,6 @@ using System.Threading.Tasks;
 
 namespace net_core_api_boiler_plate.Database.Repository.Interface
 {
-    /// <summary>
-    ///     IComosRepository Interface
-    /// </summary>
     public interface ICosmosRepository
     {
         /// <summary>
