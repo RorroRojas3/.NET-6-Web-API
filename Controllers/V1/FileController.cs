@@ -153,13 +153,14 @@ namespace net_core_api_boiler_plate.Controllers.V1
         /// <param name="request"></param>
         /// <returns></returns>
         [HttpPost]
+        [Route("Chunks")]
         public async Task<IActionResult> PostFileByChuncks(FileByChunksRequest request)
         {
             _logger.LogInformation($"PostFileByChuncks - Started");
 
             var result = await _fileService.PostFileByChunks(request);
 
-            return StatusCode(StatusCodes.Status200OK);
+            return StatusCode(StatusCodes.Status200OK, result);
         }
     }
 }

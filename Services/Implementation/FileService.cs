@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Http;
@@ -9,6 +10,7 @@ using net_core_api_boiler_plate.Models.Requests;
 using net_core_api_boiler_plate.Models.Responses;
 using net_core_api_boiler_plate.Services.Interface;
 using File = net_core_api_boiler_plate.Database.Tables.File;
+using SystemFile = System.IO.File;
 
 namespace net_core_api_boiler_plate.Services.Implementation
 {
@@ -91,7 +93,9 @@ namespace net_core_api_boiler_plate.Services.Implementation
         /// <inheritdoc/>
         public async Task<bool> PostFileByChunks(FileByChunksRequest request)
         {
-            throw new NotImplementedException();
+            var bytes = Encoding.ASCII.GetBytes(request.Bytes);
+            await SystemFile.WriteAllBytesAsync("Example.xlsx", bytes);
+            return true;
         }
     }
 }
