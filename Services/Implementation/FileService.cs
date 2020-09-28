@@ -93,7 +93,10 @@ namespace net_core_api_boiler_plate.Services.Implementation
         /// <inheritdoc/>
         public async Task<bool> PostFileByChunks(FileByChunksRequest request)
         {
-            await SystemFile.WriteAllBytesAsync("Example-2.xlsx", request.Bytes);
+            using (var stream = new FileStream(request.FileName, FileMode.Append))
+            {
+                await stream.WriteAsync(request.Bytes, 0, request.Bytes.Length);
+            }
             return true;
         }
     }
