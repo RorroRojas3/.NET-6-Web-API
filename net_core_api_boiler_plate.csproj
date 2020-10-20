@@ -4,6 +4,7 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <RootNamespace>net_core_api_boiler_plate</RootNamespace>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <AssemblyName>net_core_api_boiler_plate</AssemblyName>
   </PropertyGroup>
 
 
