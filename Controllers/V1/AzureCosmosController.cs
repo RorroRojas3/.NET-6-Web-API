@@ -1,8 +1,10 @@
+using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using net_core_api_boiler_plate.Database.Tables;
+using net_core_api_boiler_plate.Database.Tables.Cosmos;
 using net_core_api_boiler_plate.Models.Requests;
 using net_core_api_boiler_plate.Services.Interface;
 
@@ -14,13 +16,13 @@ namespace net_core_api_boiler_plate.Controllers.V1
     public class AzureCosmosController : Controller
     {
         private readonly ILogger _logger;
-        private readonly IAzureCosmosService _azureCosmosService;
+        private readonly IItemCosmosService _itemCosmosService;
 
         public AzureCosmosController(ILogger<AzureCosmosController> logger,
-                                        IAzureCosmosService azureCosmosService)
+                                        IItemCosmosService itemCosmosService)
         {
             _logger = logger;
-            _azureCosmosService = azureCosmosService;
+            _itemCosmosService = itemCosmosService;
         }
 
         /// <summary>
@@ -29,9 +31,9 @@ namespace net_core_api_boiler_plate.Controllers.V1
         /// <returns></returns>
         [HttpGet]
         [Route("Item")]
-        public IActionResult GetAllItems(string dataBaseName, string containerName)
+        public IActionResult GetAllItems()
         {
-            var result = _azureCosmosService.GetAllItems<Item>(dataBaseName, containerName);
+            var result = _itemCosmosService.GetAllItems();
             return StatusCode(StatusCodes.Status200OK, result);
         }
 
@@ -41,9 +43,9 @@ namespace net_core_api_boiler_plate.Controllers.V1
         /// <returns></returns>
         [HttpGet]
         [Route("Items/{id}")]
-        public async Task<IActionResult> GetItem(string id, string dataBaseName, string containerName)
+        public async Task<IActionResult> GetItem(string id)
         {
-            var result = await _azureCosmosService.GetItem<Item>(id, dataBaseName, containerName);
+            var result = await _itemCosmosService.GetItem(id);
             return StatusCode(StatusCodes.Status200OK, result);
         }
 
@@ -52,9 +54,9 @@ namespace net_core_api_boiler_plate.Controllers.V1
         /// </summary>
         /// <returns></returns>
         [HttpPost]
-        public async Task<IActionResult> PostItem(string id, string dataBaseName, string containerName, ItemRequest request)
+        public async Task<IActionResult> PostItem(ItemRequest request)
         {
-            var result = await _azureCosmosService.PostItem(request, id, dataBaseName, containerName);
+            var result = await _itemCosmosService.PostItem(request);
             return StatusCode(StatusCodes.Status201Created, result);
         }
 
@@ -63,9 +65,9 @@ namespace net_core_api_boiler_plate.Controllers.V1
         /// </summary>
         /// <returns></returns>
         [HttpPut]
-        public async Task<IActionResult> UpdateItem(string id, string dataBaseName, string containerName, ItemRequest request)
+        public async Task<IActionResult> UpdateItem(string id, ItemRequest request)
         {
-            var result = await _azureCosmosService.PutItem(id, request, dataBaseName, containerName);
+            var result = await _itemCosmosService.PutItem(id, request);
             return StatusCode(StatusCodes.Status200OK, result);
         }
 
@@ -74,9 +76,9 @@ namespace net_core_api_boiler_plate.Controllers.V1
         /// </summary>
         /// <returns></returns>
         [HttpDelete]
-        public async Task<IActionResult> DeleteItem(string id, string dataBaseName, string containerName)
+        public async Task<IActionResult> DeleteItem(string id)
         {
-            await _azureCosmosService.DeleteItem(id, dataBaseName, containerName);
+            await _itemCosmosService.DeleteItem(id);
             return StatusCode(StatusCodes.Status200OK, true);
         }
     }

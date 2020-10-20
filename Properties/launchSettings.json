@@ -15,7 +15,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "net-core-api-boiler-plate": {
+    "net_core_api_boiler_plate": {
       "commandName": "Project",
       "launchBrowser": true,
       "environmentVariables": {

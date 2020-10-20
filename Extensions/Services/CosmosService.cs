@@ -24,7 +24,7 @@ namespace net_core_api_boiler_plate.Extensions.Services
                                 .Build();
 
             services.AddSingleton(client);
-            services.AddScoped<IAzureCosmosService, AzureCosmosService>();
+            services.AddScoped<IItemCosmosService, ItemCosmosService>();
         }
     }
 }
