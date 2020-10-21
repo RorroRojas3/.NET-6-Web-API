@@ -23,7 +23,6 @@ namespace net_core_api_boiler_plate.Services.Interface
         /// <summary>
         ///     Gets item from Azure Cosmos DB
         /// </summary>
-        /// <typeparam name="T"></typeparam>
         /// <param name="id"></param>
         /// <returns></returns>
         Task<ItemCosmos> GetItem(string id);
