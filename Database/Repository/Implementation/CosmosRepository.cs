@@ -20,16 +20,9 @@ namespace net_core_api_boiler_plate.Database.Repository.Implementation
         /// <inheritdoc/>
         public async Task<T> GetItemAsync<T>(string id, string dataBaseName, string containerName)
         {
-            try
-            {
-                var container = GetContainer(dataBaseName, containerName);
-                ItemResponse<T> response = await container.ReadItemAsync<T>(id, new PartitionKey(id));
-                return response.Resource;
-            }
-            catch (CosmosException ex) when (ex.StatusCode == System.Net.HttpStatusCode.NotFound)
-            {
-                return default(T);
-            }
+            var container = GetContainer(dataBaseName, containerName);
+            ItemResponse<T> response = await container.ReadItemAsync<T>(id, new PartitionKey(id));
+            return response.Resource;       
         }
 
         /// <inheritdoc/>

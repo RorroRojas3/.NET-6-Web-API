@@ -1,5 +1,7 @@
 using AutoMapper;
 using net_core_api_boiler_plate.Database.Tables;
+using net_core_api_boiler_plate.Database.Tables.Cosmos;
+using net_core_api_boiler_plate.Models.Requests;
 using net_core_api_boiler_plate.Models.Responses;
 
 namespace net_core_api_boiler_plate.AutoMapper
@@ -9,6 +11,7 @@ namespace net_core_api_boiler_plate.AutoMapper
         public AutoMapping()
         {
             CreateMap<File, FileResponse>();
+            CreateMap<ItemRequest, ItemCosmos>();
         }
     }
 }
