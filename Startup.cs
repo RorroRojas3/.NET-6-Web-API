@@ -45,6 +45,8 @@ namespace net_core_api_boiler_plate
             services.AddHelpersService();
             Log.Information("Adding Data Protection Service");
             services.AddDataProtectionService();
+            Log.Information("Adding Azure Cosmos DB");
+            services.AddAzureCosmosService(Configuration);
             Log.Information("Adding HttpContextAccesor Service");
             services.AddHttpContextAccessor();
         }
