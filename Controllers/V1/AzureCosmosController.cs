@@ -62,6 +62,7 @@ namespace net_core_api_boiler_plate.Controllers.V1
         /// </summary>
         /// <returns></returns>
         [HttpPut]
+        [Route("{id}")]
         public async Task<IActionResult> UpdateItem(string id, ItemRequest request)
         {
             var result = await _itemCosmosService.PutItem(id, request);
@@ -73,6 +74,7 @@ namespace net_core_api_boiler_plate.Controllers.V1
         /// </summary>
         /// <returns></returns>
         [HttpDelete]
+        [Route("{id}")]
         public async Task<IActionResult> DeleteItem(string id)
         {
             await _itemCosmosService.DeleteItem(id);

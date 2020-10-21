@@ -25,6 +25,13 @@ namespace net_core_api_boiler_plate.Extensions.Services
                                 .WithConnectionModeDirect()
                                 .Build();
 
+            DatabaseResponse database = client.CreateDatabaseIfNotExistsAsync(cosmosDb.DatabaseName).GetAwaiter().GetResult();
+
+            foreach (var item in cosmosDb.ContainerCollection)
+            {
+                database.Database.CreateContainerIfNotExistsAsync(item.Name, item.PartitionKey);
+            }
+            
             services.AddSingleton(client);
             services.AddScoped<ICosmosRepository, CosmosRepository>();
             services.AddSingleton(cosmosDb);
