@@ -7,6 +7,10 @@
     <AssemblyName>Rodrigo.Tech.BoilerPlate</AssemblyName>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Content Remove="C:\Users\Rorro\.nuget\packages\microsoft.azure.cosmos\3.14.0\contentFiles\any\netstandard2.0\ThirdPartyNotice.txt" />
+  </ItemGroup>
+
 
   <ItemGroup>
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.0" />
