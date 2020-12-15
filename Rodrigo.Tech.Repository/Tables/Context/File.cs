@@ -1,11 +1,12 @@
+using Rodrigo.Tech.Respository.Pattern.Interface;
+using Rodrigo.Tech.Respository.Schemas;
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Rodrigo.Tech.BoilerPlate.Database.Repository.Interface;
 
-namespace Rodrigo.Tech.BoilerPlate.Database.Tables
+namespace Rodrigo.Tech.Respository.Tables.Context
 {
-    [Table(nameof(File), Schema = nameof(Schemas.Example))]
+    [Table(nameof(File), Schema = nameof(TableSchemas.Example))]
     public class File : IEntity
     {
         [Key]

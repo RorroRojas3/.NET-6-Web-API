@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.Extensions.Logging;
-using Rodrigo.Tech.BoilerPlate.Database.Repository.Interface;
-using Rodrigo.Tech.BoilerPlate.Database.Tables.Cosmos;
 using Rodrigo.Tech.BoilerPlate.Models.Requests;
 using Rodrigo.Tech.BoilerPlate.Models.Settings;
 using Rodrigo.Tech.BoilerPlate.Services.Interface;
+using Rodrigo.Tech.Respository.Pattern.Interface;
+using Rodrigo.Tech.Respository.Tables.Cosmos;
 
 namespace Rodrigo.Tech.BoilerPlate.Services.Implementation
 {

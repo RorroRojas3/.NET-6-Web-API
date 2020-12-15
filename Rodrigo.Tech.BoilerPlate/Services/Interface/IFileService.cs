@@ -2,9 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
-using Rodrigo.Tech.BoilerPlate.Database.Tables;
 using Rodrigo.Tech.BoilerPlate.Models.Requests;
 using Rodrigo.Tech.BoilerPlate.Models.Responses;
+using Rodrigo.Tech.Respository.Tables.Context;
 
 namespace Rodrigo.Tech.BoilerPlate.Services.Interface
 {

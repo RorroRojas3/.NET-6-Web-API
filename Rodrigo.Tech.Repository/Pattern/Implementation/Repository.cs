@@ -2,16 +2,16 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using Rodrigo.Tech.BoilerPlate.Database.DB;
-using Rodrigo.Tech.BoilerPlate.Database.Repository.Interface;
 using System.Linq;
+using Rodrigo.Tech.Respository.Pattern.Interface;
+using Rodrigo.Tech.Respository.Context;
 
-namespace Rodrigo.Tech.BoilerPlate.Database.Repository.Implementation
+namespace Rodrigo.Tech.Respository.Pattern.Implementation
 {
     public class Repository<T> : IRepository<T> where T : class, IEntity
     {
         protected readonly DatabaseContext _dbContext;
-        private DbSet<T> _entities;
+        private readonly DbSet<T> _entities;
 
         public Repository(DatabaseContext dbContext)
         {
@@ -26,7 +26,7 @@ namespace Rodrigo.Tech.BoilerPlate.Database.Repository.Implementation
 
             if (doesExit != null)
             {
-                return default(T);
+                return default;
             }
 
             await _entities.AddAsync(entity);
@@ -80,7 +80,7 @@ namespace Rodrigo.Tech.BoilerPlate.Database.Repository.Implementation
 
             if (doesExit == null)
             {
-                return default(T);
+                return default;
             }
 
             _entities.Update(entity);

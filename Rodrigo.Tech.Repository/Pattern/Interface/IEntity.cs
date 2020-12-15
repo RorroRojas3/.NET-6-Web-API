@@ -1,6 +1,6 @@
 using System;
 
-namespace Rodrigo.Tech.BoilerPlate.Database.Repository.Interface
+namespace Rodrigo.Tech.Respository.Pattern.Interface
 {
     public interface IEntity
     {

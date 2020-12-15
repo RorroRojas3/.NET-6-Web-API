@@ -1,16 +1,14 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Http;
-using Rodrigo.Tech.BoilerPlate.Database.Repository.Interface;
 using Rodrigo.Tech.BoilerPlate.Models.Requests;
 using Rodrigo.Tech.BoilerPlate.Models.Responses;
 using Rodrigo.Tech.BoilerPlate.Services.Interface;
-using File = Rodrigo.Tech.BoilerPlate.Database.Tables.File;
-using SystemFile = System.IO.File;
+using Rodrigo.Tech.Respository.Pattern.Interface;
+using File = Rodrigo.Tech.Respository.Tables.Context.File;
 
 namespace Rodrigo.Tech.BoilerPlate.Services.Implementation
 {
@@ -67,7 +65,7 @@ namespace Rodrigo.Tech.BoilerPlate.Services.Implementation
 
             var result = await _fileRepository.Add(file);
 
-            return result == null ? false : true;
+            return result != null;
         }
 
         /// <inheritdoc/>

@@ -1,13 +1,13 @@
+using Rodrigo.Tech.Respository.Pattern.Interface;
+using Rodrigo.Tech.Respository.Schemas;
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Rodrigo.Tech.BoilerPlate.Database.Repository.Interface;
-using Newtonsoft.Json;
 
-namespace Rodrigo.Tech.BoilerPlate.Database.Tables
+namespace Rodrigo.Tech.Respository.Tables.Context
 {
     [Serializable]
-    [Table(nameof(Item), Schema = nameof(Schemas.Example))]
+    [Table(nameof(Item), Schema = nameof(TableSchemas.Example))]
     public class Item : IEntity
     {
         [Key]

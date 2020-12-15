@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
-using Rodrigo.Tech.BoilerPlate.Database.Tables;
+using Rodrigo.Tech.Respository.Tables.Context;
 
-namespace Rodrigo.Tech.BoilerPlate.Database.DB
+namespace Rodrigo.Tech.Respository.Context
 {
     public class DatabaseContext : DbContext
     {

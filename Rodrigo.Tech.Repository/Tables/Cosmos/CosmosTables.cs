@@ -1,4 +1,4 @@
-﻿namespace Rodrigo.Tech.BoilerPlate.Database.Tables.Cosmos
+﻿namespace Rodrigo.Tech.Respository.Tables.Cosmos
 {
     public static class CosmosTables
     {

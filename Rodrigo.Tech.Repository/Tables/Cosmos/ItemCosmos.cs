@@ -1,8 +1,8 @@
-﻿using Rodrigo.Tech.BoilerPlate.Database.Repository.Interface;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using System;
+using Rodrigo.Tech.Respository.Pattern.Interface;
 
-namespace Rodrigo.Tech.BoilerPlate.Database.Tables.Cosmos
+namespace Rodrigo.Tech.Respository.Tables.Cosmos
 {
     [Serializable]
     public class ItemCosmos : IEntity

@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Rodrigo.Tech.BoilerPlate.Database.Repository.Interface
+namespace Rodrigo.Tech.Respository.Pattern.Interface
 {
     public interface IRepository<T> where T : class, IEntity
     {

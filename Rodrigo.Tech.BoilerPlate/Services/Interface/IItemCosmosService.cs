@@ -1,5 +1,5 @@
-using Rodrigo.Tech.BoilerPlate.Database.Tables.Cosmos;
 using Rodrigo.Tech.BoilerPlate.Models.Requests;
+using Rodrigo.Tech.Respository.Tables.Cosmos;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 

@@ -1,12 +1,12 @@
+using Microsoft.Azure.Cosmos;
+using Rodrigo.Tech.Respository.Pattern.Interface;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
-using Microsoft.Azure.Cosmos;
-using Rodrigo.Tech.BoilerPlate.Database.Repository.Interface;
 
-namespace Rodrigo.Tech.BoilerPlate.Database.Repository.Implementation
+namespace Rodrigo.Tech.Respository.Pattern.Implementation
 {
     public class CosmosRepository : ICosmosRepository
     {

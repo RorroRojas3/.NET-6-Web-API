@@ -1,9 +1,9 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Rodrigo.Tech.BoilerPlate.Database.DB;
-using Rodrigo.Tech.BoilerPlate.Database.Repository.Implementation;
-using Rodrigo.Tech.BoilerPlate.Database.Repository.Interface;
+using Rodrigo.Tech.Respository.Context;
+using Rodrigo.Tech.Respository.Pattern.Implementation;
+using Rodrigo.Tech.Respository.Pattern.Interface;
 
 namespace Rodrigo.Tech.BoilerPlate.Extensions.Services
 {

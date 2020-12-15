@@ -4,11 +4,11 @@ using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Caching.Distributed;
-using Rodrigo.Tech.BoilerPlate.Database.Repository.Interface;
-using Rodrigo.Tech.BoilerPlate.Database.Tables;
 using Rodrigo.Tech.BoilerPlate.Helpers;
 using Rodrigo.Tech.BoilerPlate.Models.Requests;
 using Rodrigo.Tech.BoilerPlate.Services.Interface;
+using Rodrigo.Tech.Respository.Pattern.Interface;
+using Rodrigo.Tech.Respository.Tables.Context;
 
 namespace Rodrigo.Tech.BoilerPlate.Services.Implementation
 {

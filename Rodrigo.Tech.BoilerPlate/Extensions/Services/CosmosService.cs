@@ -2,11 +2,11 @@ using Microsoft.Azure.Cosmos;
 using Microsoft.Azure.Cosmos.Fluent;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Rodrigo.Tech.BoilerPlate.Database.Repository.Implementation;
-using Rodrigo.Tech.BoilerPlate.Database.Repository.Interface;
 using Rodrigo.Tech.BoilerPlate.Models.Settings;
 using Rodrigo.Tech.BoilerPlate.Services.Implementation;
 using Rodrigo.Tech.BoilerPlate.Services.Interface;
+using Rodrigo.Tech.Respository.Pattern.Implementation;
+using Rodrigo.Tech.Respository.Pattern.Interface;
 
 namespace Rodrigo.Tech.BoilerPlate.Extensions.Services
 {

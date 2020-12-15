@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
-namespace Rodrigo.Tech.BoilerPlate.Database.Repository.Interface
+namespace Rodrigo.Tech.Respository.Pattern.Interface
 {
     public interface ICosmosRepository
     {
