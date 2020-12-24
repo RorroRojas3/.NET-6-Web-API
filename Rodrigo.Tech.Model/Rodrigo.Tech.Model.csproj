@@ -4,4 +4,10 @@
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Enum\" />
+    <Folder Include="Response\" />
+    <Folder Include="Request\" />
+  </ItemGroup>
+
 </Project>
