@@ -2,8 +2,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using Rodrigo.Tech.BoilerPlate.Models.Requests;
-using Rodrigo.Tech.BoilerPlate.Services.Interface;
+using Rodrigo.Tech.Model.Requests;
+using Rodrigo.Tech.Service.Interface;
 
 namespace Rodrigo.Tech.BoilerPlate.Controllers.V1
 {

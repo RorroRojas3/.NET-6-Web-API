@@ -1,14 +1,11 @@
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using Rodrigo.Tech.BoilerPlate.Database.DB;
 using Rodrigo.Tech.BoilerPlate.Extensions.Applications;
-using Rodrigo.Tech.BoilerPlate.Extensions.Services;
+using Rodrigo.Tech.BoilerPlate.Extensions.ServiceCollection;
+using Rodrigo.Tech.Respository.Context;
 using Serilog;
 
 namespace Rodrigo.Tech.BoilerPlate
@@ -41,8 +38,6 @@ namespace Rodrigo.Tech.BoilerPlate
             services.AddAutoMapperService();
             Log.Information("Adding Cache Service");
             services.AddCacheService(Configuration);
-            Log.Information("Adding Helper Service");
-            services.AddHelpersService();
             Log.Information("Adding Data Protection Service");
             services.AddDataProtectionService();
             Log.Information("Adding Azure Cosmos DB");
@@ -55,11 +50,9 @@ namespace Rodrigo.Tech.BoilerPlate
         ///     Configure
         /// </summary>
         /// <param name="app"></param>
-        /// <param name="env"></param>
         /// <param name="provider"></param>
         /// <param name="db"></param>
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env,
-                                IApiVersionDescriptionProvider provider,
+        public void Configure(IApplicationBuilder app, IApiVersionDescriptionProvider provider,
                                 DatabaseContext db)
         {
             Log.Information($"Using Exception middleware");

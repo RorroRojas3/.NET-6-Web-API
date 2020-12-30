@@ -4,8 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using Rodrigo.Tech.BoilerPlate.Models.Requests;
-using Rodrigo.Tech.BoilerPlate.Services.Interface;
+using Rodrigo.Tech.Service.Interface;
 
 namespace Rodrigo.Tech.BoilerPlate.Controllers.V1
 {
@@ -30,18 +29,11 @@ namespace Rodrigo.Tech.BoilerPlate.Controllers.V1
         /// <returns></returns>
         [HttpGet]
         [Route("{id}")]
-        public async Task<IActionResult> GetFile(string id)
+        public async Task<IActionResult> GetFile(Guid id)
         {
             _logger.LogInformation($"GetFile - Started");
 
-            Guid guid;
-            var validGuid = Guid.TryParse(id, out guid);
-            if (string.IsNullOrEmpty(id) || !validGuid)
-            {
-                return StatusCode(StatusCodes.Status406NotAcceptable, "Id empty or not acceptable");
-            }
-
-            var result = await _fileService.GetFile(guid);
+            var result = await _fileService.GetFile(id);
 
             if (result == null)
             {
@@ -86,25 +78,11 @@ namespace Rodrigo.Tech.BoilerPlate.Controllers.V1
         /// <returns></returns>
         [HttpPut]
         [Route("{id}")]
-        public async Task<IActionResult> PutFile(string id, IFormFile formFile)
+        public async Task<IActionResult> PutFile(Guid id, [FromBody] IFormFile formFile)
         {
             _logger.LogInformation($"PutFile - Started");
 
-            Guid guid;
-            var validGuid = Guid.TryParse(id, out guid);
-            if (string.IsNullOrEmpty(id) || !validGuid)
-            {
-                return StatusCode(StatusCodes.Status406NotAcceptable, "Id empty or not acceptable");
-            }
-
-            if (formFile == null)
-            {
-                return StatusCode(StatusCodes.Status406NotAcceptable, "File not provided");
-            }
-
-            _logger.LogInformation($"PutFile - Started");
-
-            var result = await _fileService.UpdateFile(guid, formFile);
+            await _fileService.UpdateFile(id, formFile);
 
             return StatusCode(StatusCodes.Status200OK);
         }
@@ -116,18 +94,11 @@ namespace Rodrigo.Tech.BoilerPlate.Controllers.V1
         /// <returns></returns>
         [HttpDelete]
         [Route("{id}")]
-        public async Task<IActionResult> DeleteFile(string id)
+        public async Task<IActionResult> DeleteFile(Guid id)
         {
             _logger.LogInformation($"DeleteFile - Started");
 
-            Guid guid;
-            var validGuid = Guid.TryParse(id, out guid);
-            if (string.IsNullOrEmpty(id) || !validGuid)
-            {
-                return StatusCode(StatusCodes.Status406NotAcceptable, "Id empty or not acceptable");
-            }
-
-            var result = await _fileService.DeleteFile(guid);
+            await _fileService.DeleteFile(id);
 
             _logger.LogInformation($"PutFile - Started");
             return StatusCode(StatusCodes.Status200OK);
@@ -143,22 +114,6 @@ namespace Rodrigo.Tech.BoilerPlate.Controllers.V1
             _logger.LogInformation($"GetAllFiles - Started");
 
             var result = await _fileService.GetAllFiles();
-
-            return StatusCode(StatusCodes.Status200OK, result);
-        }
-
-        /// <summary>
-        ///     Creates file by Chunks
-        /// </summary>
-        /// <param name="request"></param>
-        /// <returns></returns>
-        [HttpPost]
-        [Route("Chunks")]
-        public async Task<IActionResult> PostFileByChuncks(FileByChunksRequest request)
-        {
-            _logger.LogInformation($"PostFileByChuncks - Started");
-
-            var result = await _fileService.PostFileByChunks(request);
 
             return StatusCode(StatusCodes.Status200OK, result);
         }
