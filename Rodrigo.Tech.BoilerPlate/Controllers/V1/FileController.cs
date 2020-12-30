@@ -31,17 +31,22 @@ namespace Rodrigo.Tech.BoilerPlate.Controllers.V1
         [Route("{id}")]
         public async Task<IActionResult> GetFile(Guid id)
         {
-            _logger.LogInformation($"GetFile - Started");
+            _logger.LogInformation($"{nameof(FileController)} - {nameof(GetFile)} - Started, " +
+                $"{nameof(id)}: {id}");
 
             var result = await _fileService.GetFile(id);
 
             if (result == null)
             {
+                _logger.LogError($"{nameof(FileController)} - {nameof(GetFile)} - Not found, " +
+               $"{nameof(id)}: {id}");
                 return StatusCode(StatusCodes.Status404NotFound);
             }
 
             Stream stream = new MemoryStream(result.Data);
 
+            _logger.LogInformation($"{nameof(FileController)} - {nameof(GetFile)} - Finished, " +
+               $"{nameof(id)}: {id}");
             return new FileStreamResult(stream, result.ContentType);
         }
 
@@ -51,22 +56,19 @@ namespace Rodrigo.Tech.BoilerPlate.Controllers.V1
         /// <param name="formFile"></param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<IActionResult> PostFile(IFormFile formFile)
+        public async Task<IActionResult> PostFile([FromBody] IFormFile formFile)
         {
-            _logger.LogInformation($"PostFile - Started");
-
-            if (formFile == null)
-            {
-                return StatusCode(StatusCodes.Status406NotAcceptable, "File not provided");
-            }
+            _logger.LogInformation($"{nameof(FileController)} - {nameof(PostFile)} - Started");
 
             var result = await _fileService.PostFile(formFile);
 
             if (!result)
             {
+                _logger.LogError($"{nameof(FileController)} - {nameof(PostFile)} - File could not be created");
                 return StatusCode(StatusCodes.Status400BadRequest, "File could not be created");
             }
 
+            _logger.LogInformation($"{nameof(FileController)} - {nameof(PostFile)} - Finished");
             return StatusCode(StatusCodes.Status201Created);
         }
 
@@ -80,10 +82,13 @@ namespace Rodrigo.Tech.BoilerPlate.Controllers.V1
         [Route("{id}")]
         public async Task<IActionResult> PutFile(Guid id, [FromBody] IFormFile formFile)
         {
-            _logger.LogInformation($"PutFile - Started");
+            _logger.LogInformation($"{nameof(FileController)} - {nameof(PutFile)} - Started, " +
+                $"{nameof(id)}: {id}");
 
             await _fileService.UpdateFile(id, formFile);
 
+            _logger.LogInformation($"{nameof(FileController)} - {nameof(PutFile)} - Finished, " +
+                $"{nameof(id)}: {id}");
             return StatusCode(StatusCodes.Status200OK);
         }
 
@@ -96,11 +101,13 @@ namespace Rodrigo.Tech.BoilerPlate.Controllers.V1
         [Route("{id}")]
         public async Task<IActionResult> DeleteFile(Guid id)
         {
-            _logger.LogInformation($"DeleteFile - Started");
+            _logger.LogInformation($"{nameof(FileController)} - {nameof(DeleteFile)} - Started, " +
+                $"{nameof(id)}: {id}");
 
             await _fileService.DeleteFile(id);
 
-            _logger.LogInformation($"PutFile - Started");
+            _logger.LogInformation($"{nameof(FileController)} - {nameof(DeleteFile)} - Finished, " +
+                $"{nameof(id)}: {id}");
             return StatusCode(StatusCodes.Status200OK);
         }
 
@@ -111,10 +118,11 @@ namespace Rodrigo.Tech.BoilerPlate.Controllers.V1
         [HttpGet]
         public async Task<IActionResult> GetAllFiles()
         {
-            _logger.LogInformation($"GetAllFiles - Started");
+            _logger.LogInformation($"{nameof(FileController)} - {nameof(GetAllFiles)} - Started");
 
             var result = await _fileService.GetAllFiles();
 
+            _logger.LogInformation($"{nameof(FileController)} - {nameof(GetAllFiles)} - Finished");
             return StatusCode(StatusCodes.Status200OK, result);
         }
     }

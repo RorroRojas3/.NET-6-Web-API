@@ -1,5 +1,6 @@
 using Rodrigo.Tech.Model.Requests;
 using Rodrigo.Tech.Respository.Tables.Cosmos;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -12,7 +13,7 @@ namespace Rodrigo.Tech.Service.Interface
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        Task DeleteItem(string id);
+        Task<bool> DeleteItem(Guid id);
 
         /// <summary>
         ///     Gets all items from Azure Cosmos DB
@@ -25,7 +26,7 @@ namespace Rodrigo.Tech.Service.Interface
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        Task<ItemCosmos> GetItem(string id);
+        Task<ItemCosmos> GetItem(Guid id);
 
         /// <summary>
         ///     Adds item from Azure Cosmos DB
@@ -40,6 +41,6 @@ namespace Rodrigo.Tech.Service.Interface
         /// <param name="id"></param>
         /// <param name="item"></param>
         /// <returns></returns>
-        Task<ItemCosmos> PutItem(string id, ItemRequest item);
+        Task<ItemCosmos> PutItem(Guid id, ItemRequest item);
     }
 }
