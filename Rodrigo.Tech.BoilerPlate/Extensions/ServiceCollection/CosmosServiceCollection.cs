@@ -2,11 +2,13 @@ using Microsoft.Azure.Cosmos;
 using Microsoft.Azure.Cosmos.Fluent;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Rodrigo.Tech.Model.Constants;
 using Rodrigo.Tech.Model.Settings;
 using Rodrigo.Tech.Respository.Pattern.Implementation;
 using Rodrigo.Tech.Respository.Pattern.Interface;
 using Rodrigo.Tech.Service.Implementation;
 using Rodrigo.Tech.Service.Interface;
+using System;
 
 namespace Rodrigo.Tech.BoilerPlate.Extensions.ServiceCollection
 {
@@ -20,6 +22,9 @@ namespace Rodrigo.Tech.BoilerPlate.Extensions.ServiceCollection
         public static void AddAzureCosmosService(this IServiceCollection services, IConfiguration configuration)
         {
             var cosmosDb = configuration.GetSection("CosmosDb").Get<CosmosDb>();
+            cosmosDb.DatabaseName = Environment.GetEnvironmentVariable(EnvironmentConstants.COSMOS_DB);
+            cosmosDb.Account = Environment.GetEnvironmentVariable(EnvironmentConstants.COSMOS_ACCOUNT);
+            cosmosDb.Key = Environment.GetEnvironmentVariable(EnvironmentConstants.COSMOS_KEY);
             CosmosClientBuilder clientBuilder = new CosmosClientBuilder(cosmosDb.Account, cosmosDb.Key);
             CosmosClient client = clientBuilder
                                 .WithConnectionModeDirect()
