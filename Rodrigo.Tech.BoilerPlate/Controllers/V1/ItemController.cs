@@ -3,8 +3,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using Rodrigo.Tech.BoilerPlate.Models.Requests;
-using Rodrigo.Tech.BoilerPlate.Services.Interface;
+using Rodrigo.Tech.Model.Requests;
+using Rodrigo.Tech.Service.Interface;
 
 namespace Rodrigo.Tech.BoilerPlate.Controllers.V1
 {
@@ -42,18 +42,11 @@ namespace Rodrigo.Tech.BoilerPlate.Controllers.V1
         /// <returns></returns>
         [HttpGet]
         [Route("{id}")]
-        public async Task<IActionResult> GetItem([FromRoute] string id)
+        public async Task<IActionResult> GetItem([FromRoute] Guid id)
         {
-            Guid guid;
-            var validGuid = Guid.TryParse(id, out guid);
-            if (string.IsNullOrEmpty(id) || !validGuid)
-            {
-                return StatusCode(StatusCodes.Status406NotAcceptable, "Id empty or not acceptable");
-            }
-
             _logger.LogInformation($"GetItem - Started");
 
-            var result = await _itemService.GetItem(guid);
+            var result = await _itemService.GetItem(id);
 
             return StatusCode(StatusCodes.Status200OK, result);
         }
@@ -66,11 +59,6 @@ namespace Rodrigo.Tech.BoilerPlate.Controllers.V1
         [HttpPost]
         public async Task<IActionResult> PostItem([FromBody] ItemRequest item)
         {
-            if (item == null)
-            {
-                return StatusCode(StatusCodes.Status406NotAcceptable, "Item not provided");
-            }
-
             _logger.LogInformation($"PostItem - Started");
 
             var result = await _itemService.PostItem(item);
@@ -86,23 +74,11 @@ namespace Rodrigo.Tech.BoilerPlate.Controllers.V1
         /// <returns></returns>
         [HttpPut]
         [Route("{id}")]
-        public async Task<IActionResult> PutItem([FromRoute] string id, [FromBody] ItemRequest item)
+        public async Task<IActionResult> PutItem([FromRoute] Guid id, [FromBody] ItemRequest item)
         {
-            Guid guid;
-            var validGuid = Guid.TryParse(id, out guid);
-            if (string.IsNullOrEmpty(id) || !validGuid)
-            {
-                return StatusCode(StatusCodes.Status406NotAcceptable, "Id empty or not acceptable");
-            }
-
-            if (item == null)
-            {
-                return StatusCode(StatusCodes.Status406NotAcceptable, "Item not provided");
-            }
-
             _logger.LogInformation($"PutItem - Started");
 
-            var result = await _itemService.PutItem(guid, item);
+            var result = await _itemService.PutItem(id, item);
 
             if (result == null)
             {
@@ -120,18 +96,11 @@ namespace Rodrigo.Tech.BoilerPlate.Controllers.V1
         /// <returns></returns>
         [HttpDelete]
         [Route("{id}")]
-        public async Task<IActionResult> DeleteItem([FromRoute] string id)
+        public async Task<IActionResult> DeleteItem([FromRoute] Guid id)
         {
-            Guid guid;
-            var validGuid = Guid.TryParse(id, out guid);
-            if (string.IsNullOrEmpty(id) || !validGuid)
-            {
-                return StatusCode(StatusCodes.Status406NotAcceptable, "Id empty or not acceptable");
-            }
-
             _logger.LogInformation($"DeleteItem - Started");
 
-            var result = await _itemService.DeleteItem(guid);
+            var result = await _itemService.DeleteItem(id);
 
             if (!result)
             {

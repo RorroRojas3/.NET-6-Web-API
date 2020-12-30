@@ -5,6 +5,7 @@
     <RootNamespace>Rodrigo.Tech.BoilerPlate</RootNamespace>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <AssemblyName>Rodrigo.Tech.BoilerPlate</AssemblyName>
+    <EnableUnsafeBinaryFormatterSerialization>true</EnableUnsafeBinaryFormatterSerialization>
   </PropertyGroup>
 
   <ItemGroup>
@@ -20,7 +21,7 @@
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="5.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning" Version="4.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning.ApiExplorer" Version="4.2.0" />
-    <PackageReference Include="Microsoft.Azure.Cosmos" Version="3.15.0" />
+    <PackageReference Include="Microsoft.Azure.Cosmos" Version="3.15.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.1">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
@@ -36,7 +37,9 @@
 
 
   <ItemGroup>
+    <ProjectReference Include="..\Rodrigo.Tech.Model\Rodrigo.Tech.Model.csproj" />
     <ProjectReference Include="..\Rodrigo.Tech.Repository\Rodrigo.Tech.Repository.csproj" />
+    <ProjectReference Include="..\Rodrigo.Tech.Service\Rodrigo.Tech.Service.csproj" />
   </ItemGroup>
 
 

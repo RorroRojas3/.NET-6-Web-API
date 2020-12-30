@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Rodrigo.Tech.Repository.Tables.Context;
 using Rodrigo.Tech.Respository.Tables.Context;
 
 namespace Rodrigo.Tech.Respository.Context
@@ -24,6 +25,8 @@ namespace Rodrigo.Tech.Respository.Context
         public DbSet<Item> Items { get; set; }
 
         public DbSet<File> Files { get; set; }
+
+        public DbSet<Cache> Caches { get; set; }
         #endregion
     }
 }

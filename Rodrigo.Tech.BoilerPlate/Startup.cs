@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Rodrigo.Tech.BoilerPlate.Extensions.Applications;
-using Rodrigo.Tech.BoilerPlate.Extensions.Services;
+using Rodrigo.Tech.BoilerPlate.Extensions.ServiceCollection;
 using Rodrigo.Tech.Respository.Context;
 using Serilog;
 
@@ -38,8 +38,6 @@ namespace Rodrigo.Tech.BoilerPlate
             services.AddAutoMapperService();
             Log.Information("Adding Cache Service");
             services.AddCacheService(Configuration);
-            Log.Information("Adding Helper Service");
-            services.AddHelpersService();
             Log.Information("Adding Data Protection Service");
             services.AddDataProtectionService();
             Log.Information("Adding Azure Cosmos DB");
@@ -74,7 +72,7 @@ namespace Rodrigo.Tech.BoilerPlate
             app.UseSwashbuckle(provider);
 
             Log.Information($"Using Migration of DB");
-            //db.Database.Migrate();
+            db.Database.Migrate();
         }
     }
 }
