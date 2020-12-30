@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 using Rodrigo.Tech.Model.Requests;
 using Rodrigo.Tech.Model.Settings;
 using Rodrigo.Tech.Respository.Pattern.Interface;
@@ -30,42 +31,73 @@ namespace Rodrigo.Tech.Service.Implementation
         }
 
         /// <inheritdoc/>
-        public async Task DeleteItem(string id)
+        public async Task<bool> DeleteItem(Guid id)
         {
-            await _cosmosRepository.DeleteItemAsync(id, _cosmosDb.DatabaseName, CosmosTables.ITEM);
+            _logger.LogInformation($"{nameof(ItemCosmosService)} - {nameof(DeleteItem)} - Started, " +
+                $"{nameof(id)}: {id}");
+
+            await _cosmosRepository.DeleteItemAsync(id.ToString(), _cosmosDb.DatabaseName, CosmosTables.ITEM);
+
+            _logger.LogInformation($"{nameof(ItemCosmosService)} - {nameof(DeleteItem)} - Finished, " +
+                $"{nameof(id)}: {id}");
+            return true;
         }
 
         /// <inheritdoc/>
         public IEnumerable<ItemCosmos> GetAllItems()
         {
-            return _cosmosRepository.GetItemsAsync<ItemCosmos>(_cosmosDb.DatabaseName, CosmosTables.ITEM);
+            _logger.LogInformation($"{nameof(ItemCosmosService)} - {nameof(GetAllItems)} - Started");
+
+            var result = _cosmosRepository.GetItemsAsync<ItemCosmos>(_cosmosDb.DatabaseName, CosmosTables.ITEM);
+
+            _logger.LogInformation($"{nameof(ItemCosmosService)} - {nameof(GetAllItems)} - Finished");
+            return result;
         }
 
         /// <inheritdoc/>
-        public async Task<ItemCosmos> GetItem(string id)
+        public async Task<ItemCosmos> GetItem(Guid id)
         {
-            return await _cosmosRepository.GetItemAsync<ItemCosmos>(id, _cosmosDb.DatabaseName, CosmosTables.ITEM);
+            _logger.LogInformation($"{nameof(ItemCosmosService)} - {nameof(GetItem)} - Started, " +
+                $"{nameof(id)}: {id}");
+            
+            var result = await _cosmosRepository.GetItemAsync<ItemCosmos>(id.ToString(), _cosmosDb.DatabaseName, CosmosTables.ITEM);
+
+            _logger.LogInformation($"{nameof(ItemCosmosService)} - {nameof(GetItem)} - Finished, " +
+                $"{nameof(id)}: {id}");
+            return result;
         }
 
         /// <inheritdoc/>
-        public async Task<ItemCosmos> PostItem(ItemRequest item)
+        public async Task<ItemCosmos> PostItem(ItemRequest request)
         {
-            ItemCosmos newItem = _mapper.Map<ItemCosmos>(item);
+            _logger.LogInformation($"{nameof(ItemCosmosService)} - {nameof(PostItem)} - Started, " +
+                $"{nameof(ItemRequest)}: {JsonConvert.SerializeObject(request)}");
+
+            ItemCosmos newItem = _mapper.Map<ItemCosmos>(request);
             newItem.Id = Guid.NewGuid();
 
             await _cosmosRepository.AddItemAsync(newItem, newItem.Id.ToString(), _cosmosDb.DatabaseName, CosmosTables.ITEM);
 
+            _logger.LogInformation($"{nameof(ItemCosmosService)} - {nameof(PostItem)} - Finished, " +
+                $"{nameof(ItemRequest)}: {JsonConvert.SerializeObject(request)}");
             return newItem;
         }
 
         /// <inheritdoc/>
-        public async Task<ItemCosmos> PutItem(string id, ItemRequest request)
+        public async Task<ItemCosmos> PutItem(Guid id, ItemRequest request)
         {
+            _logger.LogInformation($"{nameof(ItemCosmosService)} - {nameof(PutItem)} - Started, " +
+                $"{nameof(id)}: {id}, " +
+                $"{nameof(ItemRequest)}: {JsonConvert.SerializeObject(request)}");
+
             var item = await GetItem(id);
             _mapper.Map(request, item);
 
             await _cosmosRepository.UpdateItemAsync(item.Id.ToString(), item, _cosmosDb.DatabaseName, CosmosTables.ITEM);
 
+            _logger.LogInformation($"{nameof(ItemCosmosService)} - {nameof(PutItem)} - Finished, " +
+                $"{nameof(id)}: {id}, " +
+                $"{nameof(ItemRequest)}: {JsonConvert.SerializeObject(request)}");
             return item;
         }
     }

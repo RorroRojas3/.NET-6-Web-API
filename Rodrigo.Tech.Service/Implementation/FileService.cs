@@ -1,5 +1,6 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Logging;
 using Rodrigo.Tech.Model.Responses;
 using Rodrigo.Tech.Respository.Pattern.Interface;
 using Rodrigo.Tech.Service.Interface;
@@ -15,38 +16,61 @@ namespace Rodrigo.Tech.Service.Implementation
     {
         private readonly IRepository<File> _fileRepository;
         private readonly IMapper _mapper;
+        private readonly ILogger _logger;
 
         public FileService(IRepository<File> fileRepository,
-                            IMapper mapper)
+                            IMapper mapper,
+                            ILogger<FileService> logger)
         {
             _fileRepository = fileRepository;
             _mapper = mapper;
+            _logger = logger;
         }
 
         /// <inheritdoc/>
         public async Task<bool> DeleteFile(Guid id)
         {
-            return await _fileRepository.Delete(id);
+            _logger.LogInformation($"{nameof(FileService)} - {nameof(DeleteFile)} - Started, " +
+                $"{nameof(id)}: {id}");
+
+            var result =  await _fileRepository.Delete(id);
+
+            _logger.LogInformation($"{nameof(FileService)} - {nameof(DeleteFile)} - Finished, " +
+                $"{nameof(id)}: {id}");
+            return result;
         }
 
         /// <inheritdoc/>
         public async Task<List<FileResponse>> GetAllFiles()
         {
+            _logger.LogInformation($"{nameof(FileService)} - {nameof(GetAllFiles)} - Started");
+
             var files = await _fileRepository.GetAll();
             var response = _mapper.Map<List<FileResponse>>(files);
+
+            _logger.LogInformation($"{nameof(FileService)} - {nameof(GetAllFiles)} - Finished");
             return response;
         }
 
         /// <inheritdoc/>
         public async Task<File> GetFile(Guid id)
         {
+            _logger.LogInformation($"{nameof(FileService)} - {nameof(GetFile)} - Started, " +
+                $"{nameof(id)}: {id}");
+
             var file = await _fileRepository.Get(id);
+
+            _logger.LogInformation($"{nameof(FileService)} - {nameof(GetFile)} - Finished, " +
+                $"{nameof(id)}: {id}");
             return file;
         }
 
         /// <inheritdoc/>
         public async Task<bool> PostFile(IFormFile formFile)
         {
+            _logger.LogInformation($"{nameof(FileService)} - {nameof(PostFile)} - Started");
+
+            _logger.LogInformation($"{nameof(FileService)} - {nameof(PostFile)} - Formfile to Byte array");
             byte[] data;
             using (var memoryStream = new MemoryStream())
             {
@@ -62,28 +86,41 @@ namespace Rodrigo.Tech.Service.Implementation
                 Data = data
             };
 
+            _logger.LogInformation($"{nameof(FileService)} - {nameof(PostFile)} - Adding to database");
             var result = await _fileRepository.Add(file);
 
+            _logger.LogInformation($"{nameof(FileService)} - {nameof(PostFile)} - Finished");
             return result != null;
         }
 
         /// <inheritdoc/>
         public async Task<bool> UpdateFile(Guid id, IFormFile formfile)
         {
+            _logger.LogInformation($"{nameof(FileService)} - {nameof(UpdateFile)} - Started, " +
+                $"{nameof(id)}: {id}");
+
             var deleteFile = await _fileRepository.Delete(id);
 
             if (!deleteFile)
             {
+                _logger.LogError($"{nameof(FileService)} - {nameof(UpdateFile)} - Not found, " +
+                $"{nameof(id)}: {id}");
                 return false;
             }
 
+            _logger.LogInformation($"{nameof(FileService)} - {nameof(UpdateFile)} - Updating file, " +
+                $"{nameof(id)}: {id}");
             var addFile = await PostFile(formfile);
 
             if (!addFile)
             {
+                _logger.LogError($"{nameof(FileService)} - {nameof(UpdateFile)} - File could not be updated, " +
+                $"{nameof(id)}: {id}");
                 return false;
             }
 
+            _logger.LogInformation($"{nameof(FileService)} - {nameof(UpdateFile)} - Finished, " +
+                $"{nameof(id)}: {id}");
             return true;
         }
     }
