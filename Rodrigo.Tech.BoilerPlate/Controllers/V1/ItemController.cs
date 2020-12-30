@@ -99,7 +99,7 @@ namespace Rodrigo.Tech.BoilerPlate.Controllers.V1
         public async Task<IActionResult> PutItem([FromRoute] Guid id, [FromBody] ItemRequest request)
         {
             _logger.LogInformation($"{nameof(ItemController)} - {nameof(PutItem)} - Started, " +
-                $"{nameof(id)}: {id}" +
+                $"{nameof(id)}: {id}, " +
                 $"{nameof(ItemRequest)}: {JsonConvert.SerializeObject(request)}");
 
             var result = await _itemService.PutItem(id, request);
@@ -107,13 +107,13 @@ namespace Rodrigo.Tech.BoilerPlate.Controllers.V1
             if (result == null)
             {
                 _logger.LogError($"{nameof(ItemController)} - {nameof(PutItem)} - Not found, " +
-                $"{nameof(id)}: {id}" +
+                $"{nameof(id)}: {id}, " +
                 $"{nameof(ItemRequest)}: {JsonConvert.SerializeObject(request)}");
                 return StatusCode(StatusCodes.Status404NotFound);
             }
 
             _logger.LogInformation($"{nameof(ItemController)} - {nameof(PutItem)} - Finished, " +
-                $"{nameof(id)}: {id}" +
+                $"{nameof(id)}: {id}, " +
                 $"{nameof(ItemRequest)}: {JsonConvert.SerializeObject(request)}");
             return StatusCode(StatusCodes.Status200OK, result);
         }

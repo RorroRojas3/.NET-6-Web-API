@@ -1,3 +1,5 @@
+using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 using Rodrigo.Tech.Model.Requests;
 using Rodrigo.Tech.Respository.Pattern.Interface;
 using Rodrigo.Tech.Respository.Tables.Context;
@@ -13,23 +15,36 @@ namespace Rodrigo.Tech.Service.Implementation
     {
         private readonly IRepository<Item> _itemRepository;
         private readonly ICacheService _cacheService;
+        private readonly ILogger _logger;
 
         public ItemService(IRepository<Item> itemRepository,
-                            ICacheService cacheHelper)
+                            ICacheService cacheHelper,
+                            ILogger<ItemService> logger)
         {
             _itemRepository = itemRepository;
             _cacheService = cacheHelper;
+            _logger = logger;
         }
 
         /// <inheritdoc/>
         public async Task<bool> DeleteItem(Guid id)
         {
-            return await _itemRepository.Delete(id);
+            _logger.LogInformation($"{nameof(ItemService)} - {nameof(DeleteItem)} - Started, " +
+                $"{nameof(id)}: {id}");
+
+            var result =  await _itemRepository.Delete(id);
+
+            _logger.LogInformation($"{nameof(ItemService)} - {nameof(DeleteItem)} - Finished, " +
+                $"{nameof(id)}: {id}");
+            return result;
         }
 
         /// <inheritdoc/>
         public async Task<Item> GetItem(Guid id)
         {
+            _logger.LogInformation($"{nameof(ItemService)} - {nameof(GetItem)} - Started, " +
+                $"{nameof(id)}: {id}");
+
             var cacheBytes = await _cacheService.GetAsync($"item-{id}");
 
             if (cacheBytes != null)
@@ -42,19 +57,25 @@ namespace Rodrigo.Tech.Service.Implementation
 
             if (item == null)
             {
+                _logger.LogInformation($"{nameof(ItemService)} - {nameof(GetItem)} - Not found, " +
+                $"{nameof(id)}: {id}");
                 return null;
             }
 
             var serializedItem = SerializeHelper.SerializeObject(item);
 
-            await _cacheService.SetDatatMinAsync($"item-{id}", serializedItem, 5);
+            await _cacheService.SetDataMinAsync($"item-{id}", serializedItem, 5);
 
+            _logger.LogInformation($"{nameof(ItemService)} - {nameof(GetItem)} - Finished, " +
+                $"{nameof(id)}: {id}");
             return item;
         }
 
         /// <inheritdoc/>
         public async Task<List<Item>> GetItems()
         {
+            _logger.LogInformation($"{nameof(ItemService)} - {nameof(GetItems)} - Started");
+
             var cacheBytes = await _cacheService.GetAsync($"items");
 
             if (cacheBytes != null)
@@ -67,19 +88,24 @@ namespace Rodrigo.Tech.Service.Implementation
 
             if (items.Count == 0)
             {
+                _logger.LogInformation($"{nameof(ItemService)} - {nameof(GetItems)} - Not found");
                 return null;
             }
 
             var serializedItem = SerializeHelper.SerializeObject(items);
 
-            await _cacheService.SetDatatMinAsync($"items", serializedItem, 5);
+            await _cacheService.SetDataMinAsync($"items", serializedItem, 5);
 
+            _logger.LogInformation($"{nameof(ItemService)} - {nameof(GetItems)} - Finished");
             return items;
         }
 
         /// <inheritdoc/>
         public async Task<Item> PostItem(ItemRequest item)
         {
+            _logger.LogInformation($"{nameof(ItemService)} - {nameof(PostItem)} - Started, " +
+                $"{nameof(ItemRequest)}: {JsonConvert.SerializeObject(item)}");
+
             var newItem = new Item
             {
                 Id = Guid.NewGuid(),
@@ -87,25 +113,41 @@ namespace Rodrigo.Tech.Service.Implementation
                 Value = item.Value
             };
 
-            return await _itemRepository.Add(newItem);
+            var result =  await _itemRepository.Add(newItem);
+
+            _logger.LogInformation($"{nameof(ItemService)} - {nameof(PostItem)} - Finished, " +
+                $"{nameof(ItemRequest)}: {JsonConvert.SerializeObject(item)}");
+            return result;
         }
 
         /// <inheritdoc/>
-        public async Task<Item> PutItem(Guid id, ItemRequest itemRequest)
+        public async Task<Item> PutItem(Guid id, ItemRequest request)
         {
+            _logger.LogInformation($"{nameof(ItemService)} - {nameof(PutItem)} - Started, " +
+                $"{nameof(id)}: {id}, " +
+                $"{nameof(ItemRequest)}: {JsonConvert.SerializeObject(request)}");
+
             var item = await GetItem(id);
 
             if (item == null)
             {
+                _logger.LogInformation($"{nameof(ItemService)} - {nameof(PutItem)} - Not found, " +
+                $"{nameof(id)}: {id}, " +
+                $"{nameof(ItemRequest)}: {JsonConvert.SerializeObject(request)}");
                 return null;
             }
 
             await _cacheService.RemoveCacheAsync($"item-{id}");
 
-            item.Name = itemRequest.Name;
-            item.Value = itemRequest.Value;
+            item.Name = request.Name;
+            item.Value = request.Value;
 
-            return await _itemRepository.Update(item);
+            var result =  await _itemRepository.Update(item);
+
+            _logger.LogInformation($"{nameof(ItemService)} - {nameof(PutItem)} - Finished, " +
+                $"{nameof(id)}: {id}, " +
+                $"{nameof(ItemRequest)}: {JsonConvert.SerializeObject(request)}");
+            return result;
         }
     }
 }

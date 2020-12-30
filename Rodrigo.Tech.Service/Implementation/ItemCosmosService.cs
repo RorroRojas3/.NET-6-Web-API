@@ -87,7 +87,7 @@ namespace Rodrigo.Tech.Service.Implementation
         public async Task<ItemCosmos> PutItem(Guid id, ItemRequest request)
         {
             _logger.LogInformation($"{nameof(ItemCosmosService)} - {nameof(PutItem)} - Started, " +
-                $"{nameof(id)}: {id}" +
+                $"{nameof(id)}: {id}, " +
                 $"{nameof(ItemRequest)}: {JsonConvert.SerializeObject(request)}");
 
             var item = await GetItem(id);
@@ -96,7 +96,7 @@ namespace Rodrigo.Tech.Service.Implementation
             await _cosmosRepository.UpdateItemAsync(item.Id.ToString(), item, _cosmosDb.DatabaseName, CosmosTables.ITEM);
 
             _logger.LogInformation($"{nameof(ItemCosmosService)} - {nameof(PutItem)} - Finished, " +
-                $"{nameof(id)}: {id}" +
+                $"{nameof(id)}: {id}, " +
                 $"{nameof(ItemRequest)}: {JsonConvert.SerializeObject(request)}");
             return item;
         }

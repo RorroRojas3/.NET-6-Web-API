@@ -87,13 +87,13 @@ namespace Rodrigo.Tech.BoilerPlate.Controllers.V1
         public async Task<IActionResult> UpdateItem(Guid id, ItemRequest request)
         {
             _logger.LogInformation($"{nameof(AzureCosmosController)} - {nameof(UpdateItem)} - Started, " +
-                $"{nameof(id)}: {id}" +
+                $"{nameof(id)}: {id}, " +
                 $"{nameof(ItemRequest)}: {JsonConvert.SerializeObject(request)}");
 
             var result = await _itemCosmosService.PutItem(id, request);
 
             _logger.LogInformation($"{nameof(AzureCosmosController)} - {nameof(UpdateItem)} - Finished, " +
-                $"{nameof(id)}: {id}" +
+                $"{nameof(id)}: {id}, " +
                 $"{nameof(ItemRequest)}: {JsonConvert.SerializeObject(request)}");
             return StatusCode(StatusCodes.Status200OK, result);
         }

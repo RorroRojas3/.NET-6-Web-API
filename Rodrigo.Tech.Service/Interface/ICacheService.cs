@@ -18,7 +18,7 @@ namespace Rodrigo.Tech.Service.Interface
         /// <param name="data"></param>
         /// <param name="time"></param>
         /// <returns></returns>
-        Task SetDatatMillAsync(string key, byte[] data, int time);
+        Task SetDataMillAsync(string key, byte[] data, int time);
 
         /// <summary>
         ///     Sets data in _cache in seconds
@@ -27,7 +27,7 @@ namespace Rodrigo.Tech.Service.Interface
         /// <param name="data"></param>
         /// <param name="time"></param>
         /// <returns></returns>
-        Task SetDatatSecAsync(string key, byte[] data, int time);
+        Task SetDataSecAsync(string key, byte[] data, int time);
 
         /// <summary>
         ///     Sets data in _cache for minutes
@@ -36,7 +36,7 @@ namespace Rodrigo.Tech.Service.Interface
         /// <param name="data"></param>
         /// <param name="time"></param>
         /// <returns></returns>
-        Task SetDatatMinAsync(string key, byte[] data, int time);
+        Task SetDataMinAsync(string key, byte[] data, int time);
 
         /// <summary>
         ///     Sets data _cache for hours
@@ -45,7 +45,7 @@ namespace Rodrigo.Tech.Service.Interface
         /// <param name="data"></param>
         /// <param name="time"></param>
         /// <returns></returns>
-        Task SetDatatHourAsync(string key, byte[] data, int time);
+        Task SetDataHourAsync(string key, byte[] data, int time);
 
         /// <summary>
         ///     Sets data in _cache for days
@@ -54,7 +54,7 @@ namespace Rodrigo.Tech.Service.Interface
         /// <param name="data"></param>
         /// <param name="time"></param>
         /// <returns></returns>
-        Task SetDatatDaysAsync(string key, byte[] data, int time);
+        Task SetDataDaysAsync(string key, byte[] data, int time);
 
         /// <summary>
         ///     Removes object from _cache
