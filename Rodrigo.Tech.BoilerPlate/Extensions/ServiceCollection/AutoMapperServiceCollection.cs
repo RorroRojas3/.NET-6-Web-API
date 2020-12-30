@@ -1,5 +1,6 @@
 using AutoMapper;
 using Microsoft.Extensions.DependencyInjection;
+using Rodrigo.Tech.Model.AutoMapper;
 
 namespace Rodrigo.Tech.BoilerPlate.Extensions.ServiceCollection
 {
@@ -11,7 +12,7 @@ namespace Rodrigo.Tech.BoilerPlate.Extensions.ServiceCollection
         /// <param name="services"></param>
         public static void AddAutoMapperService(this IServiceCollection services)
         {
-            services.AddAutoMapper(typeof(Startup));
+            services.AddAutoMapper(typeof(AutoMapping));
         }
     }
 }
