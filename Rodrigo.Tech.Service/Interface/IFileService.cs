@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
-using Rodrigo.Tech.Model.Responses;
+using Rodrigo.Tech.Model.Response;
 using Rodrigo.Tech.Respository.Tables.Context;
 
 namespace Rodrigo.Tech.Service.Interface

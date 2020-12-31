@@ -56,7 +56,7 @@ namespace Rodrigo.Tech.BoilerPlate.Controllers.V1
         /// <param name="formFile"></param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<IActionResult> PostFile([FromBody] IFormFile formFile)
+        public async Task<IActionResult> PostFile([FromForm] IFormFile formFile)
         {
             _logger.LogInformation($"{nameof(FileController)} - {nameof(PostFile)} - Started");
 
@@ -80,7 +80,7 @@ namespace Rodrigo.Tech.BoilerPlate.Controllers.V1
         /// <returns></returns>
         [HttpPut]
         [Route("{id}")]
-        public async Task<IActionResult> PutFile(Guid id, [FromBody] IFormFile formFile)
+        public async Task<IActionResult> PutFile(Guid id, [FromForm] IFormFile formFile)
         {
             _logger.LogInformation($"{nameof(FileController)} - {nameof(PutFile)} - Started, " +
                 $"{nameof(id)}: {id}");

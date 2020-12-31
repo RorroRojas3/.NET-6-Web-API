@@ -1,7 +1,7 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
-using Rodrigo.Tech.Model.Responses;
+using Rodrigo.Tech.Model.Response;
 using Rodrigo.Tech.Respository.Pattern.Interface;
 using Rodrigo.Tech.Service.Interface;
 using System;
@@ -94,14 +94,14 @@ namespace Rodrigo.Tech.Service.Implementation
         }
 
         /// <inheritdoc/>
-        public async Task<bool> UpdateFile(Guid id, IFormFile formfile)
+        public async Task<bool> UpdateFile(Guid id, IFormFile formFile)
         {
             _logger.LogInformation($"{nameof(FileService)} - {nameof(UpdateFile)} - Started, " +
                 $"{nameof(id)}: {id}");
 
-            var deleteFile = await _fileRepository.Delete(id);
+            var file = await _fileRepository.Get(id);
 
-            if (!deleteFile)
+            if (file == null)
             {
                 _logger.LogError($"{nameof(FileService)} - {nameof(UpdateFile)} - Not found, " +
                 $"{nameof(id)}: {id}");
@@ -110,14 +110,18 @@ namespace Rodrigo.Tech.Service.Implementation
 
             _logger.LogInformation($"{nameof(FileService)} - {nameof(UpdateFile)} - Updating file, " +
                 $"{nameof(id)}: {id}");
-            var addFile = await PostFile(formfile);
 
-            if (!addFile)
+            byte[] data;
+            using (var memoryStream = new MemoryStream())
             {
-                _logger.LogError($"{nameof(FileService)} - {nameof(UpdateFile)} - File could not be updated, " +
-                $"{nameof(id)}: {id}");
-                return false;
+                await formFile.CopyToAsync(memoryStream);
+                data = memoryStream.ToArray();
             }
+
+            file.Name = formFile.Name;
+            file.ContentType = formFile.ContentType;
+            file.Data = data;
+            await _fileRepository.Update(file);
 
             _logger.LogInformation($"{nameof(FileService)} - {nameof(UpdateFile)} - Finished, " +
                 $"{nameof(id)}: {id}");
