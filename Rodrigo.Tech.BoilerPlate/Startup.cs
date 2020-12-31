@@ -70,6 +70,7 @@ namespace Rodrigo.Tech.BoilerPlate
             {
                 endpoints.MapControllers();
                 endpoints.MapHealthChecks("/health");
+                endpoints.MapHealthChecksUI();
             });
             Log.Information($"Using Swashbuckle");
             app.UseSwashbuckle(provider);
