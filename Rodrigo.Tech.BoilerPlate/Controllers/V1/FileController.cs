@@ -1,9 +1,11 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Rodrigo.Tech.Model.Response;
 using Rodrigo.Tech.Service.Interface;
 
 namespace Rodrigo.Tech.BoilerPlate.Controllers.V1
@@ -28,26 +30,56 @@ namespace Rodrigo.Tech.BoilerPlate.Controllers.V1
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet]
-        [Route("{id}")]
-        public async Task<IActionResult> GetFile(Guid id)
+        [Route("Info/{id}")]
+        [Produces("application/json")]
+        [ProducesResponseType(typeof(FileResponse), StatusCodes.Status200OK)]
+        public async Task<IActionResult> GetFileInfo(Guid id)
         {
-            _logger.LogInformation($"{nameof(FileController)} - {nameof(GetFile)} - Started, " +
+            _logger.LogInformation($"{nameof(FileController)} - {nameof(GetFileInfo)} - Started, " +
                 $"{nameof(id)}: {id}");
 
-            var result = await _fileService.GetFile(id);
+            var result = await _fileService.GetFileInfo(id);
 
             if (result == null)
             {
-                _logger.LogError($"{nameof(FileController)} - {nameof(GetFile)} - Not found, " +
+                _logger.LogError($"{nameof(FileController)} - {nameof(GetFileInfo)} - Not found, " +
+               $"{nameof(id)}: {id}");
+                return StatusCode(StatusCodes.Status404NotFound);
+            }
+
+            _logger.LogInformation($"{nameof(FileController)} - {nameof(GetFileInfo)} - Finished, " +
+               $"{nameof(id)}: {id}");
+            return StatusCode(StatusCodes.Status200OK, result);
+        }
+
+        /// <summary>
+        ///     Gets file based on Id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("Download/{id}")]
+        [Produces("application/octet-stream")]
+        [ProducesResponseType(typeof(FileStreamResult), StatusCodes.Status200OK)]
+        public async Task<IActionResult> GetFileDownload(Guid id)
+        {
+            _logger.LogInformation($"{nameof(FileController)} - {nameof(GetFileDownload)} - Started, " +
+                $"{nameof(id)}: {id}");
+
+            var result = await _fileService.GetFileDownload(id);
+
+            if (result == null)
+            {
+                _logger.LogError($"{nameof(FileController)} - {nameof(GetFileDownload)} - Not found, " +
                $"{nameof(id)}: {id}");
                 return StatusCode(StatusCodes.Status404NotFound);
             }
 
             Stream stream = new MemoryStream(result.Data);
 
-            _logger.LogInformation($"{nameof(FileController)} - {nameof(GetFile)} - Finished, " +
+            _logger.LogInformation($"{nameof(FileController)} - {nameof(GetFileDownload)} - Finished, " +
                $"{nameof(id)}: {id}");
-            return new FileStreamResult(stream, result.ContentType);
+            return new FileStreamResult(stream, "application/octet-stream");
         }
 
         /// <summary>
@@ -56,20 +88,16 @@ namespace Rodrigo.Tech.BoilerPlate.Controllers.V1
         /// <param name="formFile"></param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<IActionResult> PostFile([FromBody] IFormFile formFile)
+        [Produces("application/json")]
+        [ProducesResponseType(typeof(FileResponse), StatusCodes.Status200OK)]
+        public async Task<IActionResult> PostFile(IFormFile formFile)
         {
             _logger.LogInformation($"{nameof(FileController)} - {nameof(PostFile)} - Started");
 
             var result = await _fileService.PostFile(formFile);
 
-            if (!result)
-            {
-                _logger.LogError($"{nameof(FileController)} - {nameof(PostFile)} - File could not be created");
-                return StatusCode(StatusCodes.Status400BadRequest, "File could not be created");
-            }
-
             _logger.LogInformation($"{nameof(FileController)} - {nameof(PostFile)} - Finished");
-            return StatusCode(StatusCodes.Status201Created);
+            return StatusCode(StatusCodes.Status201Created, result);
         }
 
         /// <summary>
@@ -80,16 +108,25 @@ namespace Rodrigo.Tech.BoilerPlate.Controllers.V1
         /// <returns></returns>
         [HttpPut]
         [Route("{id}")]
-        public async Task<IActionResult> PutFile(Guid id, [FromBody] IFormFile formFile)
+        [Produces("application/json")]
+        [ProducesResponseType(typeof(FileResponse), StatusCodes.Status200OK)]
+        public async Task<IActionResult> PutFile(Guid id, IFormFile formFile)
         {
             _logger.LogInformation($"{nameof(FileController)} - {nameof(PutFile)} - Started, " +
                 $"{nameof(id)}: {id}");
 
-            await _fileService.UpdateFile(id, formFile);
+            var result = await _fileService.UpdateFile(id, formFile);
+
+            if (result == null)
+            {
+                _logger.LogInformation($"{nameof(FileController)} - {nameof(PutFile)} - Not found, " +
+                $"{nameof(id)}: {id}");
+                return StatusCode(StatusCodes.Status404NotFound);
+            }
 
             _logger.LogInformation($"{nameof(FileController)} - {nameof(PutFile)} - Finished, " +
                 $"{nameof(id)}: {id}");
-            return StatusCode(StatusCodes.Status200OK);
+            return StatusCode(StatusCodes.Status200OK, result);
         }
 
         /// <summary>
@@ -99,16 +136,25 @@ namespace Rodrigo.Tech.BoilerPlate.Controllers.V1
         /// <returns></returns>
         [HttpDelete]
         [Route("{id}")]
+        [Produces("application/json")]
+        [ProducesResponseType(typeof(bool), StatusCodes.Status200OK)]
         public async Task<IActionResult> DeleteFile(Guid id)
         {
             _logger.LogInformation($"{nameof(FileController)} - {nameof(DeleteFile)} - Started, " +
                 $"{nameof(id)}: {id}");
 
-            await _fileService.DeleteFile(id);
+            var result = await _fileService.DeleteFile(id);
+
+            if (!result)
+            {
+                _logger.LogInformation($"{nameof(FileController)} - {nameof(DeleteFile)} - Not found, " +
+                $"{nameof(id)}: {id}");
+                return StatusCode(StatusCodes.Status404NotFound);
+            }
 
             _logger.LogInformation($"{nameof(FileController)} - {nameof(DeleteFile)} - Finished, " +
                 $"{nameof(id)}: {id}");
-            return StatusCode(StatusCodes.Status200OK);
+            return StatusCode(StatusCodes.Status200OK, result);
         }
 
         /// <summary>
@@ -116,11 +162,19 @@ namespace Rodrigo.Tech.BoilerPlate.Controllers.V1
         /// </summary>
         /// <returns></returns>
         [HttpGet]
+        [Produces("application/json")]
+        [ProducesResponseType(typeof(List<FileResponse>), StatusCodes.Status200OK)]
         public async Task<IActionResult> GetAllFiles()
         {
             _logger.LogInformation($"{nameof(FileController)} - {nameof(GetAllFiles)} - Started");
 
             var result = await _fileService.GetAllFiles();
+
+            if (result == null)
+            {
+                _logger.LogError($"{nameof(FileController)} - {nameof(GetAllFiles)} - Not found");
+                return StatusCode(StatusCodes.Status404NotFound);
+            }
 
             _logger.LogInformation($"{nameof(FileController)} - {nameof(GetAllFiles)} - Finished");
             return StatusCode(StatusCodes.Status200OK, result);

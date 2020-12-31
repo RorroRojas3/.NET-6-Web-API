@@ -1,6 +1,8 @@
+using AutoMapper;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using Rodrigo.Tech.Model.Requests;
+using Rodrigo.Tech.Model.Response;
 using Rodrigo.Tech.Respository.Pattern.Interface;
 using Rodrigo.Tech.Respository.Tables.Context;
 using Rodrigo.Tech.Service.Helpers;
@@ -16,14 +18,17 @@ namespace Rodrigo.Tech.Service.Implementation
         private readonly IRepository<Item> _itemRepository;
         private readonly ICacheService _cacheService;
         private readonly ILogger _logger;
+        private readonly IMapper _mapper;
 
         public ItemService(IRepository<Item> itemRepository,
                             ICacheService cacheHelper,
-                            ILogger<ItemService> logger)
+                            ILogger<ItemService> logger,
+                            IMapper mapper)
         {
             _itemRepository = itemRepository;
             _cacheService = cacheHelper;
             _logger = logger;
+            _mapper = mapper;
         }
 
         /// <inheritdoc/>
@@ -40,7 +45,7 @@ namespace Rodrigo.Tech.Service.Implementation
         }
 
         /// <inheritdoc/>
-        public async Task<Item> GetItem(Guid id)
+        public async Task<ItemResponse> GetItem(Guid id)
         {
             _logger.LogInformation($"{nameof(ItemService)} - {nameof(GetItem)} - Started, " +
                 $"{nameof(id)}: {id}");
@@ -50,7 +55,7 @@ namespace Rodrigo.Tech.Service.Implementation
             if (cacheBytes != null)
             {
                 var cacheItem = SerializeHelper.DeserializeObject<Item>(cacheBytes);
-                return cacheItem;
+                return _mapper.Map<ItemResponse>(cacheItem);
             }
 
             var item = await _itemRepository.Get(id);
@@ -68,11 +73,11 @@ namespace Rodrigo.Tech.Service.Implementation
 
             _logger.LogInformation($"{nameof(ItemService)} - {nameof(GetItem)} - Finished, " +
                 $"{nameof(id)}: {id}");
-            return item;
+            return _mapper.Map<ItemResponse>(item);
         }
 
         /// <inheritdoc/>
-        public async Task<List<Item>> GetItems()
+        public async Task<List<ItemResponse>> GetItems()
         {
             _logger.LogInformation($"{nameof(ItemService)} - {nameof(GetItems)} - Started");
 
@@ -81,7 +86,7 @@ namespace Rodrigo.Tech.Service.Implementation
             if (cacheBytes != null)
             {
                 var cacheItem = SerializeHelper.DeserializeObject<List<Item>>(cacheBytes);
-                return cacheItem;
+                return _mapper.Map<List<ItemResponse>>(cacheItem);
             }
 
             var items = await _itemRepository.GetAll();
@@ -97,37 +102,32 @@ namespace Rodrigo.Tech.Service.Implementation
             await _cacheService.SetDataMinAsync($"items", serializedItem, 5);
 
             _logger.LogInformation($"{nameof(ItemService)} - {nameof(GetItems)} - Finished");
-            return items;
+            return _mapper.Map<List<ItemResponse>>(items);
         }
 
         /// <inheritdoc/>
-        public async Task<Item> PostItem(ItemRequest item)
+        public async Task<ItemResponse> PostItem(ItemRequest request)
         {
             _logger.LogInformation($"{nameof(ItemService)} - {nameof(PostItem)} - Started, " +
-                $"{nameof(ItemRequest)}: {JsonConvert.SerializeObject(item)}");
+                $"{nameof(ItemRequest)}: {JsonConvert.SerializeObject(request)}");
 
-            var newItem = new Item
-            {
-                Id = Guid.NewGuid(),
-                Name = item.Name,
-                Value = item.Value
-            };
+            var newItem = _mapper.Map<Item>(request);
 
             var result =  await _itemRepository.Add(newItem);
 
             _logger.LogInformation($"{nameof(ItemService)} - {nameof(PostItem)} - Finished, " +
-                $"{nameof(ItemRequest)}: {JsonConvert.SerializeObject(item)}");
-            return result;
+                $"{nameof(ItemRequest)}: {JsonConvert.SerializeObject(request)}");
+            return _mapper.Map<ItemResponse>(result);
         }
 
         /// <inheritdoc/>
-        public async Task<Item> PutItem(Guid id, ItemRequest request)
+        public async Task<ItemResponse> PutItem(Guid id, ItemRequest request)
         {
             _logger.LogInformation($"{nameof(ItemService)} - {nameof(PutItem)} - Started, " +
                 $"{nameof(id)}: {id}, " +
                 $"{nameof(ItemRequest)}: {JsonConvert.SerializeObject(request)}");
 
-            var item = await GetItem(id);
+            var item = await _itemRepository.Get(id);
 
             if (item == null)
             {
@@ -139,15 +139,14 @@ namespace Rodrigo.Tech.Service.Implementation
 
             await _cacheService.RemoveCacheAsync($"item-{id}");
 
-            item.Name = request.Name;
-            item.Value = request.Value;
+            _mapper.Map(request, item);
 
             var result =  await _itemRepository.Update(item);
 
             _logger.LogInformation($"{nameof(ItemService)} - {nameof(PutItem)} - Finished, " +
                 $"{nameof(id)}: {id}, " +
                 $"{nameof(ItemRequest)}: {JsonConvert.SerializeObject(request)}");
-            return result;
+            return _mapper.Map<ItemResponse>(result);
         }
     }
 }
