@@ -90,7 +90,6 @@ namespace Rodrigo.Tech.BoilerPlate.Controllers.V1
         ///
         /// </remarks>
         /// <returns></returns>
-        /// <response code="412">If the item is null</response>    
         [HttpPost]
         [Produces("application/json")]
         public async Task<IActionResult> PostItem([FromBody] ItemRequest request)
