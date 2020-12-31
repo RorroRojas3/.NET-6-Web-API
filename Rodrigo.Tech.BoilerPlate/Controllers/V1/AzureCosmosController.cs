@@ -1,10 +1,12 @@
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using Rodrigo.Tech.Model.Requests;
+using Rodrigo.Tech.Respository.Tables.Cosmos;
 using Rodrigo.Tech.Service.Interface;
 
 namespace Rodrigo.Tech.BoilerPlate.Controllers.V1
@@ -30,6 +32,8 @@ namespace Rodrigo.Tech.BoilerPlate.Controllers.V1
         /// <returns></returns>
         [HttpGet]
         [Route("Item")]
+        [Produces("application/json")]
+        [ProducesResponseType(typeof(IEnumerable<ItemCosmos>), StatusCodes.Status200OK)]
         public IActionResult GetAllItems()
         {
             _logger.LogInformation($"{nameof(AzureCosmosController)} - {nameof(GetAllItems)} - Started");
@@ -46,6 +50,8 @@ namespace Rodrigo.Tech.BoilerPlate.Controllers.V1
         /// <returns></returns>
         [HttpGet]
         [Route("Items/{id}")]
+        [Produces("application/json")]
+        [ProducesResponseType(typeof(ItemCosmos), StatusCodes.Status200OK)]
         public async Task<IActionResult> GetItem(Guid id)
         {
             _logger.LogInformation($"{nameof(AzureCosmosController)} - {nameof(GetItem)} - Started, " +
@@ -61,9 +67,20 @@ namespace Rodrigo.Tech.BoilerPlate.Controllers.V1
         /// <summary>
         ///     Creates item
         /// </summary>
+        /// <remarks>
+        /// Sample request:
+        ///
+        ///     {
+        ///        "name": "example",
+        ///        "value": "example"
+        ///     }
+        ///
+        /// </remarks>
         /// <param name="request"></param>
         /// <returns></returns>
         [HttpPost]
+        [Produces("application/json")]
+        [ProducesResponseType(typeof(ItemCosmos), StatusCodes.Status200OK)]
         public async Task<IActionResult> PostItem(ItemRequest request)
         {
             _logger.LogInformation($"{nameof(AzureCosmosController)} - {nameof(PostItem)} - Started, " +
@@ -81,9 +98,20 @@ namespace Rodrigo.Tech.BoilerPlate.Controllers.V1
         /// </summary>
         /// <param name="id"></param>
         /// <param name="request"></param>
+        /// <remarks>
+        /// Sample request:
+        ///
+        ///     {
+        ///        "name": "example",
+        ///        "value": "example"
+        ///     }
+        ///
+        /// </remarks>
         /// <returns></returns>
         [HttpPut]
         [Route("{id}")]
+        [Produces("application/json")]
+        [ProducesResponseType(typeof(ItemCosmos), StatusCodes.Status200OK)]
         public async Task<IActionResult> UpdateItem(Guid id, ItemRequest request)
         {
             _logger.LogInformation($"{nameof(AzureCosmosController)} - {nameof(UpdateItem)} - Started, " +
@@ -105,6 +133,8 @@ namespace Rodrigo.Tech.BoilerPlate.Controllers.V1
         /// <returns></returns>
         [HttpDelete]
         [Route("{id}")]
+        [Produces("application/json")]
+        [ProducesResponseType(typeof(bool), StatusCodes.Status200OK)]
         public async Task<IActionResult> DeleteItem(Guid id)
         {
             _logger.LogInformation($"{nameof(AzureCosmosController)} - {nameof(DeleteItem)} - Started, " +

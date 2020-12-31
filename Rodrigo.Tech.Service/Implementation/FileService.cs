@@ -46,27 +46,39 @@ namespace Rodrigo.Tech.Service.Implementation
             _logger.LogInformation($"{nameof(FileService)} - {nameof(GetAllFiles)} - Started");
 
             var files = await _fileRepository.GetAll();
-            var response = _mapper.Map<List<FileResponse>>(files);
+            
+            if (files.Count == 0)
+            {
+                _logger.LogError($"{nameof(FileService)} - {nameof(GetAllFiles)} - Not found");
+                return null;
+            }
 
             _logger.LogInformation($"{nameof(FileService)} - {nameof(GetAllFiles)} - Finished");
-            return response;
+            return _mapper.Map<List<FileResponse>>(files); ;
         }
 
         /// <inheritdoc/>
-        public async Task<File> GetFile(Guid id)
+        public async Task<FileResponse> GetFileInfo(Guid id)
         {
-            _logger.LogInformation($"{nameof(FileService)} - {nameof(GetFile)} - Started, " +
+            _logger.LogInformation($"{nameof(FileService)} - {nameof(GetFileInfo)} - Started, " +
                 $"{nameof(id)}: {id}");
 
             var file = await _fileRepository.Get(id);
 
-            _logger.LogInformation($"{nameof(FileService)} - {nameof(GetFile)} - Finished, " +
+            if (file == null)
+            {
+                _logger.LogInformation($"{nameof(FileService)} - {nameof(GetFileInfo)} - Not found, " +
                 $"{nameof(id)}: {id}");
-            return file;
+                return null;
+            }
+
+            _logger.LogInformation($"{nameof(FileService)} - {nameof(GetFileInfo)} - Finished, " +
+                $"{nameof(id)}: {id}");
+            return _mapper.Map<FileResponse>(file);
         }
 
         /// <inheritdoc/>
-        public async Task<bool> PostFile(IFormFile formFile)
+        public async Task<FileResponse> PostFile(IFormFile formFile)
         {
             _logger.LogInformation($"{nameof(FileService)} - {nameof(PostFile)} - Started");
 
@@ -80,7 +92,6 @@ namespace Rodrigo.Tech.Service.Implementation
 
             var file = new File
             {
-                Id = Guid.NewGuid(),
                 Name = formFile.FileName,
                 ContentType = formFile.ContentType,
                 Data = data
@@ -90,11 +101,11 @@ namespace Rodrigo.Tech.Service.Implementation
             var result = await _fileRepository.Add(file);
 
             _logger.LogInformation($"{nameof(FileService)} - {nameof(PostFile)} - Finished");
-            return result != null;
+            return _mapper.Map<FileResponse>(file);
         }
 
         /// <inheritdoc/>
-        public async Task<bool> UpdateFile(Guid id, IFormFile formFile)
+        public async Task<FileResponse> UpdateFile(Guid id, IFormFile formFile)
         {
             _logger.LogInformation($"{nameof(FileService)} - {nameof(UpdateFile)} - Started, " +
                 $"{nameof(id)}: {id}");
@@ -105,7 +116,7 @@ namespace Rodrigo.Tech.Service.Implementation
             {
                 _logger.LogError($"{nameof(FileService)} - {nameof(UpdateFile)} - Not found, " +
                 $"{nameof(id)}: {id}");
-                return false;
+                return null;
             }
 
             _logger.LogInformation($"{nameof(FileService)} - {nameof(UpdateFile)} - Updating file, " +
@@ -125,7 +136,27 @@ namespace Rodrigo.Tech.Service.Implementation
 
             _logger.LogInformation($"{nameof(FileService)} - {nameof(UpdateFile)} - Finished, " +
                 $"{nameof(id)}: {id}");
-            return true;
+            return _mapper.Map<FileResponse>(file);
+        }
+
+        /// <inheritdoc/>
+        public async Task<File> GetFileDownload(Guid id)
+        {
+            _logger.LogInformation($"{nameof(FileService)} - {nameof(GetFileDownload)} - Started, " +
+                $"{nameof(id)}: {id}");
+
+            var file = await _fileRepository.Get(id);
+
+            if (file == null)
+            {
+                _logger.LogError($"{nameof(FileService)} - {nameof(GetFileDownload)} - Not found, " +
+                $"{nameof(id)}: {id}");
+                return null;
+            }
+
+            _logger.LogInformation($"{nameof(FileService)} - {nameof(GetFileDownload)} - Finished, " +
+                $"{nameof(id)}: {id}");
+            return file;
         }
     }
 }

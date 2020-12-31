@@ -20,14 +20,14 @@ namespace Rodrigo.Tech.Service.Interface
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        Task<File> GetFile(Guid id);
+        Task<FileResponse> GetFileInfo(Guid id);
 
         /// <summary>
         ///     Creates file on DB 
         /// </summary>
         /// <param name="formFile"></param>
         /// <returns></returns>
-        Task<bool> PostFile(IFormFile formFile);
+        Task<FileResponse> PostFile(IFormFile formFile);
 
         /// <summary>
         ///     Deletes file from DB based on Id
@@ -42,6 +42,13 @@ namespace Rodrigo.Tech.Service.Interface
         /// <param name="id"></param>
         /// <param name="formFile"></param>
         /// <returns></returns>
-        Task<bool> UpdateFile(Guid id, IFormFile formFile);
+        Task<FileResponse> UpdateFile(Guid id, IFormFile formFile);
+
+        /// <summary>
+        ///     Gets binary file 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        Task<File> GetFileDownload(Guid id);
     }
 }
