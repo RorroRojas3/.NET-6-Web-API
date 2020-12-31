@@ -42,6 +42,8 @@ namespace Rodrigo.Tech.BoilerPlate
             services.AddDataProtectionService();
             Log.Information("Adding Azure Cosmos DB");
             //services.AddAzureCosmosService(Configuration);
+            Log.Information("Adding Health Checks");
+            services.AddCustomHealthChecks(Configuration);
             Log.Information("Adding HttpContextAccesor Service");
             services.AddHttpContextAccessor();
         }
@@ -67,6 +69,7 @@ namespace Rodrigo.Tech.BoilerPlate
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapHealthChecks("/health");
             });
             Log.Information($"Using Swashbuckle");
             app.UseSwashbuckle(provider);
