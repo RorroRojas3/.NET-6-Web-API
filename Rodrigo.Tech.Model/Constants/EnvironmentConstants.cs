@@ -9,5 +9,7 @@
         public const string COSMOS_ACCOUNT = nameof(COSMOS_ACCOUNT);
 
         public const string COSMOS_KEY = nameof(COSMOS_KEY);
+
+        public const string APPINSIGHTS_INSTRUMENTATIONKEY = nameof(APPINSIGHTS_INSTRUMENTATIONKEY);
     }
 }
