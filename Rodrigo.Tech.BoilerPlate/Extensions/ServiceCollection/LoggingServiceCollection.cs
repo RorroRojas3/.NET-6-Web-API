@@ -1,7 +1,9 @@
+using System;
 using System.IO;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Rodrigo.Tech.Model.Constants;
 using Serilog;
 using Serilog.Events;
 
@@ -23,8 +25,10 @@ namespace Rodrigo.Tech.BoilerPlate.Extensions.ServiceCollection
                 Directory.CreateDirectory(logDirectory);
             }
 
+            var instrumentationKey = Environment.GetEnvironmentVariable(EnvironmentConstants.APPINSIGHTS_INSTRUMENTATIONKEY);
             var logger = new LoggerConfiguration()
                             .WriteTo.Console(LogEventLevel.Information)
+                            .WriteTo.ApplicationInsights(instrumentationKey, TelemetryConverter.Traces, LogEventLevel.Information)
                             .ReadFrom.Configuration(configuration)
                             .CreateLogger();
             services.AddSingleton(logger);
@@ -32,6 +36,7 @@ namespace Rodrigo.Tech.BoilerPlate.Extensions.ServiceCollection
 
             Log.Logger = new LoggerConfiguration()
                         .WriteTo.Console(LogEventLevel.Information)
+                        .WriteTo.ApplicationInsights(instrumentationKey, TelemetryConverter.Traces, LogEventLevel.Information)
                         .ReadFrom.Configuration(configuration)
                         .CreateLogger();
             services.AddSingleton(Log.Logger);
