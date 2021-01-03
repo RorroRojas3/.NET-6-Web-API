@@ -20,6 +20,10 @@
 
         public const string TENANT_ID = nameof(TENANT_ID);
 
-        public const string OAUTH2_AUTHORIZATION = nameof(OAUTH2_AUTHORIZATION);
+        public const string OAUTH2_TOKEN = nameof(OAUTH2_TOKEN);
+
+        public const string OAUTH2_AUTHORIZE = nameof(OAUTH2_AUTHORIZE);
+
+        public const string SCOPE = nameof(SCOPE);
     }
 }

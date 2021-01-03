@@ -18,10 +18,11 @@
         "COSMOS_KEY": "",
         "APPINSIGHTS_INSTRUMENTATIONKEY": "",
         "ClIENT_ID": "",
-        "CLIENT_SECRET": "",
         "INSTANCE": "https://login.microsoftonline.com",
         "TENANT_ID": "",
-        "OAUTH2_AUTHORIZATION": ""
+        "OAUTH2_TOKEN": "oauth2/v2.0/token",
+        "OAUTH2_AUTHORIZE": "oauth2/v2.0/authorize",
+        "SCOPE": "api://{0}/user_impersonation"
       },
       "applicationUrl": "https://localhost:5001;http://localhost:5000"
     }

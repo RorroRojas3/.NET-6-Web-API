@@ -1,5 +1,7 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
+using Rodrigo.Tech.Model.Constants;
+using System;
 
 namespace Rodrigo.Tech.BoilerPlate.Extensions.Applications
 {
@@ -24,6 +26,8 @@ namespace Rodrigo.Tech.BoilerPlate.Extensions.Applications
                     }
 
                     options.RoutePrefix = string.Empty;
+                    options.OAuthClientId(Environment.GetEnvironmentVariable(EnvironmentConstants.CLIENT_ID));
+                    options.OAuthAppName("ASP.NET Core Web Api");
                 });
         }
     }

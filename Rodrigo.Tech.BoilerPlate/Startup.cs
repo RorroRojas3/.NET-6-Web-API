@@ -31,6 +31,8 @@ namespace Rodrigo.Tech.BoilerPlate
             services.AddLoggingService(Configuration);
             Log.Information("Adding Controller and NewtonSoftJson Service");
             services.AddControllers().AddNewtonsoftJson();
+            Log.Information("Addding Authentication Service");
+            services.AddAuthenticationService();
             Log.Information("Adding Swashbuckle Service");
             services.AddSwashbuckleService();
             Log.Information("Adding Custom Service");
@@ -64,6 +66,8 @@ namespace Rodrigo.Tech.BoilerPlate
             app.UseExceptionMiddleware();
             Log.Information($"Using HttpsRedirection");
             app.UseHttpsRedirection();
+            Log.Information($"Using Authentication");
+            app.UseAuthentication();
             Log.Information($"Using Routing");
             app.UseRouting();
             Log.Information($"Using Auhtorization");

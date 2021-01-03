@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
+using Rodrigo.Tech.Model.Constants;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace Rodrigo.Tech.BoilerPlate.Extensions.ServiceCollection
@@ -21,11 +22,31 @@ namespace Rodrigo.Tech.BoilerPlate.Extensions.ServiceCollection
             services.AddApiVersioning();
             services.AddVersionedApiExplorer(options => options.GroupNameFormat = "'v'VVV");
             services.AddTransient<IConfigureOptions<SwaggerGenOptions>, ConfigureSwaggerOptions>();
+            var instance = Environment.GetEnvironmentVariable(EnvironmentConstants.INSTANCE);
+            var tenantId = Environment.GetEnvironmentVariable(EnvironmentConstants.TENANT_ID);
+            var tokenEndpoint = Environment.GetEnvironmentVariable(EnvironmentConstants.OAUTH2_TOKEN);
+            var authorizeEndpoint = Environment.GetEnvironmentVariable(EnvironmentConstants.OAUTH2_AUTHORIZE);
+            var scope = Environment.GetEnvironmentVariable(EnvironmentConstants.SCOPE);
+            var clientID = Environment.GetEnvironmentVariable(EnvironmentConstants.CLIENT_ID);
             services.AddSwaggerGen(x =>
             {
+                x.AddSecurityDefinition(SecuritySchemeType.OAuth2.ToString(), new OpenApiSecurityScheme()
+                {
+                    Type = SecuritySchemeType.OAuth2,
+                    Description = "Azure ADD Authentication",
+                    Flows = new OpenApiOAuthFlows
+                    {
+                        Implicit = new OpenApiOAuthFlow()
+                        {
+                            TokenUrl = new Uri($"{instance}/{tenantId}/{tokenEndpoint}"),
+                            AuthorizationUrl = new Uri($"{instance}/{tenantId}/{authorizeEndpoint}"),
+                            Scopes = { { string.Format(scope, clientID), "User access" } }
+                        }
+                    }
+                });
                 var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
-                x.IncludeXmlComments(xmlPath);
+                x.IncludeXmlComments(xmlPath);               
             });
         }
     }
