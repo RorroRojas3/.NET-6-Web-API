@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Identity.Web;
+using Microsoft.IdentityModel.Tokens;
 using Rodrigo.Tech.Model.Constants;
 using System;
 
@@ -23,9 +24,14 @@ namespace Rodrigo.Tech.BoilerPlate.Extensions.ServiceCollection
             })
             .AddJwtBearer(options =>
             {
-                options.Audience = clientId;
-                options.Authority = $"{instance}/{tenantId}/v2.0";
-                options.TokenValidationParameters.ValidAudiences = new string[] { clientId, $"api://{clientId}" };
+                options.Audience = $"api://{clientId}";
+                options.Authority = $"{instance}/{tenantId}";
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidateLifetime = true
+                };
             });
         }
     }

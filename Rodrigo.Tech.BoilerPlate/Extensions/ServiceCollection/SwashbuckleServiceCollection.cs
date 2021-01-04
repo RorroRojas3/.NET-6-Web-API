@@ -30,10 +30,11 @@ namespace Rodrigo.Tech.BoilerPlate.Extensions.ServiceCollection
             var clientID = Environment.GetEnvironmentVariable(EnvironmentConstants.CLIENT_ID);
             services.AddSwaggerGen(x =>
             {
-                x.AddSecurityDefinition(SecuritySchemeType.OAuth2.ToString(), new OpenApiSecurityScheme()
+                x.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme()
                 {
+                    Name = "oauth2",
                     Type = SecuritySchemeType.OAuth2,
-                    Description = "Azure ADD Authentication",
+                    Description = "JWT Authorization header using OAuth2 Schema",
                     Flows = new OpenApiOAuthFlows
                     {
                         Implicit = new OpenApiOAuthFlow()
@@ -42,6 +43,18 @@ namespace Rodrigo.Tech.BoilerPlate.Extensions.ServiceCollection
                             AuthorizationUrl = new Uri($"{instance}/{tenantId}/{authorizeEndpoint}"),
                             Scopes = { { string.Format(scope, clientID), "User access" } }
                         }
+                    }
+                });
+                x.AddSecurityRequirement(new OpenApiSecurityRequirement
+                {
+                    {
+                        new OpenApiSecurityScheme
+                        {
+                            Reference = new OpenApiReference
+                            {
+                                Type = ReferenceType.SecurityScheme, Id = "oauth2" }
+                        },
+                        new [] {"ReadWriteAccess"}
                     }
                 });
                 var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
