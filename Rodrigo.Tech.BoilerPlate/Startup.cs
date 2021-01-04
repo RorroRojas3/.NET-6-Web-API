@@ -30,9 +30,9 @@ namespace Rodrigo.Tech.BoilerPlate
         {
             services.AddLoggingService(Configuration);
             Log.Information("Adding Swashbuckle Service");
-            services.AddSwashbuckleService();
+            services.AddSwashbuckleService(Configuration);
             Log.Information("Addding Authentication Service");
-            services.AddAuthenticationService();
+            services.AddAuthenticationService(Configuration);
             Log.Information("Adding Controller and NewtonSoftJson Service");
             services.AddControllers().AddNewtonsoftJson();
             Log.Information("Adding Custom Service");

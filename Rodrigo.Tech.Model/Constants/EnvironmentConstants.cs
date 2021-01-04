@@ -14,16 +14,6 @@
 
         public const string CLIENT_ID = nameof(CLIENT_ID);
 
-        public const string CLIENT_SECRET = nameof(CLIENT_SECRET);
-
-        public const string INSTANCE = nameof(INSTANCE);
-
         public const string TENANT_ID = nameof(TENANT_ID);
-
-        public const string OAUTH2_TOKEN = nameof(OAUTH2_TOKEN);
-
-        public const string OAUTH2_AUTHORIZE = nameof(OAUTH2_AUTHORIZE);
-
-        public const string SCOPE = nameof(SCOPE);
     }
 }
