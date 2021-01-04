@@ -45,7 +45,7 @@ namespace Rodrigo.Tech.BoilerPlate
             services.AddCacheService(Configuration);
             Log.Information("Adding Data Protection Service");
             services.AddDataProtectionService();
-            Log.Information("Adding Azure Cosmos DB");
+            //Log.Information("Adding Azure Cosmos DB");
             //services.AddAzureCosmosService(Configuration);
             Log.Information("Adding Health Checks");
             services.AddCustomHealthChecks(Configuration);
