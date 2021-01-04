@@ -17,7 +17,7 @@
         "COSMOS_ACCOUNT": "",
         "COSMOS_KEY": "",
         "APPINSIGHTS_INSTRUMENTATIONKEY": "",
-        "ClIENT_ID": "",
+        "CLIENT_ID": "",
         "INSTANCE": "https://login.microsoftonline.com",
         "TENANT_ID": "",
         "OAUTH2_TOKEN": "oauth2/v2.0/token",
