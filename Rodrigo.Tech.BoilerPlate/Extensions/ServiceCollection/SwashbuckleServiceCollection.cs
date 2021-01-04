@@ -2,10 +2,12 @@ using System;
 using System.IO;
 using System.Reflection;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
 using Rodrigo.Tech.Model.Constants;
+using Rodrigo.Tech.Model.Settings;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace Rodrigo.Tech.BoilerPlate.Extensions.ServiceCollection
@@ -16,18 +18,16 @@ namespace Rodrigo.Tech.BoilerPlate.Extensions.ServiceCollection
         ///     Service to add Swashbuckle (Swagger)
         /// </summary>
         /// <param name="services"></param>
-        public static void AddSwashbuckleService(this IServiceCollection services)
+        /// <param name="configuration"></param>
+        public static void AddSwashbuckleService(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddMvc();
             services.AddApiVersioning();
             services.AddVersionedApiExplorer(options => options.GroupNameFormat = "'v'VVV");
             services.AddTransient<IConfigureOptions<SwaggerGenOptions>, ConfigureSwaggerOptions>();
-            var instance = Environment.GetEnvironmentVariable(EnvironmentConstants.INSTANCE);
             var tenantId = Environment.GetEnvironmentVariable(EnvironmentConstants.TENANT_ID);
-            var tokenEndpoint = Environment.GetEnvironmentVariable(EnvironmentConstants.OAUTH2_TOKEN);
-            var authorizeEndpoint = Environment.GetEnvironmentVariable(EnvironmentConstants.OAUTH2_AUTHORIZE);
-            var scope = Environment.GetEnvironmentVariable(EnvironmentConstants.SCOPE);
-            var clientID = Environment.GetEnvironmentVariable(EnvironmentConstants.CLIENT_ID);
+            var clientId = Environment.GetEnvironmentVariable(EnvironmentConstants.CLIENT_ID);
+            var azureAd = configuration.GetSection("AzureAd").Get<AzureAd>();
             services.AddSwaggerGen(x =>
             {
                 x.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme()
@@ -39,9 +39,9 @@ namespace Rodrigo.Tech.BoilerPlate.Extensions.ServiceCollection
                     {
                         Implicit = new OpenApiOAuthFlow()
                         {
-                            TokenUrl = new Uri($"{instance}/{tenantId}/{tokenEndpoint}"),
-                            AuthorizationUrl = new Uri($"{instance}/{tenantId}/{authorizeEndpoint}"),
-                            Scopes = { { string.Format(scope, clientID), "User access" } }
+                            TokenUrl = new Uri($"{azureAd.Instance}/{tenantId}/{azureAd.OAuth2_Token}"),
+                            AuthorizationUrl = new Uri($"{azureAd.Instance}/{tenantId}/{azureAd.OAuth2_Authorize}"),
+                            Scopes = { { string.Format(azureAd.Scope, clientId), "User access" } }
                         }
                     }
                 });
