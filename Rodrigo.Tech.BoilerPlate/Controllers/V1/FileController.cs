@@ -91,7 +91,7 @@ namespace Rodrigo.Tech.BoilerPlate.Controllers.V1
         /// <returns></returns>
         [HttpPost]
         [Produces("application/json")]
-        [ProducesResponseType(typeof(FileResponse), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(FileResponse), StatusCodes.Status201Created)]
         public async Task<IActionResult> PostFile(IFormFile formFile)
         {
             _logger.LogInformation($"{nameof(FileController)} - {nameof(PostFile)} - Started");

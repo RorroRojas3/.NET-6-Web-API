@@ -16,6 +16,7 @@ namespace Rodrigo.Tech.BoilerPlate.Controllers.V1
     [Route("api/v{version:apiVersion}/[controller]")]
     [ApiVersion("1")]
     [Authorize]
+    [NonController]
     public class AzureCosmosController : Controller
     {
         private readonly ILogger _logger;
@@ -82,7 +83,7 @@ namespace Rodrigo.Tech.BoilerPlate.Controllers.V1
         /// <returns></returns>
         [HttpPost]
         [Produces("application/json")]
-        [ProducesResponseType(typeof(ItemCosmos), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ItemCosmos), StatusCodes.Status201Created)]
         public async Task<IActionResult> PostItem(ItemRequest request)
         {
             _logger.LogInformation($"{nameof(AzureCosmosController)} - {nameof(PostItem)} - Started, " +

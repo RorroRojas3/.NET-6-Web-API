@@ -94,6 +94,7 @@ namespace Rodrigo.Tech.BoilerPlate.Controllers.V1
         /// <returns></returns>
         [HttpPost]
         [Produces("application/json")]
+        [ProducesResponseType(typeof(ItemResponse), StatusCodes.Status201Created)]
         public async Task<IActionResult> PostItem([FromBody] ItemRequest request)
         {
             _logger.LogInformation($"{nameof(ItemController)} - {nameof(PostItem)} - Started, " +
