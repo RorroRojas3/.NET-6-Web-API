@@ -76,12 +76,12 @@ namespace Rodrigo.Tech.BoilerPlate
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
-                endpoints.MapHealthChecks("/healthcheck", new HealthCheckOptions
-                {
-                    Predicate = _ => true,
-                    ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
-                });
-                endpoints.MapHealthChecksUI();
+                // endpoints.MapHealthChecks("/healthcheck", new HealthCheckOptions
+                // {
+                //     Predicate = _ => true,
+                //     ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+                // });
+                // endpoints.MapHealthChecksUI();
             });
             Log.Information($"Using Swashbuckle");
             app.UseSwashbuckle(provider);

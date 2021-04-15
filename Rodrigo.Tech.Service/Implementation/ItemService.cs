@@ -1,6 +1,7 @@
 using AutoMapper;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
+using Rodrigo.Tech.Model.Exceptions;
 using Rodrigo.Tech.Model.Requests;
 using Rodrigo.Tech.Model.Response;
 using Rodrigo.Tech.Respository.Pattern.Interface;
@@ -9,6 +10,7 @@ using Rodrigo.Tech.Service.Helpers;
 using Rodrigo.Tech.Service.Interface;
 using System;
 using System.Collections.Generic;
+using System.Net;
 using System.Threading.Tasks;
 
 namespace Rodrigo.Tech.Service.Implementation
@@ -37,7 +39,7 @@ namespace Rodrigo.Tech.Service.Implementation
             _logger.LogInformation($"{nameof(ItemService)} - {nameof(DeleteItem)} - Started, " +
                 $"{nameof(id)}: {id}");
 
-            var result =  await _itemRepository.Delete(id);
+            var result = await _itemRepository.Delete(id);
 
             _logger.LogInformation($"{nameof(ItemService)} - {nameof(DeleteItem)} - Finished, " +
                 $"{nameof(id)}: {id}");
@@ -62,9 +64,9 @@ namespace Rodrigo.Tech.Service.Implementation
 
             if (item == null)
             {
-                _logger.LogInformation($"{nameof(ItemService)} - {nameof(GetItem)} - Not found, " +
-                $"{nameof(id)}: {id}");
-                return null;
+                _logger.LogError($"{nameof(ItemService)} - {nameof(GetItem)} - Not found, " +
+                    $"{nameof(id)}: {id}");
+                throw new StatusCodeException(HttpStatusCode.NotFound, $"{nameof(item)} not found");
             }
 
             var serializedItem = SerializeHelper.SerializeObject(item);
@@ -93,8 +95,8 @@ namespace Rodrigo.Tech.Service.Implementation
 
             if (items.Count == 0)
             {
-                _logger.LogInformation($"{nameof(ItemService)} - {nameof(GetItems)} - Not found");
-                return null;
+                _logger.LogError($"{nameof(ItemService)} - {nameof(GetItems)} - Not found");
+                throw new StatusCodeException(HttpStatusCode.NotFound, $"{nameof(items)} not found");
             }
 
             var serializedItem = SerializeHelper.SerializeObject(items);
@@ -113,7 +115,7 @@ namespace Rodrigo.Tech.Service.Implementation
 
             var newItem = _mapper.Map<Item>(request);
 
-            var result =  await _itemRepository.Add(newItem);
+            var result = await _itemRepository.Add(newItem);
 
             _logger.LogInformation($"{nameof(ItemService)} - {nameof(PostItem)} - Finished, " +
                 $"{nameof(ItemRequest)}: {JsonConvert.SerializeObject(request)}");
@@ -131,21 +133,22 @@ namespace Rodrigo.Tech.Service.Implementation
 
             if (item == null)
             {
-                _logger.LogInformation($"{nameof(ItemService)} - {nameof(PutItem)} - Not found, " +
-                $"{nameof(id)}: {id}, " +
-                $"{nameof(ItemRequest)}: {JsonConvert.SerializeObject(request)}");
-                return null;
+                _logger.LogError($"{nameof(ItemService)} - {nameof(PutItem)} - Not found, " +
+                    $"{nameof(id)}: {id}, " +
+                    $"{nameof(ItemRequest)}: {JsonConvert.SerializeObject(request)}");
+                throw new StatusCodeException(HttpStatusCode.NotFound, $"{nameof(item)} not found");
             }
 
             await _cacheService.RemoveCacheAsync($"item-{id}");
 
             _mapper.Map(request, item);
 
-            var result =  await _itemRepository.Update(item);
+            var result = await _itemRepository.Update(item);
 
             _logger.LogInformation($"{nameof(ItemService)} - {nameof(PutItem)} - Finished, " +
                 $"{nameof(id)}: {id}, " +
                 $"{nameof(ItemRequest)}: {JsonConvert.SerializeObject(request)}");
+
             return _mapper.Map<ItemResponse>(result);
         }
     }
