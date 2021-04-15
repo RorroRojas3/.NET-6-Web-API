@@ -1,12 +1,14 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
+using Rodrigo.Tech.Model.Exceptions;
 using Rodrigo.Tech.Model.Response;
 using Rodrigo.Tech.Respository.Pattern.Interface;
 using Rodrigo.Tech.Service.Interface;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Net;
 using System.Threading.Tasks;
 using File = Rodrigo.Tech.Respository.Tables.Context.File;
 
@@ -33,11 +35,17 @@ namespace Rodrigo.Tech.Service.Implementation
             _logger.LogInformation($"{nameof(FileService)} - {nameof(DeleteFile)} - Started, " +
                 $"{nameof(id)}: {id}");
 
-            var result =  await _fileRepository.Delete(id);
+            var file = await _fileRepository.Delete(id);
+            if (!file)
+            {
+                _logger.LogError($"{nameof(FileService)} - {nameof(DeleteFile)} - " +
+                    $"{nameof(file)} not found");
+                throw new StatusCodeException(HttpStatusCode.NotFound, $"{nameof(file)} not found");
+            }
 
             _logger.LogInformation($"{nameof(FileService)} - {nameof(DeleteFile)} - Finished, " +
                 $"{nameof(id)}: {id}");
-            return result;
+            return file;
         }
 
         /// <inheritdoc/>
@@ -46,11 +54,11 @@ namespace Rodrigo.Tech.Service.Implementation
             _logger.LogInformation($"{nameof(FileService)} - {nameof(GetAllFiles)} - Started");
 
             var files = await _fileRepository.GetAll();
-            
+
             if (files.Count == 0)
             {
                 _logger.LogError($"{nameof(FileService)} - {nameof(GetAllFiles)} - Not found");
-                return null;
+                throw new StatusCodeException(HttpStatusCode.NotFound, $"{nameof(files)} not found");
             }
 
             _logger.LogInformation($"{nameof(FileService)} - {nameof(GetAllFiles)} - Finished");
@@ -69,7 +77,7 @@ namespace Rodrigo.Tech.Service.Implementation
             {
                 _logger.LogInformation($"{nameof(FileService)} - {nameof(GetFileInfo)} - Not found, " +
                 $"{nameof(id)}: {id}");
-                return null;
+                throw new StatusCodeException(HttpStatusCode.NotFound, $"{nameof(file)} not found");
             }
 
             _logger.LogInformation($"{nameof(FileService)} - {nameof(GetFileInfo)} - Finished, " +
@@ -116,7 +124,7 @@ namespace Rodrigo.Tech.Service.Implementation
             {
                 _logger.LogError($"{nameof(FileService)} - {nameof(UpdateFile)} - Not found, " +
                 $"{nameof(id)}: {id}");
-                return null;
+                throw new StatusCodeException(HttpStatusCode.NotFound, $"{nameof(file)} not found");
             }
 
             _logger.LogInformation($"{nameof(FileService)} - {nameof(UpdateFile)} - Updating file, " +
@@ -151,7 +159,7 @@ namespace Rodrigo.Tech.Service.Implementation
             {
                 _logger.LogError($"{nameof(FileService)} - {nameof(GetFileDownload)} - Not found, " +
                 $"{nameof(id)}: {id}");
-                return null;
+                throw new StatusCodeException(HttpStatusCode.NotFound, $"{nameof(file)} not found");
             }
 
             _logger.LogInformation($"{nameof(FileService)} - {nameof(GetFileDownload)} - Finished, " +

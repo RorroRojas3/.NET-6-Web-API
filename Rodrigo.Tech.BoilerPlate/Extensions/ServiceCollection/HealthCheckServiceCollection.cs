@@ -10,9 +10,9 @@ namespace Rodrigo.Tech.BoilerPlate.Extensions.ServiceCollection
                     .AddSqlServer(configuration.GetConnectionString("AZURE_DB"));
             service.AddHealthChecksUI(options =>
             {
-                options.AddHealthCheckEndpoint("API", "/healthcheck"); 
+                options.AddHealthCheckEndpoint("API", "/healthcheck");
             })
-                .AddInMemoryStorage();
+            .AddInMemoryStorage();
         }
     }
 }
