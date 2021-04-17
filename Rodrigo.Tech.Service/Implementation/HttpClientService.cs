@@ -5,6 +5,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Net.Http.Json;
 using Rodrigo.Tech.Service.Interface;
+using Rodrigo.Tech.Model.Enums;
 
 namespace Rodrigo.Tech.Service.Implementation
 {
@@ -18,12 +19,12 @@ namespace Rodrigo.Tech.Service.Implementation
         }
 
         /// <inheritdoc/>
-        public async Task<HttpResponseMessage> Json<T>(string url, string httpMethod, Dictionary<string, string> headers = null, T body = default)
+        public async Task<HttpResponseMessage> Json(string url, HttpCallEnum httpCall, Dictionary<string, string> headers = null, object body = default)
         {
             _logger.LogInformation($"{nameof(HttpClientService)} - {nameof(Json)} - Started, " +
                 $"{nameof(url)}: {url}, " +
                 $"{nameof(body)}: {JsonConvert.SerializeObject(body)}, " +
-                $"{nameof(httpMethod)}: {httpMethod}");
+                $"{nameof(httpCall)}: {httpCall}");
 
             using var client = CreateClient();
             HttpResponseMessage httpResponseMessage = null;
@@ -35,28 +36,28 @@ namespace Rodrigo.Tech.Service.Implementation
                 }
             }
 
-            switch (httpMethod.ToUpper())
+            switch (httpCall)
             {
-                case "GET":
+                case HttpCallEnum.GET:
                     httpResponseMessage = await client.GetAsync(url);
                     break;
-                case "POST":
+                case HttpCallEnum.POST:
                     httpResponseMessage = await client.PostAsJsonAsync(url, body);
                     break;
-                case "PUT":
+                case HttpCallEnum.PUT:
                     httpResponseMessage = await client.PutAsJsonAsync(url, body);
                     break;
-                case "DELETE":
+                case HttpCallEnum.DELETE:
                     httpResponseMessage = await client.DeleteAsync(url);
                     break;
                 default:
-                    _logger.LogError($"{nameof(HttpClientService)} - {nameof(Json)} - {nameof(httpMethod)} not found, " +
-                        $"{nameof(url)}: {url}, " +
-                        $"{nameof(body)}: {JsonConvert.SerializeObject(body)}, " +
-                        $"{nameof(httpMethod)}: {httpMethod}");
                     break;
             }
 
+            _logger.LogInformation($"{nameof(HttpClientService)} - {nameof(Json)} - Finished, " +
+                $"{nameof(url)}: {url}, " +
+                $"{nameof(body)}: {JsonConvert.SerializeObject(body)}, " +
+                $"{nameof(httpCall)}: {httpCall}");
             return httpResponseMessage;
         }
 

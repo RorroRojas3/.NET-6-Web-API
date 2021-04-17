@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Rodrigo.Tech.Model.Enums;
 
 namespace Rodrigo.Tech.Service.Interface
 {
@@ -9,12 +10,12 @@ namespace Rodrigo.Tech.Service.Interface
         /// <summary>
         ///     GET/POST/DELETE/PUT Json
         /// </summary>
-        /// <typeparam name="T"></typeparam>
         /// <param name="url"></param>
-        /// <param name="httpMethod"></param>
-        /// <param name="body"></param>
+        /// <param name="httpCall"></param>
         /// <param name="headers"></param>
+        /// <param name="body"></param>
+        /// 
         /// <returns></returns>
-        Task<HttpResponseMessage> Json<T>(string url, string httpMethod, Dictionary<string, string> headers = null, T body = default);
+        Task<HttpResponseMessage> Json(string url, HttpCallEnum httpCall, Dictionary<string, string> headers = null, object body = default);
     }
 }
