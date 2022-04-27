@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Rodrigo.Rojas.Models\Rodrigo.Rojas.Models.csproj" />
     <ProjectReference Include="..\Rodrigo.Rojas.Repository\Rodrigo.Rojas.Repository.csproj" />
   </ItemGroup>
 

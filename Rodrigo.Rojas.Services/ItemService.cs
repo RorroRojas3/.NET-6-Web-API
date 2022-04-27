@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using Rodrigo.Rojas.Models.Exceptions;
 using Rodrigo.Rojas.Repository.Context;
 using Rodrigo.Rojas.Repository.Sets;
 using System;
@@ -12,6 +13,10 @@ namespace Rodrigo.Rojas.Services
 {
     public interface IItemService
     {
+        /// <summary>
+        ///     Gets items from database
+        /// </summary>
+        /// <returns></returns>
         Task<List<ItemSet>> GetItems();
     }
 
@@ -25,10 +30,22 @@ namespace Rodrigo.Rojas.Services
             _logger = logger;
             _context = demoContext;
         }
-
+   
+        /// </inheritdoc>
         public async Task<List<ItemSet>> GetItems()
         {
-            return await _context.Items.ToListAsync();
+            _logger.LogInformation($"{nameof(ItemService)} - {nameof(GetItems)} - " +
+                $"Started");
+
+            var items = await _context.Items.ToListAsync();
+            if (items.Count == 0)
+            {
+                throw new NotFoundException($"Items not found");
+            }
+
+            _logger.LogInformation($"{nameof(ItemService)} - {nameof(GetItems)} - " +
+                $"Finished");
+            return items;
         }
     }
 }
