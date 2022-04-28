@@ -17,7 +17,11 @@ namespace Rodrigo.Rojas.Api.Controllers
             _itemService = itemService;
         }
 
-        [HttpGet(Name = "Items")]
+        /// <summary>
+        ///     Gets all items
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<ItemSet>))]
         [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(string))]
         [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(string))]
@@ -26,7 +30,29 @@ namespace Rodrigo.Rojas.Api.Controllers
             _logger.LogInformation($"{nameof(ItemsController)} - {nameof(GetItems)} - " +
                 $"Started");
 
-            var items = await _itemService.GetItems();
+            var items = await _itemService.GetItemsAsync();
+
+            _logger.LogInformation($"{nameof(ItemsController)} - {nameof(GetItems)} - " +
+                $"Finsihed");
+            return Ok(items);
+        }
+
+        /// <summary>
+        ///     Gets item by id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<ItemSet>))]
+        [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(string))]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(string))]
+        public async Task<IActionResult> GetItem(int id)
+        {
+            _logger.LogInformation($"{nameof(ItemsController)} - {nameof(GetItems)} - " +
+                $"Started");
+
+            var items = await _itemService.GetItemAsync(id);
 
             _logger.LogInformation($"{nameof(ItemsController)} - {nameof(GetItems)} - " +
                 $"Finsihed");

@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Rodrigo.Rojas.Models.Mappers;
 using Rodrigo.Rojas.Repository.Context;
 using Rodrigo.Rojas.Services;
 
@@ -13,6 +14,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<DemoContext>(options =>
     options.UseInMemoryDatabase(nameof(DemoContext)));
 builder.Services.AddTransient<IItemService, ItemService>();
+builder.Services.AddAutoMapper(typeof(Mappers));
 
 var app = builder.Build();
 
