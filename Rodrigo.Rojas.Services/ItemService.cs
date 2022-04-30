@@ -1,6 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
+using Rodrigo.Rojas.Models.Dtos;
 using Rodrigo.Rojas.Models.Exceptions;
+using Rodrigo.Rojas.Models.Requests;
 using Rodrigo.Rojas.Repository.Context;
 using Rodrigo.Rojas.Repository.Sets;
 using System;
@@ -17,36 +21,38 @@ namespace Rodrigo.Rojas.Services
         ///     Gets items from database
         /// </summary>
         /// <returns></returns>
-        Task<List<ItemSet>> GetItemsAsync();
+        Task<List<ItemDto>> GetItemsAsync();
 
         /// <summary>
         ///     Gets item by id
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        Task<ItemSet> GetItemAsync(int id);
+        Task<ItemDto> GetItemAsync(int id);
 
         /// <summary>
         ///     Creates 
         /// </summary>
         /// <param name="itemSet"></param>
         /// <returns></returns>
-        Task<ItemSet> CreateItemAsync(ItemSet itemSet);
+        Task<ItemDto> CreateItemAsync(ItemRequest itemSet);
     }
 
     public class ItemService : IItemService
     {
         private readonly ILogger _logger;
+        private readonly IMapper _mapper;
         private readonly DemoContext _context;
 
-        public ItemService(ILogger<ItemService> logger, DemoContext demoContext)
+        public ItemService(ILogger<ItemService> logger, IMapper mapper, DemoContext demoContext)
         {
             _logger = logger;
+            _mapper = mapper;
             _context = demoContext;
         }
    
         /// </inheritdoc>
-        public async Task<List<ItemSet>> GetItemsAsync()
+        public async Task<List<ItemDto>> GetItemsAsync()
         {
             _logger.LogInformation($"{nameof(ItemService)} - {nameof(GetItemsAsync)} - " +
                 $"Started");
@@ -59,11 +65,11 @@ namespace Rodrigo.Rojas.Services
 
             _logger.LogInformation($"{nameof(ItemService)} - {nameof(GetItemsAsync)} - " +
                 $"Finished");
-            return items;
+            return _mapper.Map<List<ItemDto>>(items);
         }
 
         /// </inheritdoc>
-        public async Task<ItemSet> GetItemAsync(int id)
+        public async Task<ItemDto> GetItemAsync(int id)
         {
             _logger.LogInformation($"{nameof(ItemService)} - {nameof(GetItemAsync)} - " +
                 $"Started");
@@ -76,32 +82,29 @@ namespace Rodrigo.Rojas.Services
 
             _logger.LogInformation($"{nameof(ItemService)} - {nameof(GetItemAsync)} - " +
                 $"Finished");
-            return item;
+            return _mapper.Map<ItemDto>(item);
         }
 
         /// </inheritdoc>
-        public async Task<ItemSet> CreateItemAsync(ItemSet itemSet)
+        public async Task<ItemDto> CreateItemAsync(ItemRequest request)
         {
             _logger.LogInformation($"{nameof(ItemService)} - {nameof(CreateItemAsync)} - " +
-                $"Started");
+                $"Started, " +
+                $"{nameof(ItemRequest)}: {JsonConvert.SerializeObject(request)}");
 
-            if (itemSet == null)
+            if (request == null)
             {
                 throw new ArgumentNullException($"Item cannot be null.");
             }
 
-            var item = await _context.Items.FirstOrDefaultAsync(x => x.Id == itemSet.Id);
-            if (item != null)
-            {
-                throw new ConflictException($"Item already exists with {nameof(item.Id)}: {item.Id}");
-            }
-
-            await _context.AddAsync(itemSet);
+            var newItem = _mapper.Map<ItemSet>(request);
+            await _context.AddAsync(newItem);
             await _context.SaveChangesAsync();
 
             _logger.LogInformation($"{nameof(ItemService)} - {nameof(CreateItemAsync)} - " +
-                $"Finished");
-            return itemSet;
+                $"Finished, " +
+                $"{nameof(ItemRequest)}: {JsonConvert.SerializeObject(request)}");
+            return _mapper.Map<ItemDto>(newItem);
         }
     }
 }
