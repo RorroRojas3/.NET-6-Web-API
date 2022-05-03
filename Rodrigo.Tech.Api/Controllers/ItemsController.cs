@@ -2,7 +2,6 @@ using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using Rodrigo.Rojas.Models.Dtos;
 using Rodrigo.Rojas.Models.Requests;
-using Rodrigo.Rojas.Repository.Sets;
 using Rodrigo.Rojas.Services;
 
 namespace Rodrigo.Rojas.Api.Controllers
@@ -83,6 +82,56 @@ namespace Rodrigo.Rojas.Api.Controllers
                 $"Finsihed, " +
                 $"{nameof(ItemRequest)}: {JsonConvert.SerializeObject(request)}");
             return StatusCode(StatusCodes.Status201Created, items);
+        }
+
+        /// <summary>
+        ///     Updates an item by id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpPut]
+        [Route("{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ItemDto))]
+        [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(string))]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(string))]
+        public async Task<IActionResult> UpdateItem(int id, ItemRequest request)
+        {
+            _logger.LogInformation($"{nameof(ItemsController)} - {nameof(UpdateItem)} - " +
+                $"Started, " +
+                $"{nameof(id)}: {id}, " +
+                $"{nameof(ItemRequest)}: {JsonConvert.SerializeObject(request)}");
+
+            var items = await _itemService.UpdateItemAsync(id, request);
+
+            _logger.LogInformation($"{nameof(ItemsController)} - {nameof(UpdateItem)} - " +
+                $"Finsihed, " +
+                $"{nameof(id)}: {id}, " +
+                $"{nameof(ItemRequest)}: {JsonConvert.SerializeObject(request)}");
+            return StatusCode(StatusCodes.Status200OK, items);
+        }
+
+        /// <summary>
+        ///     Deletes item by id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpDelete]
+        [Route("{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(string))]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(string))]
+        public async Task<IActionResult> DeleteItem(int id)
+        {
+            _logger.LogInformation($"{nameof(ItemsController)} - {nameof(DeleteItem)} - " +
+                $"Started, " +
+                $"{nameof(id)}: {id}");
+
+            await _itemService.DeleteItemAsync(id);
+
+            _logger.LogInformation($"{nameof(ItemsController)} - {nameof(DeleteItem)} - " +
+                $"Finsihed, " +
+                $"{nameof(id)}: {id}");
+            return StatusCode(StatusCodes.Status200OK);
         }
     }
 }
