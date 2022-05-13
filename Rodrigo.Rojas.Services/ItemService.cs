@@ -69,74 +69,48 @@ namespace Rodrigo.Rojas.Services
         /// </inheritdoc>
         public async Task<List<ItemDto>> GetItemsAsync()
         {
-            _logger.LogInformation($"{nameof(ItemService)} - {nameof(GetItemsAsync)} - " +
-                $"Started");
-
             var items = await _context.Items.ToListAsync();
             if (items.Count == 0)
             {
                 throw new NotFoundException($"Items not found");
             }
 
-            _logger.LogInformation($"{nameof(ItemService)} - {nameof(GetItemsAsync)} - " +
-                $"Finished");
             return _mapper.Map<List<ItemDto>>(items);
         }
 
         /// </inheritdoc>
         public async Task<ItemDto> GetItemAsync(int id)
         {
-            _logger.LogInformation($"{nameof(ItemService)} - {nameof(GetItemAsync)} - " +
-                $"Started");
-
             var item = await _context.Items.FindAsync(id);
             if (item == null)
             {
                 throw new NotFoundException($"Item with {nameof(id)}: {id} not found");
             }
 
-            _logger.LogInformation($"{nameof(ItemService)} - {nameof(GetItemAsync)} - " +
-                $"Finished");
             return _mapper.Map<ItemDto>(item);
         }
 
         /// </inheritdoc>
         public async Task<ItemDto> CreateItemAsync(ItemRequest request)
         {
-            _logger.LogInformation($"{nameof(ItemService)} - {nameof(CreateItemAsync)} - " +
-                $"Started, " +
-                $"{nameof(ItemRequest)}: {JsonConvert.SerializeObject(request)}");
-
             if (request == null)
             {
-                throw new ArgumentNullException($"Item cannot be null.");
+                throw new ArgumentNullException("Item cannot be null.");
             }
 
             var newItem = _mapper.Map<ItemSet>(request);
             await _context.AddAsync(newItem);
             await _context.SaveChangesAsync();
 
-            _logger.LogInformation($"{nameof(ItemService)} - {nameof(CreateItemAsync)} - " +
-                $"Finished, " +
-                $"{nameof(ItemRequest)}: {JsonConvert.SerializeObject(request)}");
             return _mapper.Map<ItemDto>(newItem);
         }
 
         /// </inheritdoc>
         public async Task<ItemDto> UpdateItemAsync(int id, ItemRequest request)
         {
-            _logger.LogInformation($"{nameof(ItemService)} - {nameof(UpdateItemAsync)} - " +
-                $"Started, " +
-                $"{nameof(id)}: {id}, " +
-                $"{nameof(ItemRequest)}: {JsonConvert.SerializeObject(request)}");
-
             var item = await _context.Items.FindAsync(id);
             if (item == null)
             {
-                _logger.LogError($"{nameof(ItemService)} - {nameof(UpdateItemAsync)} - " +
-                    $"Item not found, " +
-                    $"{nameof(id)}: {id}, " +
-                    $"{nameof(ItemRequest)}: {JsonConvert.SerializeObject(request)}");
                 throw new NotFoundException($"Item with {nameof(id)}: {id} not found");
             }
 
@@ -144,34 +118,20 @@ namespace Rodrigo.Rojas.Services
             _context.Update(item);
             await _context.SaveChangesAsync();
 
-            _logger.LogInformation($"{nameof(ItemService)} - {nameof(UpdateItemAsync)} - " +
-                $"Finished, " +
-                $"{nameof(id)}: {id}, " +
-                $"{nameof(ItemRequest)}: {JsonConvert.SerializeObject(request)}");
             return _mapper.Map<ItemDto>(item);
         }
 
         /// </inheritdoc>
         public async Task DeleteItemAsync(int id)
         {
-            _logger.LogInformation($"{nameof(ItemService)} - {nameof(DeleteItemAsync)} - " +
-                $"Started, " +
-                $"{nameof(id)}: {id}");
-
             var item = await _context.Items.FindAsync(id);
             if (item == null)
             {
-                _logger.LogError($"{nameof(ItemService)} - {nameof(DeleteItemAsync)} - " +
-                    $"Item with {nameof(id)}: {id} not found");
                 throw new NotFoundException($"Item with {nameof(id)}: {id} not found");
             }
 
             _context.Remove(item);
             await _context.SaveChangesAsync();
-
-            _logger.LogInformation($"{nameof(ItemService)} - {nameof(DeleteItemAsync)} - " +
-                $"Finished, " +
-                $"{nameof(id)}: {id}");
         }
     }
 }

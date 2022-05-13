@@ -29,13 +29,7 @@ namespace Rodrigo.Rojas.Api.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(string))]
         public async Task<IActionResult> GetItems()
         {
-            _logger.LogInformation($"{nameof(ItemsController)} - {nameof(GetItems)} - " +
-                $"Started");
-
             var items = await _itemService.GetItemsAsync();
-
-            _logger.LogInformation($"{nameof(ItemsController)} - {nameof(GetItems)} - " +
-                $"Finsihed");
             return Ok(items);
         }
 
@@ -51,13 +45,7 @@ namespace Rodrigo.Rojas.Api.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(string))]
         public async Task<IActionResult> GetItem(int id)
         {
-            _logger.LogInformation($"{nameof(ItemsController)} - {nameof(GetItems)} - " +
-                $"Started");
-
             var items = await _itemService.GetItemAsync(id);
-
-            _logger.LogInformation($"{nameof(ItemsController)} - {nameof(GetItems)} - " +
-                $"Finsihed");
             return Ok(items);
         }
 
@@ -72,15 +60,7 @@ namespace Rodrigo.Rojas.Api.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(string))]
         public async Task<IActionResult> CreateItem(ItemRequest request)
         {
-            _logger.LogInformation($"{nameof(ItemsController)} - {nameof(CreateItem)} - " +
-                $"Started, " +
-                $"{nameof(ItemRequest)}: {JsonConvert.SerializeObject(request)}");
-
             var items = await _itemService.CreateItemAsync(request);
-
-            _logger.LogInformation($"{nameof(ItemsController)} - {nameof(CreateItem)} - " +
-                $"Finsihed, " +
-                $"{nameof(ItemRequest)}: {JsonConvert.SerializeObject(request)}");
             return StatusCode(StatusCodes.Status201Created, items);
         }
 
@@ -96,17 +76,7 @@ namespace Rodrigo.Rojas.Api.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(string))]
         public async Task<IActionResult> UpdateItem(int id, ItemRequest request)
         {
-            _logger.LogInformation($"{nameof(ItemsController)} - {nameof(UpdateItem)} - " +
-                $"Started, " +
-                $"{nameof(id)}: {id}, " +
-                $"{nameof(ItemRequest)}: {JsonConvert.SerializeObject(request)}");
-
             var items = await _itemService.UpdateItemAsync(id, request);
-
-            _logger.LogInformation($"{nameof(ItemsController)} - {nameof(UpdateItem)} - " +
-                $"Finsihed, " +
-                $"{nameof(id)}: {id}, " +
-                $"{nameof(ItemRequest)}: {JsonConvert.SerializeObject(request)}");
             return StatusCode(StatusCodes.Status200OK, items);
         }
 
@@ -122,15 +92,7 @@ namespace Rodrigo.Rojas.Api.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(string))]
         public async Task<IActionResult> DeleteItem(int id)
         {
-            _logger.LogInformation($"{nameof(ItemsController)} - {nameof(DeleteItem)} - " +
-                $"Started, " +
-                $"{nameof(id)}: {id}");
-
             await _itemService.DeleteItemAsync(id);
-
-            _logger.LogInformation($"{nameof(ItemsController)} - {nameof(DeleteItem)} - " +
-                $"Finsihed, " +
-                $"{nameof(id)}: {id}");
             return StatusCode(StatusCodes.Status200OK);
         }
     }
